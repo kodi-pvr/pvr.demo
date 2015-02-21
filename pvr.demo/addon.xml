@@ -10,12 +10,11 @@
   </requires>
   <extension
     point="xbmc.pvrclient"
-    library_linux="Kodi_Demo.pvr"
-    library_osx="Kodi_Demo.pvr"
-    library_freebsd="Kodi_Demo.pvr"
-    library_wingl="Kodi_Demo_win32.dll"
-    library_windx="Kodi_Demo_win32.dll"
-    library_android="libKodi_Demo.so" />
+    library_linux="pvr.demo.so"
+    library_osx="pvr.demo.dylib"
+    library_freebsd="pvr.demo.so"
+    library_windx="pvr.demo.dll"
+    library_android="libpvr.demo.so" />
   <extension point="xbmc.addon.metadata">
     <summary lang="am">የ PVR ደንበኛ ናሙና </summary>
     <summary lang="bg">Демонстрация на ПВР клиента</summary>
@@ -177,6 +176,6 @@
     <disclaimer lang="vi">Chỉ chứa phần tử sơ khai</disclaimer>
     <disclaimer lang="zh">只包含存根</disclaimer>
     <disclaimer lang="zh_TW">只包含 Stubs</disclaimer>
-    <platform>@OS@</platform>
+    <platform>all</platform>
   </extension>
 </addon>
