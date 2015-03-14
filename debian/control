@@ -1,22 +1,22 @@
-Source: xbmc-pvr-demo
+Source: kodi-pvr-demo
 Priority: extra
-Maintainer: Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
-Build-Depends: debhelper (>= 8.0.0), cmake, libtinyxml-dev, xbmc-pvr-dev,
-               libxbmcplatform-dev, xbmc-addon-dev
+Maintainer: Nobody <nobody@kodi.tv>
+Build-Depends: debhelper (>= 9.0.0), cmake, libtinyxml-dev, kodi-pvr-dev,
+               libkodiplatform-dev, kodi-addon-dev
 Standards-Version: 3.9.2
 Section: libs
 
-Package: xbmc-pvr-demo
+Package: kodi-pvr-demo
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Demo PVR for XBMC
- Demo PVR for XBMC
+Description: Demo PVR for Kodi
+ Demo PVR for Kodi
 
-Package: xbmc-pvr-demo-dbg
+Package: kodi-pvr-demo-dbg
 Section: debug
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: debug symbols for Demo PVR for XBMC
- debug symbols for Demo PVR for XBMC
+Description: debug symbols for Demo PVR for Kodi
+ debug symbols for Demo PVR for Kodi
 
