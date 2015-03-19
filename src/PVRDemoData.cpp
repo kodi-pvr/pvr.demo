@@ -136,6 +136,9 @@ bool PVRDemoData::LoadDemoData(void)
 
       /* radio/TV */
       XMLUtils::GetBoolean(pGroupNode, "radio", group.bRadio);
+      
+      /* sort position */
+      XMLUtils::GetInt(pGroupNode, "position", group.iPosition);
 
       /* members */
       TiXmlNode* pMembers = pGroupNode->FirstChild("members");
@@ -491,6 +494,7 @@ PVR_ERROR PVRDemoData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
       memset(&xbmcGroup, 0, sizeof(PVR_CHANNEL_GROUP));
 
       xbmcGroup.bIsRadio = bRadio;
+      xbmcGroup.iPosition = group.iPosition;
       strncpy(xbmcGroup.strGroupName, group.strGroupName.c_str(), sizeof(xbmcGroup.strGroupName) - 1);
 
       PVR->TransferChannelGroup(handle, &xbmcGroup);
