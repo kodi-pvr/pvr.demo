@@ -201,6 +201,7 @@
     <group>
       <name>Demo Group #1</name>
       <radio>0</radio>
+      <position>1</position>
       <members>
         <member>1</member>
         <member>2</member>
@@ -218,6 +219,7 @@
     <group>
       <name>Demo Group #2</name>
       <radio>0</radio>
+      <position>3</position>
       <members>
         <member>1</member>
         <member>3</member>
@@ -225,6 +227,18 @@
         <member>7</member>
         <member>9</member>
         <member>11</member>
+      </members>
+    </group>
+    <group>
+      <name>Demo Group #3</name>
+      <radio>0</radio>
+      <position>2</position>
+      <members>
+        <member>4</member>
+        <member>5</member>
+        <member>6</member>
+        <member>7</member>
+        <member>8</member>
       </members>
     </group>
   </channelgroups>

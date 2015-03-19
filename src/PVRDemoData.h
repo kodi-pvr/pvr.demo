@@ -89,6 +89,7 @@ struct PVRDemoChannelGroup
   bool             bRadio;
   int              iGroupId;
   std::string      strGroupName;
+  int              iPosition;
   std::vector<int> members;
 };
 
