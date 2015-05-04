@@ -8,11 +8,13 @@ enable_language(CXX)
 
 find_package(kodi REQUIRED)
 find_package(kodiplatform REQUIRED)
+find_package(platform REQUIRED)
 
 include_directories(${kodiplatform_INCLUDE_DIRS}
+                    ${platform_INCLUDE_DIRS}
                     ${KODI_INCLUDE_DIR})
 
-set(DEPLIBS ${kodiplatform_LIBRARIES})
+set(DEPLIBS ${platform_LIBRARIES})
 
 set(PVRDEMO_SOURCES src/client.cpp
                     src/PVRDemoData.cpp)

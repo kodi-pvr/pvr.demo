@@ -21,7 +21,7 @@
  */
 
 #include <vector>
-#include "kodi/util/StdString.h"
+#include "platform/util/StdString.h"
 #include "client.h"
 
 struct PVRDemoEpgEntry
