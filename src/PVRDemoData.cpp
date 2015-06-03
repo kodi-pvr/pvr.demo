@@ -19,7 +19,7 @@
  *
  */
 
-#include "kodi/util/XMLUtils.h"
+#include "util/XMLUtils.h"
 #include "PVRDemoData.h"
 
 using namespace std;
