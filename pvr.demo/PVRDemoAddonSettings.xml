@@ -1,5 +1,6 @@
 <demo>
   <channels>
+    <!-- TV channels -->
     <channel>
       <name>Demo TV Channel 1</name>
       <radio>0</radio>
@@ -89,6 +90,7 @@
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
 
+    <!-- Radio Channels -->
     <channel>
       <name>Demo Radio Channel 1</name>
       <radio>1</radio>
@@ -169,6 +171,8 @@
       <icon>special://xbmc/addons/pvr.demo/data/10.png</icon>
       <stream></stream>
     </channel>
+
+    <!-- TV sub channels -->
     <channel>
       <name>Demo TV Channel Sub.1</name>
       <radio>0</radio>
@@ -198,8 +202,16 @@
     </channel>
   </channels>
   <channelgroups>
+    <!--
+      !!IMPORTANT!! 
+      The channel member mapping is done by the internal channel id, 
+      not by the channel number you specified in the channel element. 
+      The internal channel id starts by 1 for the first channel element
+      and becomes increased by 1 for each channel element.
+    -->
+    <!-- TV groups -->
     <group>
-      <name>Demo Group #1</name>
+      <name>TV Group #1</name>
       <radio>0</radio>
       <position>1</position>
       <members>
@@ -217,7 +229,7 @@
       </members>
     </group>
     <group>
-      <name>Demo Group #2</name>
+      <name>TV Group #2</name>
       <radio>0</radio>
       <position>3</position>
       <members>
@@ -230,7 +242,7 @@
       </members>
     </group>
     <group>
-      <name>Demo Group #3</name>
+      <name>TV Group #3</name>
       <radio>0</radio>
       <position>2</position>
       <members>
@@ -239,6 +251,20 @@
         <member>6</member>
         <member>7</member>
         <member>8</member>
+      </members>
+    </group>
+
+    <!-- Radio groups -->
+    <group>
+      <name>Radio Group #1</name>
+      <radio>1</radio>
+      <members>
+        <member>12</member>
+        <member>13</member>
+        <member>14</member>
+        <member>15</member>
+        <member>16</member>
+        <member>19</member>
       </members>
     </group>
   </channelgroups>
