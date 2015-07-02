@@ -630,6 +630,9 @@ PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
     PVR_TIMER xbmcTimer;
     memset(&xbmcTimer, 0, sizeof(PVR_TIMER));
 
+    /* TODO: Implement own timer types to get support for the timer features introduced with PVR API 1.9.7 */
+    xbmcTimer.iTimerType = PVR_TIMER_TYPE_NONE;
+
     xbmcTimer.iClientIndex      = ++i;
     xbmcTimer.iClientChannelUid = timer.iChannelId;
     xbmcTimer.startTime         = timer.startTime;
