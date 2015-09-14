@@ -622,7 +622,7 @@ int PVRDemoData::GetTimersAmount(void)
 
 PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
 {
-  int i = 0;
+  unsigned int i = PVR_TIMER_NO_CLIENT_INDEX + 1;
   for (std::vector<PVRDemoTimer>::iterator it = m_timers.begin() ; it != m_timers.end() ; it++)
   {
     PVRDemoTimer &timer = *it;
@@ -633,7 +633,7 @@ PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
     /* TODO: Implement own timer types to get support for the timer features introduced with PVR API 1.9.7 */
     xbmcTimer.iTimerType = PVR_TIMER_TYPE_NONE;
 
-    xbmcTimer.iClientIndex      = ++i;
+    xbmcTimer.iClientIndex      = i++;
     xbmcTimer.iClientChannelUid = timer.iChannelId;
     xbmcTimer.startTime         = timer.startTime;
     xbmcTimer.endTime           = timer.endTime;
