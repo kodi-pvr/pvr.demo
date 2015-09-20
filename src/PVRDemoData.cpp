@@ -566,7 +566,8 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         tag.strIconPath        = myTag.strIconPath.c_str();
         tag.iGenreType         = myTag.iGenreType;
         tag.iGenreSubType      = myTag.iGenreSubType;
-
+        tag.iFlags             = EPG_TAG_FLAG_UNDEFINED;
+        
         iLastEndTimeTmp = tag.endTime;
 
         PVR->TransferEpgEntry(handle, &tag);
