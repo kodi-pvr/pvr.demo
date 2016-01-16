@@ -40,8 +40,8 @@ struct PVRDemoEpgEntry
 //  int         iParentalRating;
 //  int         iStarRating;
 //  bool        bNotify;
-//  int         iSeriesNumber;
-//  int         iEpisodeNumber;
+  int         iSeriesNumber;
+  int         iEpisodeNumber;
 //  int         iEpisodePartNumber;
 //  std::string strEpisodeName;
 };
@@ -70,8 +70,11 @@ struct PVRDemoRecording
   std::string strRecordingId;
   std::string strStreamURL;
   std::string strTitle;
+  std::string strEpisodeName;
   std::string strDirectory;
   time_t      recordingTime;
+  int         iSeriesNumber;
+  int         iEpisodeNumber;
 };
 
 struct PVRDemoTimer

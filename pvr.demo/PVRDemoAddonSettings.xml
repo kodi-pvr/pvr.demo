@@ -280,6 +280,8 @@
       <icon></icon>
       <genretype>16</genretype>
       <genresubtype>0</genresubtype>
+      <season>10</season>
+      <episode>5</episode>
     </entry>
     <entry>
       <broadcastid>200</broadcastid>
@@ -292,6 +294,8 @@
       <icon></icon>
       <genretype>32</genretype>
       <genresubtype>0</genresubtype>
+      <season>10</season>
+      <episode>6</episode>
     </entry>
     <entry>
       <broadcastid>300</broadcastid>
@@ -304,6 +308,7 @@
       <icon></icon>
       <genretype>48</genretype>
       <genresubtype>0</genresubtype>
+      <episode>3</episode>
     </entry>
     <entry>
       <broadcastid>400</broadcastid>
@@ -316,6 +321,7 @@
       <icon></icon>
       <genretype>64</genretype>
       <genresubtype>0</genresubtype>
+      <episode>4</episode>
     </entry>
     <entry>
       <broadcastid>500</broadcastid>
@@ -525,38 +531,66 @@
   </epg>
   <recordings>
     <recording>
-      <title>Demo Recording entry 1</title>
+      <title>Demo Recording entry A</title>
+      <episodename>SubEpisodeA32</episodename>
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 1</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
-      <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
+      <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac.</plot>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <season>3</season>
+      <episode>2</episode>
       <time>12:00</time>
       <duration>7200</duration>
     </recording>
     <recording>
-      <title>Demo Recording entry 2</title>
+      <!-- Deliberately have same title so we can see any grouping by series-->
+      <title>Demo Recording entry A</title>
+      <episodename>SubEpisodeA31</episodename>
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 2</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
-      <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
+      <plot>Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero.</plot>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <!-- Deliberately have an earlier episode shown at a later time to check sorting -->
+      <season>3</season>
+      <episode>1</episode>
       <time>14:00</time>
       <duration>7500</duration>
     </recording>
     <recording>
+      <!-- Deliberately have same title so we can see any grouping by series-->
+      <title>Demo Recording entry A</title>
+      <!-- Deliberately no sub-title/episode name -->
+      <url></url>
+      <directory>/Directory1/SubDirectory1/</directory>
+      <channelname>Demo TV Channel 2</channelname>
+      <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
+      <plot>Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero.</plot>
+      <genretype>10</genretype>
+      <genresubtype>0</genresubtype>
+      <!-- Deliberately have duplicate season/episode -->
+      <season>3</season>
+      <episode>1</episode>
+      <time>18:00</time>
+      <duration>7500</duration>
+    </recording>
+    <recording>
       <title>Demo Recording entry 3</title>
+      <episodename>SubEpisode3_4</episodename>
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 3</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
-      <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
+      <plot>Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum.</plot>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <!-- Deliberately have no season since mythtv can parse just episode -->
+      <episode>4</episode>
       <time>20:00</time>
       <duration>7500</duration>
     </recording>
@@ -569,6 +603,9 @@
       <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <!-- Season 0 is used for specials -->
+      <season>0</season>
+      <episode>4</episode>
       <time>18:00</time>
       <duration>7500</duration>
     </recording>

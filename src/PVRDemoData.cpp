@@ -208,6 +208,12 @@ bool PVRDemoData::LoadDemoData(void)
       /* genre subtype */
       XMLUtils::GetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
+      if (!XMLUtils::GetInt(pEpgNode, "season", entry.iSeriesNumber))
+        entry.iSeriesNumber = -1;
+
+      if (!XMLUtils::GetInt(pEpgNode, "episode", entry.iEpisodeNumber))
+       entry.iEpisodeNumber = -1;
+
       XBMC->Log(LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
       channel.epg.push_back(entry);
     }
@@ -228,6 +234,10 @@ bool PVRDemoData::LoadDemoData(void)
       if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
         continue;
       recording.strTitle = strTmp;
+
+      /* episode name (sub-title)*/
+      if (XMLUtils::GetString(pRecordingNode, "episodename", strTmp))
+        recording.strEpisodeName = strTmp;
 
       /* recording url */
       if (!XMLUtils::GetString(pRecordingNode, "url", strTmp))
@@ -260,6 +270,12 @@ bool PVRDemoData::LoadDemoData(void)
 
       /* genre subtype */
       XMLUtils::GetInt(pRecordingNode, "genresubtype", recording.iGenreSubType);
+
+      if (!XMLUtils::GetInt(pRecordingNode, "season", recording.iSeriesNumber))
+        recording.iSeriesNumber = -1;
+
+      if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
+        recording.iEpisodeNumber = -1;
 
       /* duration */
       XMLUtils::GetInt(pRecordingNode, "duration", recording.iDuration);
@@ -566,6 +582,8 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         tag.strIconPath        = myTag.strIconPath.c_str();
         tag.iGenreType         = myTag.iGenreType;
         tag.iGenreSubType      = myTag.iGenreSubType;
+        tag.iSeriesNumber      = myTag.iSeriesNumber;
+        tag.iEpisodeNumber     = myTag.iEpisodeNumber;
         tag.iFlags             = EPG_TAG_FLAG_UNDEFINED;
         
         iLastEndTimeTmp = tag.endTime;
@@ -595,10 +613,13 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     PVRDemoRecording &recording = *it;
 
     PVR_RECORDING xbmcRecording;
+    memset(&xbmcRecording, 0, sizeof(PVR_RECORDING));
 
     xbmcRecording.iDuration     = recording.iDuration;
     xbmcRecording.iGenreType    = recording.iGenreType;
     xbmcRecording.iGenreSubType = recording.iGenreSubType;
+    xbmcRecording.iSeriesNumber = recording.iSeriesNumber;
+    xbmcRecording.iEpisodeNumber= recording.iEpisodeNumber;
     xbmcRecording.recordingTime = recording.recordingTime;
     xbmcRecording.bIsDeleted      = bDeleted;
 
@@ -607,6 +628,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     strncpy(xbmcRecording.strPlot,        recording.strPlot.c_str(),        sizeof(xbmcRecording.strPlot) - 1);
     strncpy(xbmcRecording.strRecordingId, recording.strRecordingId.c_str(), sizeof(xbmcRecording.strRecordingId) - 1);
     strncpy(xbmcRecording.strTitle,       recording.strTitle.c_str(),       sizeof(xbmcRecording.strTitle) - 1);
+    strncpy(xbmcRecording.strEpisodeName, recording.strEpisodeName.c_str(), sizeof(xbmcRecording.strEpisodeName) - 1);
     strncpy(xbmcRecording.strStreamURL,   recording.strStreamURL.c_str(),   sizeof(xbmcRecording.strStreamURL) - 1);
     strncpy(xbmcRecording.strDirectory,   recording.strDirectory.c_str(),   sizeof(xbmcRecording.strDirectory) - 1);
 
