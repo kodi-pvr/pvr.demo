@@ -600,7 +600,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     xbmcRecording.iGenreType    = recording.iGenreType;
     xbmcRecording.iGenreSubType = recording.iGenreSubType;
     xbmcRecording.recordingTime = recording.recordingTime;
-    xbmcRecording.bIsDeleted      = bDeleted;
+    xbmcRecording.bIsDeleted    = bDeleted;
 
     strncpy(xbmcRecording.strChannelName, recording.strChannelName.c_str(), sizeof(xbmcRecording.strChannelName) - 1);
     strncpy(xbmcRecording.strPlotOutline, recording.strPlotOutline.c_str(), sizeof(xbmcRecording.strPlotOutline) - 1);
@@ -609,6 +609,9 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     strncpy(xbmcRecording.strTitle,       recording.strTitle.c_str(),       sizeof(xbmcRecording.strTitle) - 1);
     strncpy(xbmcRecording.strStreamURL,   recording.strStreamURL.c_str(),   sizeof(xbmcRecording.strStreamURL) - 1);
     strncpy(xbmcRecording.strDirectory,   recording.strDirectory.c_str(),   sizeof(xbmcRecording.strDirectory) - 1);
+
+    /* TODO: PVR API 5.0.0: Implement this */
+    xbmcRecording.iChannelUid = PVR_CHANNEL_INVALID_UID;
 
     PVR->TransferRecordingEntry(handle, &xbmcRecording);
   }
