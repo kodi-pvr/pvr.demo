@@ -613,6 +613,9 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     /* TODO: PVR API 5.0.0: Implement this */
     xbmcRecording.iChannelUid = PVR_CHANNEL_INVALID_UID;
 
+    /* TODO: PVR API 5.1.0: Implement this */
+    xbmcRecording.channelType = PVR_RECORDING_CHANNEL_TYPE_UNKNOWN;
+
     PVR->TransferRecordingEntry(handle, &xbmcRecording);
   }
 
