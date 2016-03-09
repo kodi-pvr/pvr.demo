@@ -224,6 +224,9 @@ bool PVRDemoData::LoadDemoData(void)
       CStdString strTmp;
       PVRDemoRecording recording;
 
+      /* radio/TV */
+      XMLUtils::GetBoolean(pRecordingNode, "radio", recording.bRadio);
+
       /* recording title */
       if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
         continue;
@@ -294,6 +297,9 @@ bool PVRDemoData::LoadDemoData(void)
     {
       CStdString strTmp;
       PVRDemoRecording recording;
+
+      /* radio/TV */
+      XMLUtils::GetBoolean(pRecordingNode, "radio", recording.bRadio);
 
       /* recording title */
       if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
@@ -601,6 +607,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     xbmcRecording.iGenreSubType = recording.iGenreSubType;
     xbmcRecording.recordingTime = recording.recordingTime;
     xbmcRecording.bIsDeleted    = bDeleted;
+    xbmcRecording.channelType   = recording.bRadio ? PVR_RECORDING_CHANNEL_TYPE_RADIO : PVR_RECORDING_CHANNEL_TYPE_TV;
 
     strncpy(xbmcRecording.strChannelName, recording.strChannelName.c_str(), sizeof(xbmcRecording.strChannelName) - 1);
     strncpy(xbmcRecording.strPlotOutline, recording.strPlotOutline.c_str(), sizeof(xbmcRecording.strPlotOutline) - 1);
@@ -612,9 +619,6 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
 
     /* TODO: PVR API 5.0.0: Implement this */
     xbmcRecording.iChannelUid = PVR_CHANNEL_INVALID_UID;
-
-    /* TODO: PVR API 5.1.0: Implement this */
-    xbmcRecording.channelType = PVR_RECORDING_CHANNEL_TYPE_UNKNOWN;
 
     PVR->TransferRecordingEntry(handle, &xbmcRecording);
   }
