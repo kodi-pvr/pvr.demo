@@ -61,6 +61,7 @@ struct PVRDemoChannel
 
 struct PVRDemoRecording
 {
+  bool        bRadio;
   int         iDuration;
   int         iGenreType;
   int         iGenreSubType;
