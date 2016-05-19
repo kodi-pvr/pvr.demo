@@ -22,7 +22,7 @@
 
 #include <vector>
 #include "p8-platform/util/StdString.h"
-#include "client.h"
+#include <kodi/api2/pvr/General.hpp>
 
 struct PVRDemoEpgEntry
 {

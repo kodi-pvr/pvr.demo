@@ -20,12 +20,13 @@
  */
 
 #include "client.h"
-#include "xbmc_pvr_dll.h"
 #include "PVRDemoData.h"
 #include <p8-platform/util/util.h>
 
+#include <kodi/api2/AddonLib.hpp>
+#include "xbmc_pvr_dll.h"
+
 using namespace std;
-using namespace ADDON;
 
 #ifdef TARGET_WINDOWS
 #define snprintf _snprintf
@@ -41,11 +42,8 @@ PVRDemoChannel m_currentChannel;
  * Default values are defined inside client.h
  * and exported to the other source files.
  */
-std::string g_strUserPath             = "";
-std::string g_strClientPath           = "";
-
-CHelper_libXBMC_addon *XBMC           = NULL;
-CHelper_libXBMC_pvr   *PVR            = NULL;
+std::string g_strUserPath       = "";
+std::string g_strClientPath     = "";
 
 extern "C" {
 
@@ -61,22 +59,13 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
 
   PVR_PROPERTIES* pvrprops = (PVR_PROPERTIES*)props;
 
-  XBMC = new CHelper_libXBMC_addon;
-  if (!XBMC->RegisterMe(hdl))
+  if (KodiAPI::InitLibAddon(hdl) != API_SUCCESS)
   {
-    SAFE_DELETE(XBMC);
+    fprintf(stderr, "pvr.demo InitLibAddon failed with %s\n", KodiAPI_ErrorCodeToString(KODI_API_lasterror));
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
-  PVR = new CHelper_libXBMC_pvr;
-  if (!PVR->RegisterMe(hdl))
-  {
-    SAFE_DELETE(PVR);
-    SAFE_DELETE(XBMC);
-    return ADDON_STATUS_PERMANENT_FAILURE;
-  }
-
-  XBMC->Log(LOG_DEBUG, "%s - Creating the PVR demo add-on", __FUNCTION__);
+  KodiAPI::Log(ADDON_LOG_DEBUG, "%s - Creating the PVR demo add-on", __FUNCTION__);
 
   m_CurStatus     = ADDON_STATUS_UNKNOWN;
   g_strUserPath   = pvrprops->strUserPath;
@@ -98,6 +87,7 @@ ADDON_STATUS ADDON_GetStatus()
 void ADDON_Destroy()
 {
   delete m_data;
+  KodiAPI::Finalize();
   m_bCreated = false;
   m_CurStatus = ADDON_STATUS_UNKNOWN;
 }

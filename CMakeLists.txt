@@ -6,6 +6,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
 
 enable_language(CXX)
 
+set(USE_KODI_API_LEVEL 2)
+
 find_package(Kodi REQUIRED)
 find_package(kodiplatform REQUIRED)
 find_package(p8-platform REQUIRED)
@@ -15,7 +17,8 @@ include_directories(${kodiplatform_INCLUDE_DIRS}
                     ${KODI_INCLUDE_DIR})
 
 set(DEPLIBS ${kodiplatform_LIBRARIES}
-            ${p8-platform_LIBRARIES})
+            ${p8-platform_LIBRARIES}
+            ${kodi-addon-sharedlibrary_LIBRARIES})
 
 set(PVRDEMO_SOURCES src/client.cpp
                     src/PVRDemoData.cpp)

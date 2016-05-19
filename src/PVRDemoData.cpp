@@ -21,9 +21,12 @@
 
 #include "util/XMLUtils.h"
 #include "PVRDemoData.h"
+#include "client.h"
+
+#include <kodi/api2/AddonLib.hpp>
+#include <kodi/api2/pvr/Transfer.hpp>
 
 using namespace std;
-using namespace ADDON;
 
 PVRDemoData::PVRDemoData(void)
 {
@@ -58,14 +61,14 @@ bool PVRDemoData::LoadDemoData(void)
 
   if (!xmlDoc.LoadFile(strSettingsFile))
   {
-    XBMC->Log(LOG_ERROR, "invalid demo data (no/invalid data file found at '%s')", strSettingsFile.c_str());
+    KodiAPI::Log(ADDON_LOG_ERROR, "invalid demo data (no/invalid data file found at '%s')", strSettingsFile.c_str());
     return false;
   }
 
   TiXmlElement *pRootElement = xmlDoc.RootElement();
   if (strcmp(pRootElement->Value(), "demo") != 0)
   {
-    XBMC->Log(LOG_ERROR, "invalid demo data (no <demo> tag found)");
+    KodiAPI::Log(ADDON_LOG_ERROR, "invalid demo data (no <demo> tag found)");
     return false;
   }
 
@@ -208,7 +211,7 @@ bool PVRDemoData::LoadDemoData(void)
       /* genre subtype */
       XMLUtils::GetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
-      XBMC->Log(LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
+      KodiAPI::Log(ADDON_LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
       channel.epg.push_back(entry);
     }
   }
@@ -421,7 +424,7 @@ bool PVRDemoData::LoadDemoData(void)
         }
       }
 
-      XBMC->Log(LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'", timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
+      KodiAPI::Log(ADDON_LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'", timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
       m_timers.push_back(timer);
     }
   }
@@ -454,7 +457,7 @@ PVR_ERROR PVRDemoData::GetChannels(ADDON_HANDLE handle, bool bRadio)
       strncpy(xbmcChannel.strIconPath, channel.strIconPath.c_str(), sizeof(xbmcChannel.strIconPath) - 1);
       xbmcChannel.bIsHidden         = false;
 
-      PVR->TransferChannelEntry(handle, &xbmcChannel);
+      KodiAPI::PVR::Transfer::ChannelEntry(handle, &xbmcChannel);
     }
   }
 
@@ -503,7 +506,7 @@ PVR_ERROR PVRDemoData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
       xbmcGroup.iPosition = group.iPosition;
       strncpy(xbmcGroup.strGroupName, group.strGroupName.c_str(), sizeof(xbmcGroup.strGroupName) - 1);
 
-      PVR->TransferChannelGroup(handle, &xbmcGroup);
+      KodiAPI::PVR::Transfer::ChannelGroup(handle, &xbmcGroup);
     }
   }
 
@@ -530,7 +533,7 @@ PVR_ERROR PVRDemoData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
         xbmcGroupMember.iChannelUniqueId  = channel.iUniqueId;
         xbmcGroupMember.iChannelNumber    = channel.iChannelNumber;
 
-        PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
+        KodiAPI::PVR::Transfer::ChannelGroupMember(handle, &xbmcGroupMember);
       }
     }
   }
@@ -576,7 +579,7 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         
         iLastEndTimeTmp = tag.endTime;
 
-        PVR->TransferEpgEntry(handle, &tag);
+        KodiAPI::PVR::Transfer::EpgEntry(handle, &tag);
       }
 
       iLastEndTime = iLastEndTimeTmp;
@@ -620,7 +623,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     /* TODO: PVR API 5.0.0: Implement this */
     xbmcRecording.iChannelUid = PVR_CHANNEL_INVALID_UID;
 
-    PVR->TransferRecordingEntry(handle, &xbmcRecording);
+    KodiAPI::PVR::Transfer::RecordingEntry(handle, &xbmcRecording);
   }
 
   return PVR_ERROR_NO_ERROR;
@@ -653,7 +656,7 @@ PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
     strncpy(xbmcTimer.strTitle, timer.strTitle.c_str(), sizeof(timer.strTitle) - 1);
     strncpy(xbmcTimer.strSummary, timer.strSummary.c_str(), sizeof(timer.strSummary) - 1);
 
-    PVR->TransferTimerEntry(handle, &xbmcTimer);
+    KodiAPI::PVR::Transfer::TimerEntry(handle, &xbmcTimer);
   }
 
   return PVR_ERROR_NO_ERROR;
