@@ -136,6 +136,9 @@ PVR_ERROR GetAddonCapabilities(PVR_ADDON_CAPABILITIES* pCapabilities)
   pCapabilities->bSupportsRecordings      = true;
   pCapabilities->bSupportsRecordingsUndelete = true;
   pCapabilities->bSupportsTimers          = true;
+  pCapabilities->bSupportsRecordingsRename = false;
+  pCapabilities->bSupportsRecordingsLifetimeChange = false;
+  pCapabilities->bSupportsDescrambleInfo = false;
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -344,4 +347,6 @@ time_t GetBufferTimeEnd() { return 0; }
 PVR_ERROR UndeleteRecording(const PVR_RECORDING& recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetEPGTimeFrame(int) { return PVR_ERROR_NOT_IMPLEMENTED; }
+PVR_ERROR GetDescrambleInfo(PVR_DESCRAMBLE_INFO*) { return PVR_ERROR_NOT_IMPLEMENTED; }
+PVR_ERROR SetRecordingLifetime(const PVR_RECORDING*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 }
