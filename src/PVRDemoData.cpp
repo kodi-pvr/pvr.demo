@@ -436,9 +436,8 @@ int PVRDemoData::GetChannelsAmount(void)
 
 PVR_ERROR PVRDemoData::GetChannels(ADDON_HANDLE handle, bool bRadio)
 {
-  for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
+  for (const auto& channel : m_channels)
   {
-    PVRDemoChannel &channel = m_channels.at(iChannelPtr);
     if (channel.bRadio == bRadio)
     {
       PVR_CHANNEL xbmcChannel;
@@ -449,7 +448,6 @@ PVR_ERROR PVRDemoData::GetChannels(ADDON_HANDLE handle, bool bRadio)
       xbmcChannel.iChannelNumber    = channel.iChannelNumber;
       xbmcChannel.iSubChannelNumber = channel.iSubChannelNumber;
       strncpy(xbmcChannel.strChannelName, channel.strChannelName.c_str(), sizeof(xbmcChannel.strChannelName) - 1);
-      strncpy(xbmcChannel.strStreamURL, channel.strStreamURL.c_str(), sizeof(xbmcChannel.strStreamURL) - 1);
       xbmcChannel.iEncryptionSystem = channel.iEncryptionSystem;
       strncpy(xbmcChannel.strIconPath, channel.strIconPath.c_str(), sizeof(xbmcChannel.strIconPath) - 1);
       xbmcChannel.bIsHidden         = false;
@@ -463,9 +461,8 @@ PVR_ERROR PVRDemoData::GetChannels(ADDON_HANDLE handle, bool bRadio)
 
 bool PVRDemoData::GetChannel(const PVR_CHANNEL &channel, PVRDemoChannel &myChannel)
 {
-  for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
+  for (const auto& thisChannel : m_channels)
   {
-    PVRDemoChannel &thisChannel = m_channels.at(iChannelPtr);
     if (thisChannel.iUniqueId == (int) channel.iUniqueId)
     {
       myChannel.iUniqueId         = thisChannel.iUniqueId;
