@@ -197,6 +197,21 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
   return PVR_ERROR_SERVER_ERROR;
 }
 
+const char * GetLiveStreamURL(const PVR_CHANNEL &channel)
+{
+  if (m_data)
+  {
+    PVRDemoChannel addonChannel;
+    m_data->GetChannel(channel, addonChannel);
+
+    static std::string streamURL;
+    streamURL = addonChannel.strStreamURL;
+    return streamURL.c_str();
+  }
+
+  return "";
+}
+
 bool OpenLiveStream(const PVR_CHANNEL &channel)
 {
   if (m_data)
@@ -216,13 +231,6 @@ bool OpenLiveStream(const PVR_CHANNEL &channel)
 void CloseLiveStream(void)
 {
   m_bIsPlaying = false;
-}
-
-bool SwitchChannel(const PVR_CHANNEL &channel)
-{
-  CloseLiveStream();
-
-  return OpenLiveStream(channel);
 }
 
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES* pProperties)
@@ -321,7 +329,6 @@ int ReadLiveStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0;
 long long SeekLiveStream(long long iPosition, int iWhence /* = SEEK_SET */) { return -1; }
 long long PositionLiveStream(void) { return -1; }
 long long LengthLiveStream(void) { return -1; }
-const char * GetLiveStreamURL(const PVR_CHANNEL &channel) { return ""; }
 PVR_ERROR DeleteRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetRecordingPlayCount(const PVR_RECORDING &recording, int count) { return PVR_ERROR_NOT_IMPLEMENTED; }

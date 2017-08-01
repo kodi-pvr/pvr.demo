@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.demo"
-  version="3.1.0"
+  version="3.1.1"
   name="PVR Demo Client"
   provider-name="Pulse-Eight Ltd.">
   <requires>@ADDON_DEPENDS@</requires>
