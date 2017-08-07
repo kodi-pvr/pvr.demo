@@ -21,6 +21,7 @@
 
 #include "util/XMLUtils.h"
 #include "PVRDemoData.h"
+#include "p8-platform/util/StringUtils.h"
 
 using namespace std;
 using namespace ADDON;
@@ -77,7 +78,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pChannelNode = NULL;
     while ((pChannelNode = pElement->IterateChildren(pChannelNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       PVRDemoChannel channel;
       channel.iUniqueId = ++iUniqueChannelId;
 
@@ -125,7 +126,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pGroupNode = NULL;
     while ((pGroupNode = pElement->IterateChildren(pGroupNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       PVRDemoChannelGroup group;
       group.iGroupId = ++iUniqueGroupId;
 
@@ -161,7 +162,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pEpgNode = NULL;
     while ((pEpgNode = pElement->IterateChildren(pEpgNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       int iTmp;
       PVRDemoEpgEntry entry;
 
@@ -221,7 +222,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pRecordingNode = NULL;
     while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       PVRDemoRecording recording;
 
       /* radio/TV */
@@ -243,7 +244,7 @@ bool PVRDemoData::LoadDemoData(void)
         recording.strDirectory = strTmp;
 
       iUniqueGroupId++;
-      strTmp.Format("%d", iUniqueGroupId);
+      strTmp = StringUtils::Format("%d", iUniqueGroupId);
       recording.strRecordingId = strTmp;
 
       /* channel name */
@@ -273,11 +274,11 @@ bool PVRDemoData::LoadDemoData(void)
         time_t timeNow = time(NULL);
         struct tm* now = localtime(&timeNow);
 
-        CStdString::size_type delim = strTmp.Find(':');
-        if (delim != CStdString::npos)
+        auto delim = strTmp.find(':');
+        if (delim != string::npos)
         {
-          now->tm_hour = (int)strtol(strTmp.Left(delim), NULL, 0);
-          now->tm_min  = (int)strtol(strTmp.Mid(delim + 1), NULL, 0);
+          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
+          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, (delim + 1)).c_str(), NULL, 0);
           now->tm_mday--; // yesterday
 
           recording.recordingTime = mktime(now);
@@ -295,7 +296,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pRecordingNode = NULL;
     while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       PVRDemoRecording recording;
 
       /* radio/TV */
@@ -317,7 +318,7 @@ bool PVRDemoData::LoadDemoData(void)
         recording.strDirectory = strTmp;
 
       iUniqueGroupId++;
-      strTmp.Format("%d", iUniqueGroupId);
+      strTmp = StringUtils::Format("%d", iUniqueGroupId);
       recording.strRecordingId = strTmp;
 
       /* channel name */
@@ -347,11 +348,11 @@ bool PVRDemoData::LoadDemoData(void)
         time_t timeNow = time(NULL);
         struct tm* now = localtime(&timeNow);
 
-        CStdString::size_type delim = strTmp.Find(':');
-        if (delim != CStdString::npos)
+        auto delim = strTmp.find(':');
+        if (delim != string::npos)
         {
-          now->tm_hour = (int)strtol(strTmp.Left(delim), NULL, 0);
-          now->tm_min  = (int)strtol(strTmp.Mid(delim + 1), NULL, 0);
+          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
+          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
           now->tm_mday--; // yesterday
 
           recording.recordingTime = mktime(now);
@@ -369,7 +370,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pTimerNode = NULL;
     while ((pTimerNode = pElement->IterateChildren(pTimerNode)) != NULL)
     {
-      CStdString strTmp;
+      string strTmp;
       int iTmp;
       PVRDemoTimer timer;
       time_t timeNow = time(NULL);
@@ -398,11 +399,11 @@ bool PVRDemoData::LoadDemoData(void)
       /* start time */
       if (XMLUtils::GetString(pTimerNode, "starttime", strTmp))
       {
-        CStdString::size_type delim = strTmp.Find(':');
-        if (delim != CStdString::npos)
+        auto delim = strTmp.find(':');
+        if (delim != string::npos)
         {
-          now->tm_hour = (int)strtol(strTmp.Left(delim), NULL, 0);
-          now->tm_min  = (int)strtol(strTmp.Mid(delim + 1), NULL, 0);
+          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
+          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
 
           timer.startTime = mktime(now);
         }
@@ -411,11 +412,11 @@ bool PVRDemoData::LoadDemoData(void)
       /* end time */
       if (XMLUtils::GetString(pTimerNode, "endtime", strTmp))
       {
-        CStdString::size_type delim = strTmp.Find(':');
-        if (delim != CStdString::npos)
+        auto delim = strTmp.find(':');
+        if (delim != string::npos)
         {
-          now->tm_hour = (int)strtol(strTmp.Left(delim), NULL, 0);
-          now->tm_min  = (int)strtol(strTmp.Mid(delim + 1), NULL, 0);
+          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
+          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
 
           timer.endTime = mktime(now);
         }
