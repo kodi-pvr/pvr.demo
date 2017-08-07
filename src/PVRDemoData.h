@@ -21,7 +21,7 @@
  */
 
 #include <vector>
-#include "p8-platform/util/StdString.h"
+#include "p8-platform/os.h"
 #include "client.h"
 
 struct PVRDemoEpgEntry
@@ -126,6 +126,6 @@ private:
   std::vector<PVRDemoRecording>    m_recordingsDeleted;
   std::vector<PVRDemoTimer>        m_timers;
   time_t                           m_iEpgStart;
-  CStdString                       m_strDefaultIcon;
-  CStdString                       m_strDefaultMovie;
+  std::string                      m_strDefaultIcon;
+  std::string                      m_strDefaultMovie;
 };

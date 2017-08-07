@@ -151,13 +151,13 @@ const char *GetBackendName(void)
 
 const char *GetBackendVersion(void)
 {
-  static CStdString strBackendVersion = "0.1";
+  static string strBackendVersion = "0.1";
   return strBackendVersion.c_str();
 }
 
 const char *GetConnectionString(void)
 {
-  static CStdString strConnectionString = "connected";
+  static string strConnectionString = "connected";
   return strConnectionString.c_str();
 }
 
