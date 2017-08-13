@@ -611,7 +611,6 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     strncpy(xbmcRecording.strPlot,        recording.strPlot.c_str(),        sizeof(xbmcRecording.strPlot) - 1);
     strncpy(xbmcRecording.strRecordingId, recording.strRecordingId.c_str(), sizeof(xbmcRecording.strRecordingId) - 1);
     strncpy(xbmcRecording.strTitle,       recording.strTitle.c_str(),       sizeof(xbmcRecording.strTitle) - 1);
-    strncpy(xbmcRecording.strStreamURL,   recording.strStreamURL.c_str(),   sizeof(xbmcRecording.strStreamURL) - 1);
     strncpy(xbmcRecording.strDirectory,   recording.strDirectory.c_str(),   sizeof(xbmcRecording.strDirectory) - 1);
 
     /* TODO: PVR API 5.0.0: Implement this */
@@ -621,6 +620,19 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
   }
 
   return PVR_ERROR_NO_ERROR;
+}
+
+std::string PVRDemoData::GetRecordingURL(const PVR_RECORDING &recording)
+{
+  for (const auto& thisRecording : m_recordings)
+  {
+    if (thisRecording.strRecordingId == recording.strRecordingId)
+    {
+      return thisRecording.strStreamURL;
+    }
+  }
+
+  return "";
 }
 
 int PVRDemoData::GetTimersAmount(void)

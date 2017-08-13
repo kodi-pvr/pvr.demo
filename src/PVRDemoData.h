@@ -100,25 +100,26 @@ public:
   PVRDemoData(void);
   virtual ~PVRDemoData(void);
 
-  virtual int GetChannelsAmount(void);
-  virtual PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio);
-  virtual bool GetChannel(const PVR_CHANNEL &channel, PVRDemoChannel &myChannel);
+  int GetChannelsAmount(void);
+  PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio);
+  bool GetChannel(const PVR_CHANNEL &channel, PVRDemoChannel &myChannel);
 
-  virtual int GetChannelGroupsAmount(void);
-  virtual PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
-  virtual PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP &group);
+  int GetChannelGroupsAmount(void);
+  PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
+  PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP &group);
 
-  virtual PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
+  PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
 
-  virtual int GetRecordingsAmount(bool bDeleted);
-  virtual PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool bDeleted);
+  int GetRecordingsAmount(bool bDeleted);
+  PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool bDeleted);
+  std::string GetRecordingURL(const PVR_RECORDING &recording);
 
-  virtual int GetTimersAmount(void);
-  virtual PVR_ERROR GetTimers(ADDON_HANDLE handle);
+  int GetTimersAmount(void);
+  PVR_ERROR GetTimers(ADDON_HANDLE handle);
 
-  virtual std::string GetSettingsFile() const;
+  std::string GetSettingsFile() const;
 protected:
-  virtual bool LoadDemoData(void);
+  bool LoadDemoData(void);
 private:
   std::vector<PVRDemoChannelGroup> m_groups;
   std::vector<PVRDemoChannel>      m_channels;
