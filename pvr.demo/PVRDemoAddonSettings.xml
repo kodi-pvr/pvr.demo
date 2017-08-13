@@ -527,7 +527,7 @@
     <!-- TV Recordings -->
     <recording>
       <title>Demo TV Recording entry 1</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 1</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -540,7 +540,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 2</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 2</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -553,7 +553,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 3</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 3</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -566,7 +566,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 4</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory2/</directory>
       <channelname>Demo TV Channel 4</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -579,7 +579,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 5</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory2/</directory>
       <channelname>Demo TV Channel 5</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -592,7 +592,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 6</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory1/</directory>
       <channelname>Demo TV Channel 6</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -605,7 +605,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 7</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory1/</directory>
       <channelname>Demo TV Channel 7</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -618,7 +618,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 8</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory2/</directory>
       <channelname>Demo TV Channel 8</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -631,7 +631,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 9</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory2/</directory>
       <channelname>Demo TV Channel 9</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -644,7 +644,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 10</title>
-      <url></url>
+      <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/</directory>
       <channelname>Demo TV Channel 10</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>

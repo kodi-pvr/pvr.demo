@@ -34,7 +34,6 @@ using namespace ADDON;
 bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRDemoData   *m_data           = NULL;
-bool           m_bIsPlaying     = false;
 PVRDemoChannel m_currentChannel;
 
 /* User adjustable settings are saved here.
@@ -197,45 +196,26 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
   return PVR_ERROR_SERVER_ERROR;
 }
 
-const char * GetLiveStreamURL(const PVR_CHANNEL &channel)
+PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
 {
+  if (!channel || !properties || !iPropertiesCount)
+    return PVR_ERROR_SERVER_ERROR;
+
+  if (*iPropertiesCount < 1)
+    return PVR_ERROR_INVALID_PARAMETERS;
+
   if (m_data)
   {
     PVRDemoChannel addonChannel;
-    m_data->GetChannel(channel, addonChannel);
+    m_data->GetChannel(*channel, addonChannel);
 
-    static std::string streamURL;
-    streamURL = addonChannel.strStreamURL;
-    return streamURL.c_str();
+    strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
+    strncpy(properties[0].strValue, addonChannel.strStreamURL.c_str(), sizeof(properties[0].strValue) - 1);
+    *iPropertiesCount = 1;
+    return PVR_ERROR_NO_ERROR;
   }
 
-  return "";
-}
-
-bool OpenLiveStream(const PVR_CHANNEL &channel)
-{
-  if (m_data)
-  {
-    CloseLiveStream();
-
-    if (m_data->GetChannel(channel, m_currentChannel))
-    {
-      m_bIsPlaying = true;
-      return true;
-    }
-  }
-
-  return false;
-}
-
-void CloseLiveStream(void)
-{
-  m_bIsPlaying = false;
-}
-
-PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES* pProperties)
-{
-  return PVR_ERROR_NOT_IMPLEMENTED;
+  return PVR_ERROR_SERVER_ERROR;
 }
 
 int GetChannelGroupsAmount(void)
@@ -283,7 +263,29 @@ PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool deleted)
   if (m_data)
     return m_data->GetRecordings(handle, deleted);
 
-  return PVR_ERROR_NOT_IMPLEMENTED;
+  return PVR_ERROR_SERVER_ERROR;
+}
+
+PVR_ERROR GetRecordingStreamProperties(const PVR_RECORDING* recording, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
+{
+  if (!recording || !properties || !iPropertiesCount)
+    return PVR_ERROR_SERVER_ERROR;
+
+  if (*iPropertiesCount < 1)
+    return PVR_ERROR_INVALID_PARAMETERS;
+
+  if (m_data)
+  {
+    PVRDemoRecording addonRecording;
+    std::string streamURL = m_data->GetRecordingURL(*recording);
+
+    strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
+    strncpy(properties[0].strValue, streamURL.c_str(), sizeof(properties[0].strValue) - 1);
+    *iPropertiesCount = 1;
+    return PVR_ERROR_NO_ERROR;
+  }
+
+  return PVR_ERROR_SERVER_ERROR;
 }
 
 PVR_ERROR GetTimerTypes(PVR_TIMER_TYPE types[], int *size)
@@ -325,6 +327,8 @@ long long PositionRecordedStream(void) { return -1; }
 long long LengthRecordedStream(void) { return 0; }
 void DemuxReset(void) {}
 void DemuxFlush(void) {}
+bool OpenLiveStream(const PVR_CHANNEL&) { return false; }
+void CloseLiveStream(void) {}
 int ReadLiveStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
 long long SeekLiveStream(long long iPosition, int iWhence /* = SEEK_SET */) { return -1; }
 long long PositionLiveStream(void) { return -1; }
@@ -355,6 +359,7 @@ PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetEPGTimeFrame(int) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetDescrambleInfo(PVR_DESCRAMBLE_INFO*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetRecordingLifetime(const PVR_RECORDING*) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES *times) { return PVR_ERROR_NOT_IMPLEMENTED; }
+PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
+PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 
 } // extern "C"
