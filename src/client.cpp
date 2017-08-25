@@ -180,6 +180,26 @@ PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time
   return PVR_ERROR_SERVER_ERROR;
 }
 
+PVR_ERROR IsEPGTagPlayable(const EPG_TAG*, bool* bIsPlayable)
+{
+  *bIsPlayable = true;
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG* tag, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
+{
+  if (!tag || !properties || !iPropertiesCount)
+    return PVR_ERROR_SERVER_ERROR;
+
+  if (*iPropertiesCount < 1)
+    return PVR_ERROR_INVALID_PARAMETERS;
+
+  strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
+  strncpy(properties[0].strValue, "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4", sizeof(properties[0].strValue) - 1);
+  *iPropertiesCount = 1;
+  return PVR_ERROR_NO_ERROR;
+}
+
 int GetChannelsAmount(void)
 {
   if (m_data)
@@ -361,5 +381,6 @@ PVR_ERROR GetDescrambleInfo(PVR_DESCRAMBLE_INFO*) { return PVR_ERROR_NOT_IMPLEME
 PVR_ERROR SetRecordingLifetime(const PVR_RECORDING*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
+PVR_ERROR IsEPGTagRecordable(const EPG_TAG*, bool*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 
 } // extern "C"

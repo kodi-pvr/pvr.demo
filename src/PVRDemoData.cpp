@@ -561,8 +561,8 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         memset(&tag, 0, sizeof(EPG_TAG));
 
         tag.iUniqueBroadcastId = myTag.iBroadcastId + iAddBroadcastId;
+        tag.iUniqueChannelId   = channel.iUniqueId;
         tag.strTitle           = myTag.strTitle.c_str();
-        tag.iChannelNumber     = myTag.iChannelId;
         tag.startTime          = myTag.startTime + iLastEndTime;
         tag.endTime            = myTag.endTime + iLastEndTime;
         tag.strPlotOutline     = myTag.strPlotOutline.c_str();
