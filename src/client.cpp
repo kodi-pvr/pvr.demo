@@ -84,6 +84,23 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   ADDON_ReadSettings();
 
   m_data = new PVRDemoData;
+
+  PVR_MENUHOOK hook;
+  hook.iHookId = 1;
+  hook.category = PVR_MENUHOOK_SETTING;
+  hook.iLocalizedStringId = 30000;
+  PVR->AddMenuHook(&hook);
+
+  hook.iHookId = 2;
+  hook.category = PVR_MENUHOOK_ALL;
+  hook.iLocalizedStringId = 30001;
+  PVR->AddMenuHook(&hook);
+
+  hook.iHookId = 3;
+  hook.category = PVR_MENUHOOK_CHANNEL;
+  hook.iLocalizedStringId = 30002;
+  PVR->AddMenuHook(&hook);
+
   m_CurStatus = ADDON_STATUS_OK;
   m_bCreated = true;
   return m_CurStatus;
@@ -331,9 +348,32 @@ PVR_ERROR GetTimers(ADDON_HANDLE handle)
   return PVR_ERROR_NOT_IMPLEMENTED;
 }
 
+PVR_ERROR CallMenuHook(const PVR_MENUHOOK& menuhook, const PVR_MENUHOOK_DATA&)
+{
+  int iMsg;
+  switch (menuhook.iHookId)
+  {
+    case 1:
+      iMsg = 30010;
+      break;
+    case 2:
+      iMsg = 30011;
+      break;
+    case 3:
+      iMsg = 30012;
+      break;
+    default:
+      return PVR_ERROR_INVALID_PARAMETERS;
+  }
+  char* msg = XBMC->GetLocalizedString(iMsg);
+  XBMC->QueueNotification(ADDON::QUEUE_INFO, msg);
+  XBMC->FreeString(msg);
+
+  return PVR_ERROR_NO_ERROR;
+}
+
 /** UNUSED API FUNCTIONS */
 PVR_ERROR OpenDialogChannelScan(void) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR CallMenuHook(const PVR_MENUHOOK &menuhook, const PVR_MENUHOOK_DATA &item) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR MoveChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
