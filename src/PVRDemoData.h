@@ -40,10 +40,10 @@ struct PVRDemoEpgEntry
 //  int         iParentalRating;
 //  int         iStarRating;
 //  bool        bNotify;
-//  int         iSeriesNumber;
-//  int         iEpisodeNumber;
+  int         iSeriesNumber;
+  int         iEpisodeNumber;
 //  int         iEpisodePartNumber;
-//  std::string strEpisodeName;
+  std::string strEpisodeName;
 };
 
 struct PVRDemoChannel

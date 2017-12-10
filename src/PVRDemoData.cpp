@@ -199,6 +199,15 @@ bool PVRDemoData::LoadDemoData(void)
       if (XMLUtils::GetString(pEpgNode, "plotoutline", strTmp))
         entry.strPlotOutline = strTmp;
 
+      if (!XMLUtils::GetInt(pEpgNode, "series", entry.iSeriesNumber))
+        entry.iSeriesNumber = 0;
+
+      if (!XMLUtils::GetInt(pEpgNode, "episode", entry.iEpisodeNumber))
+        entry.iEpisodeNumber = 0;
+
+      if (XMLUtils::GetString(pEpgNode, "episodetitle", strTmp))
+        entry.strEpisodeName = strTmp;
+
       /* icon path */
       if (XMLUtils::GetString(pEpgNode, "icon", strTmp))
         entry.strIconPath = strTmp;
@@ -571,7 +580,10 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         tag.iGenreType         = myTag.iGenreType;
         tag.iGenreSubType      = myTag.iGenreSubType;
         tag.iFlags             = EPG_TAG_FLAG_UNDEFINED;
-        
+        tag.iSeriesNumber      = myTag.iSeriesNumber;
+        tag.iEpisodeNumber     = myTag.iEpisodeNumber;;
+        tag.strEpisodeName     = myTag.strEpisodeName.c_str();
+
         iLastEndTimeTmp = tag.endTime;
 
         PVR->TransferEpgEntry(handle, &tag);
