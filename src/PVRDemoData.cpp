@@ -536,6 +536,7 @@ PVR_ERROR PVRDemoData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
         strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
         xbmcGroupMember.iChannelUniqueId  = channel.iUniqueId;
         xbmcGroupMember.iChannelNumber    = channel.iChannelNumber;
+        xbmcGroupMember.iSubChannelNumber = channel.iSubChannelNumber;
 
         PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
       }
