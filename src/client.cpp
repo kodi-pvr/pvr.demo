@@ -376,14 +376,12 @@ PVR_ERROR CallMenuHook(const PVR_MENUHOOK& menuhook, const PVR_MENUHOOK_DATA&)
 PVR_ERROR OpenDialogChannelScan(void) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR MoveChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelSettings(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelAdd(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 bool OpenRecordedStream(const PVR_RECORDING &recording) { return false; }
 void CloseRecordedStream(void) {}
 int ReadRecordedStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
 long long SeekRecordedStream(long long iPosition, int iWhence /* = SEEK_SET */) { return 0; }
-long long PositionRecordedStream(void) { return -1; }
 long long LengthRecordedStream(void) { return 0; }
 void DemuxReset(void) {}
 void DemuxFlush(void) {}
@@ -391,7 +389,6 @@ bool OpenLiveStream(const PVR_CHANNEL&) { return false; }
 void CloseLiveStream(void) {}
 int ReadLiveStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
 long long SeekLiveStream(long long iPosition, int iWhence /* = SEEK_SET */) { return -1; }
-long long PositionLiveStream(void) { return -1; }
 long long LengthLiveStream(void) { return -1; }
 PVR_ERROR DeleteRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -411,9 +408,6 @@ bool SeekTime(double,bool,double*) { return false; }
 void SetSpeed(int) {};
 bool IsTimeshifting(void) { return false; }
 bool IsRealTimeStream(void) { return true; }
-time_t GetPlayingTime() { return 0; }
-time_t GetBufferTimeStart() { return 0; }
-time_t GetBufferTimeEnd() { return 0; }
 PVR_ERROR UndeleteRecording(const PVR_RECORDING& recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetEPGTimeFrame(int) { return PVR_ERROR_NOT_IMPLEMENTED; }
