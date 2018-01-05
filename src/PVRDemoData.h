@@ -65,12 +65,15 @@ struct PVRDemoRecording
   int         iDuration;
   int         iGenreType;
   int         iGenreSubType;
+  int         iSeriesNumber;
+  int         iEpisodeNumber;
   std::string strChannelName;
   std::string strPlotOutline;
   std::string strPlot;
   std::string strRecordingId;
   std::string strStreamURL;
   std::string strTitle;
+  std::string strEpisodeName;
   std::string strDirectory;
   time_t      recordingTime;
 };
