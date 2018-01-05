@@ -535,6 +535,7 @@
     <!-- TV Recordings -->
     <recording>
       <title>Demo TV Recording entry 1</title>
+      <episodetitle>Demo TV Recording 1 Episode Name</episodetitle>
       <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 1</channelname>
@@ -545,9 +546,12 @@
       <time>12:00</time>
       <duration>7200</duration>
       <radio>0</radio>
+      <series>2</series>
+      <episode>1</episode>
     </recording>
     <recording>
       <title>Demo TV Recording entry 2</title>
+      <episodetitle>Demo TV Recording 2 Episode Name</episodetitle>
       <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 2</channelname>
@@ -558,12 +562,14 @@
       <time>14:00</time>
       <duration>7500</duration>
       <radio>0</radio>
+      <episode>3</episode>
     </recording>
     <recording>
       <title>Demo TV Recording entry 3</title>
       <url>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 3</channelname>
+      <episodetitle>Demo TV Recording 3 Episode Name</episodetitle>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
       <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
       <genretype>10</genretype>
@@ -802,10 +808,13 @@
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 1</channelname>
+      <episodetitle>Demo TV Recording entry 11 Episode Name</episodetitle>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
       <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <series>1</series>
+      <episode>2</episode>
       <time>12:00</time>
       <duration>7200</duration>
       <radio>0</radio>
@@ -815,9 +824,11 @@
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 2</channelname>
+      <episodetitle>Demo TV Recording entry 12 Episode Name</episodetitle>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
       <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
       <genretype>10</genretype>
+      <episode>3</episode>
       <genresubtype>0</genresubtype>
       <time>14:00</time>
       <duration>7500</duration>
@@ -828,6 +839,7 @@
       <url></url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 3</channelname>
+      <episodetitle>Demo TV Recording entry 13 Episode Name</episodetitle>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
       <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
       <genretype>10</genretype>

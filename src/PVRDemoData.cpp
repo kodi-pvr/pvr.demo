@@ -268,6 +268,18 @@ bool PVRDemoData::LoadDemoData(void)
       if (XMLUtils::GetString(pRecordingNode, "plotoutline", strTmp))
         recording.strPlotOutline = strTmp;
 
+      /* Episode Name */
+      if (XMLUtils::GetString(pRecordingNode, "episodetitle", strTmp))
+        recording.strEpisodeName = strTmp;
+
+      /* Series Number */
+      if (!XMLUtils::GetInt(pRecordingNode, "series", recording.iSeriesNumber))
+        recording.iSeriesNumber = 0;
+
+      /* Episode Number */
+      if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
+        recording.iEpisodeNumber = 0;
+
       /* genre type */
       XMLUtils::GetInt(pRecordingNode, "genretype", recording.iGenreType);
 
@@ -341,6 +353,18 @@ bool PVRDemoData::LoadDemoData(void)
       /* plot outline */
       if (XMLUtils::GetString(pRecordingNode, "plotoutline", strTmp))
         recording.strPlotOutline = strTmp;
+
+      /* Episode Name */
+      if (XMLUtils::GetString(pRecordingNode, "episodetitle", strTmp))
+        recording.strEpisodeName = strTmp;
+
+      /* Series Number */
+      if (!XMLUtils::GetInt(pRecordingNode, "series", recording.iSeriesNumber))
+        recording.iSeriesNumber = 0;
+
+      /* Episode Number */
+      if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
+        recording.iEpisodeNumber = 0;
 
       /* genre type */
       XMLUtils::GetInt(pRecordingNode, "genretype", recording.iGenreType);
@@ -617,6 +641,8 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     xbmcRecording.iGenreType    = recording.iGenreType;
     xbmcRecording.iGenreSubType = recording.iGenreSubType;
     xbmcRecording.recordingTime = recording.recordingTime;
+    xbmcRecording.iEpisodeNumber = recording.iEpisodeNumber;
+    xbmcRecording.iSeriesNumber = recording.iSeriesNumber;
     xbmcRecording.bIsDeleted    = bDeleted;
     xbmcRecording.channelType   = recording.bRadio ? PVR_RECORDING_CHANNEL_TYPE_RADIO : PVR_RECORDING_CHANNEL_TYPE_TV;
 
@@ -625,6 +651,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     strncpy(xbmcRecording.strPlot,        recording.strPlot.c_str(),        sizeof(xbmcRecording.strPlot) - 1);
     strncpy(xbmcRecording.strRecordingId, recording.strRecordingId.c_str(), sizeof(xbmcRecording.strRecordingId) - 1);
     strncpy(xbmcRecording.strTitle,       recording.strTitle.c_str(),       sizeof(xbmcRecording.strTitle) - 1);
+    strncpy(xbmcRecording.strEpisodeName, recording.strEpisodeName.c_str(), sizeof(xbmcRecording.strEpisodeName) - 1);
     strncpy(xbmcRecording.strDirectory,   recording.strDirectory.c_str(),   sizeof(xbmcRecording.strDirectory) - 1);
 
     /* TODO: PVR API 5.0.0: Implement this */
