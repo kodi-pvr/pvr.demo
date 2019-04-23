@@ -570,7 +570,7 @@ PVR_ERROR PVRDemoData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd)
+PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd)
 {
   if (m_iEpgStart == -1)
     m_iEpgStart = iStart;
@@ -581,7 +581,7 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
   for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
   {
     PVRDemoChannel &myChannel = m_channels.at(iChannelPtr);
-    if (myChannel.iUniqueId != (int) channel.iUniqueId)
+    if (myChannel.iUniqueId != iChannelUid)
       continue;
 
     while (iLastEndTime < iEnd && myChannel.epg.size() > 0)
@@ -595,7 +595,7 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         memset(&tag, 0, sizeof(EPG_TAG));
 
         tag.iUniqueBroadcastId = myTag.iBroadcastId + iAddBroadcastId;
-        tag.iUniqueChannelId   = channel.iUniqueId;
+        tag.iUniqueChannelId   = iChannelUid;
         tag.strTitle           = myTag.strTitle.c_str();
         tag.startTime          = myTag.startTime + iLastEndTime;
         tag.endTime            = myTag.endTime + iLastEndTime;
