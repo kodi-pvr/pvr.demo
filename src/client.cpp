@@ -189,10 +189,10 @@ PVR_ERROR GetDriveSpace(long long *iTotal, long long *iUsed)
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd)
+PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd)
 {
   if (m_data)
-    return m_data->GetEPGForChannel(handle, channel, iStart, iEnd);
+    return m_data->GetEPGForChannel(handle, iChannelUid, iStart, iEnd);
 
   return PVR_ERROR_SERVER_ERROR;
 }
@@ -403,12 +403,12 @@ PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) { return PVR_ER
 PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
+void FillBuffer(bool mode) {}
 void PauseStream(bool bPaused) {}
 bool CanPauseStream(void) { return false; }
 bool CanSeekStream(void) { return false; }
 bool SeekTime(double,bool,double*) { return false; }
 void SetSpeed(int) {};
-bool IsTimeshifting(void) { return false; }
 bool IsRealTimeStream(void) { return true; }
 PVR_ERROR UndeleteRecording(const PVR_RECORDING& recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }

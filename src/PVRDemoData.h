@@ -39,7 +39,6 @@ struct PVRDemoEpgEntry
 //  time_t      firstAired;
 //  int         iParentalRating;
 //  int         iStarRating;
-//  bool        bNotify;
   int         iSeriesNumber;
   int         iEpisodeNumber;
 //  int         iEpisodePartNumber;
@@ -111,7 +110,7 @@ public:
   PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
   PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP &group);
 
-  PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
+  PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd);
 
   int GetRecordingsAmount(bool bDeleted);
   PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool bDeleted);
