@@ -24,6 +24,8 @@
 #include "p8-platform/os.h"
 #include "client.h"
 
+class TiXmlNode;
+
 struct PVRDemoEpgEntry
 {
   int         iBroadcastId;
@@ -123,6 +125,12 @@ public:
 protected:
   bool LoadDemoData(void);
 private:
+  bool ScanXMLChannelData(const TiXmlNode* pChannelNode, int iUniqueChannelId, PVRDemoChannel& channel);
+  bool ScanXMLChannelGroupData(const TiXmlNode* pGroupNode, int iUniqueGroupId, PVRDemoChannelGroup& group);
+  bool ScanXMLEpgData(const TiXmlNode* pEpgNode);
+  bool ScanXMLRecordingData(const TiXmlNode* pRecordingNode, int iUniqueGroupId, PVRDemoRecording& recording);
+  bool ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer);
+
   std::vector<PVRDemoChannelGroup> m_groups;
   std::vector<PVRDemoChannel>      m_channels;
   std::vector<PVRDemoRecording>    m_recordings;
