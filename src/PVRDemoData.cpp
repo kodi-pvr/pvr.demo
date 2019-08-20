@@ -106,7 +106,7 @@ bool PVRDemoData::LoadDemoData(void)
       if (!XMLUtils::GetString(pChannelNode, "icon", strTmp))
         channel.strIconPath = m_strDefaultIcon;
       else
-        channel.strIconPath = strTmp;
+        channel.strIconPath = g_strClientPath + strTmp;
 
       /* stream url */
       if (!XMLUtils::GetString(pChannelNode, "stream", strTmp))
@@ -137,7 +137,7 @@ bool PVRDemoData::LoadDemoData(void)
 
       /* radio/TV */
       XMLUtils::GetBoolean(pGroupNode, "radio", group.bRadio);
-      
+
       /* sort position */
       XMLUtils::GetInt(pGroupNode, "position", group.iPosition);
 
