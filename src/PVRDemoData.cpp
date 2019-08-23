@@ -78,43 +78,9 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pChannelNode = NULL;
     while ((pChannelNode = pElement->IterateChildren(pChannelNode)) != NULL)
     {
-      string strTmp;
       PVRDemoChannel channel;
-      channel.iUniqueId = ++iUniqueChannelId;
-
-      /* channel name */
-      if (!XMLUtils::GetString(pChannelNode, "name", strTmp))
-        continue;
-      channel.strChannelName = strTmp;
-
-      /* radio/TV */
-      XMLUtils::GetBoolean(pChannelNode, "radio", channel.bRadio);
-
-      /* channel number */
-      if (!XMLUtils::GetInt(pChannelNode, "number", channel.iChannelNumber))
-        channel.iChannelNumber = iUniqueChannelId;
-
-      /* sub channel number */
-      if (!XMLUtils::GetInt(pChannelNode, "subnumber", channel.iSubChannelNumber))
-        channel.iSubChannelNumber = 0;
-
-      /* CAID */
-      if (!XMLUtils::GetInt(pChannelNode, "encryption", channel.iEncryptionSystem))
-        channel.iEncryptionSystem = 0;
-
-      /* icon path */
-      if (!XMLUtils::GetString(pChannelNode, "icon", strTmp))
-        channel.strIconPath = m_strDefaultIcon;
-      else
-        channel.strIconPath = g_strClientPath + strTmp;
-
-      /* stream url */
-      if (!XMLUtils::GetString(pChannelNode, "stream", strTmp))
-        channel.strStreamURL = m_strDefaultMovie;
-      else
-        channel.strStreamURL = strTmp;
-
-      m_channels.push_back(channel);
+      if (ScanXMLChannelData(pChannelNode, ++iUniqueChannelId, channel))
+        m_channels.push_back(channel);
     }
   }
 
@@ -126,32 +92,9 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pGroupNode = NULL;
     while ((pGroupNode = pElement->IterateChildren(pGroupNode)) != NULL)
     {
-      string strTmp;
       PVRDemoChannelGroup group;
-      group.iGroupId = ++iUniqueGroupId;
-
-      /* group name */
-      if (!XMLUtils::GetString(pGroupNode, "name", strTmp))
-        continue;
-      group.strGroupName = strTmp;
-
-      /* radio/TV */
-      XMLUtils::GetBoolean(pGroupNode, "radio", group.bRadio);
-
-      /* sort position */
-      XMLUtils::GetInt(pGroupNode, "position", group.iPosition);
-
-      /* members */
-      TiXmlNode* pMembers = pGroupNode->FirstChild("members");
-      TiXmlNode *pMemberNode = NULL;
-      while (pMembers != NULL && (pMemberNode = pMembers->IterateChildren(pMemberNode)) != NULL)
-      {
-        int iChannelId = atoi(pMemberNode->FirstChild()->Value());
-        if (iChannelId > -1)
-          group.members.push_back(iChannelId);
-      }
-
-      m_groups.push_back(group);
+      if (ScanXMLChannelGroupData(pGroupNode, ++iUniqueGroupId, group))
+        m_groups.push_back(group);
     }
   }
 
@@ -162,64 +105,7 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pEpgNode = NULL;
     while ((pEpgNode = pElement->IterateChildren(pEpgNode)) != NULL)
     {
-      string strTmp;
-      int iTmp;
-      PVRDemoEpgEntry entry;
-
-      /* broadcast id */
-      if (!XMLUtils::GetInt(pEpgNode, "broadcastid", entry.iBroadcastId))
-        continue;
-
-      /* channel id */
-      if (!XMLUtils::GetInt(pEpgNode, "channelid", iTmp))
-        continue;
-      PVRDemoChannel &channel = m_channels.at(iTmp - 1);
-      entry.iChannelId = channel.iUniqueId;
-
-      /* title */
-      if (!XMLUtils::GetString(pEpgNode, "title", strTmp))
-        continue;
-      entry.strTitle = strTmp;
-
-      /* start */
-      if (!XMLUtils::GetInt(pEpgNode, "start", iTmp))
-        continue;
-      entry.startTime = iTmp;
-
-      /* end */
-      if (!XMLUtils::GetInt(pEpgNode, "end", iTmp))
-        continue;
-      entry.endTime = iTmp;
-
-      /* plot */
-      if (XMLUtils::GetString(pEpgNode, "plot", strTmp))
-        entry.strPlot = strTmp;
-
-      /* plot outline */
-      if (XMLUtils::GetString(pEpgNode, "plotoutline", strTmp))
-        entry.strPlotOutline = strTmp;
-
-      if (!XMLUtils::GetInt(pEpgNode, "series", entry.iSeriesNumber))
-        entry.iSeriesNumber = 0;
-
-      if (!XMLUtils::GetInt(pEpgNode, "episode", entry.iEpisodeNumber))
-        entry.iEpisodeNumber = 0;
-
-      if (XMLUtils::GetString(pEpgNode, "episodetitle", strTmp))
-        entry.strEpisodeName = strTmp;
-
-      /* icon path */
-      if (XMLUtils::GetString(pEpgNode, "icon", strTmp))
-        entry.strIconPath = strTmp;
-
-      /* genre type */
-      XMLUtils::GetInt(pEpgNode, "genretype", entry.iGenreType);
-
-      /* genre subtype */
-      XMLUtils::GetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
-
-      XBMC->Log(LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
-      channel.epg.push_back(entry);
+      ScanXMLEpgData(pEpgNode);
     }
   }
 
@@ -231,82 +117,9 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pRecordingNode = NULL;
     while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
     {
-      string strTmp;
       PVRDemoRecording recording;
-
-      /* radio/TV */
-      XMLUtils::GetBoolean(pRecordingNode, "radio", recording.bRadio);
-
-      /* recording title */
-      if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
-        continue;
-      recording.strTitle = strTmp;
-
-      /* recording url */
-      if (!XMLUtils::GetString(pRecordingNode, "url", strTmp))
-        recording.strStreamURL = m_strDefaultMovie;
-      else
-        recording.strStreamURL = strTmp;
-
-      /* recording path */
-      if (XMLUtils::GetString(pRecordingNode, "directory", strTmp))
-        recording.strDirectory = strTmp;
-
-      iUniqueGroupId++;
-      strTmp = StringUtils::Format("%d", iUniqueGroupId);
-      recording.strRecordingId = strTmp;
-
-      /* channel name */
-      if (XMLUtils::GetString(pRecordingNode, "channelname", strTmp))
-        recording.strChannelName = strTmp;
-
-      /* plot */
-      if (XMLUtils::GetString(pRecordingNode, "plot", strTmp))
-        recording.strPlot = strTmp;
-
-      /* plot outline */
-      if (XMLUtils::GetString(pRecordingNode, "plotoutline", strTmp))
-        recording.strPlotOutline = strTmp;
-
-      /* Episode Name */
-      if (XMLUtils::GetString(pRecordingNode, "episodetitle", strTmp))
-        recording.strEpisodeName = strTmp;
-
-      /* Series Number */
-      if (!XMLUtils::GetInt(pRecordingNode, "series", recording.iSeriesNumber))
-        recording.iSeriesNumber = 0;
-
-      /* Episode Number */
-      if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
-        recording.iEpisodeNumber = 0;
-
-      /* genre type */
-      XMLUtils::GetInt(pRecordingNode, "genretype", recording.iGenreType);
-
-      /* genre subtype */
-      XMLUtils::GetInt(pRecordingNode, "genresubtype", recording.iGenreSubType);
-
-      /* duration */
-      XMLUtils::GetInt(pRecordingNode, "duration", recording.iDuration);
-
-      /* recording time */
-      if (XMLUtils::GetString(pRecordingNode, "time", strTmp))
-      {
-        time_t timeNow = time(NULL);
-        struct tm* now = localtime(&timeNow);
-
-        auto delim = strTmp.find(':');
-        if (delim != string::npos)
-        {
-          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
-          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, (delim + 1)).c_str(), NULL, 0);
-          now->tm_mday--; // yesterday
-
-          recording.recordingTime = mktime(now);
-        }
-      }
-
-      m_recordings.push_back(recording);
+      if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
+        m_recordings.push_back(recording);
     }
   }
 
@@ -317,82 +130,9 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pRecordingNode = NULL;
     while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
     {
-      string strTmp;
       PVRDemoRecording recording;
-
-      /* radio/TV */
-      XMLUtils::GetBoolean(pRecordingNode, "radio", recording.bRadio);
-
-      /* recording title */
-      if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
-        continue;
-      recording.strTitle = strTmp;
-
-      /* recording url */
-      if (!XMLUtils::GetString(pRecordingNode, "url", strTmp))
-        recording.strStreamURL = m_strDefaultMovie;
-      else
-        recording.strStreamURL = strTmp;
-
-      /* recording path */
-      if (XMLUtils::GetString(pRecordingNode, "directory", strTmp))
-        recording.strDirectory = strTmp;
-
-      iUniqueGroupId++;
-      strTmp = StringUtils::Format("%d", iUniqueGroupId);
-      recording.strRecordingId = strTmp;
-
-      /* channel name */
-      if (XMLUtils::GetString(pRecordingNode, "channelname", strTmp))
-        recording.strChannelName = strTmp;
-
-      /* plot */
-      if (XMLUtils::GetString(pRecordingNode, "plot", strTmp))
-        recording.strPlot = strTmp;
-
-      /* plot outline */
-      if (XMLUtils::GetString(pRecordingNode, "plotoutline", strTmp))
-        recording.strPlotOutline = strTmp;
-
-      /* Episode Name */
-      if (XMLUtils::GetString(pRecordingNode, "episodetitle", strTmp))
-        recording.strEpisodeName = strTmp;
-
-      /* Series Number */
-      if (!XMLUtils::GetInt(pRecordingNode, "series", recording.iSeriesNumber))
-        recording.iSeriesNumber = 0;
-
-      /* Episode Number */
-      if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
-        recording.iEpisodeNumber = 0;
-
-      /* genre type */
-      XMLUtils::GetInt(pRecordingNode, "genretype", recording.iGenreType);
-
-      /* genre subtype */
-      XMLUtils::GetInt(pRecordingNode, "genresubtype", recording.iGenreSubType);
-
-      /* duration */
-      XMLUtils::GetInt(pRecordingNode, "duration", recording.iDuration);
-
-      /* recording time */
-      if (XMLUtils::GetString(pRecordingNode, "time", strTmp))
-      {
-        time_t timeNow = time(NULL);
-        struct tm* now = localtime(&timeNow);
-
-        auto delim = strTmp.find(':');
-        if (delim != string::npos)
-        {
-          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
-          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
-          now->tm_mday--; // yesterday
-
-          recording.recordingTime = mktime(now);
-        }
-      }
-
-      m_recordingsDeleted.push_back(recording);
+      if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
+        m_recordingsDeleted.push_back(recording);
     }
   }
 
@@ -403,60 +143,9 @@ bool PVRDemoData::LoadDemoData(void)
     TiXmlNode *pTimerNode = NULL;
     while ((pTimerNode = pElement->IterateChildren(pTimerNode)) != NULL)
     {
-      string strTmp;
-      int iTmp;
       PVRDemoTimer timer;
-      time_t timeNow = time(NULL);
-      struct tm* now = localtime(&timeNow);
-
-      /* channel id */
-      if (!XMLUtils::GetInt(pTimerNode, "channelid", iTmp))
-        continue;
-      PVRDemoChannel &channel = m_channels.at(iTmp - 1);
-      timer.iChannelId = channel.iUniqueId;
-
-      /* state */
-      if (XMLUtils::GetInt(pTimerNode, "state", iTmp))
-        timer.state = (PVR_TIMER_STATE) iTmp;
-
-      /* title */
-      if (!XMLUtils::GetString(pTimerNode, "title", strTmp))
-        continue;
-      timer.strTitle = strTmp;
-
-      /* summary */
-      if (!XMLUtils::GetString(pTimerNode, "summary", strTmp))
-        continue;
-      timer.strSummary = strTmp;
-
-      /* start time */
-      if (XMLUtils::GetString(pTimerNode, "starttime", strTmp))
-      {
-        auto delim = strTmp.find(':');
-        if (delim != string::npos)
-        {
-          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
-          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
-
-          timer.startTime = mktime(now);
-        }
-      }
-
-      /* end time */
-      if (XMLUtils::GetString(pTimerNode, "endtime", strTmp))
-      {
-        auto delim = strTmp.find(':');
-        if (delim != string::npos)
-        {
-          now->tm_hour = (int)strtol(StringUtils::Left(strTmp, delim).c_str(), NULL, 0);
-          now->tm_min  = (int)strtol(StringUtils::Mid(strTmp, delim + 1).c_str(), NULL, 0);
-
-          timer.endTime = mktime(now);
-        }
-      }
-
-      XBMC->Log(LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'", timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
-      m_timers.push_back(timer);
+      if (ScanXMLTimerData(pTimerNode, timer))
+        m_timers.push_back(timer);
     }
   }
 
@@ -707,4 +396,274 @@ PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
   }
 
   return PVR_ERROR_NO_ERROR;
+}
+
+bool PVRDemoData::ScanXMLChannelData(const TiXmlNode* pChannelNode, int iUniqueChannelId, PVRDemoChannel& channel)
+{
+  std::string strTmp;
+  channel.iUniqueId = iUniqueChannelId;
+
+  /* channel name */
+  if (!XMLUtils::GetString(pChannelNode, "name", strTmp))
+    return false;
+  channel.strChannelName = strTmp;
+
+  /* radio/TV */
+  XMLUtils::GetBoolean(pChannelNode, "radio", channel.bRadio);
+
+  /* channel number */
+  if (!XMLUtils::GetInt(pChannelNode, "number", channel.iChannelNumber))
+    channel.iChannelNumber = iUniqueChannelId;
+
+  /* sub channel number */
+  if (!XMLUtils::GetInt(pChannelNode, "subnumber", channel.iSubChannelNumber))
+    channel.iSubChannelNumber = 0;
+
+  /* CAID */
+  if (!XMLUtils::GetInt(pChannelNode, "encryption", channel.iEncryptionSystem))
+    channel.iEncryptionSystem = 0;
+
+  /* icon path */
+  if (!XMLUtils::GetString(pChannelNode, "icon", strTmp))
+    channel.strIconPath = m_strDefaultIcon;
+  else
+    channel.strIconPath = g_strClientPath + strTmp;
+
+  /* stream url */
+  if (!XMLUtils::GetString(pChannelNode, "stream", strTmp))
+    channel.strStreamURL = m_strDefaultMovie;
+  else
+    channel.strStreamURL = strTmp;
+
+  return true;
+}
+
+bool PVRDemoData::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode, int iUniqueGroupId, PVRDemoChannelGroup& group)
+{
+  std::string strTmp;
+  group.iGroupId = iUniqueGroupId;
+
+  /* group name */
+  if (!XMLUtils::GetString(pGroupNode, "name", strTmp))
+    return false;
+  group.strGroupName = strTmp;
+
+  /* radio/TV */
+  XMLUtils::GetBoolean(pGroupNode, "radio", group.bRadio);
+
+  /* sort position */
+  XMLUtils::GetInt(pGroupNode, "position", group.iPosition);
+
+  /* members */
+  const TiXmlNode* pMembers = pGroupNode->FirstChild("members");
+  const TiXmlNode* pMemberNode = nullptr;
+  while (pMembers != nullptr && (pMemberNode = pMembers->IterateChildren(pMemberNode)) != nullptr)
+  {
+    int iChannelId = atoi(pMemberNode->FirstChild()->Value());
+    if (iChannelId > -1)
+      group.members.push_back(iChannelId);
+  }
+
+  return true;
+}
+
+bool PVRDemoData::ScanXMLEpgData(const TiXmlNode* pEpgNode)
+{
+  std::string strTmp;
+  int iTmp;
+  PVRDemoEpgEntry entry;
+
+  /* broadcast id */
+  if (!XMLUtils::GetInt(pEpgNode, "broadcastid", entry.iBroadcastId))
+    return false;
+
+  /* channel id */
+  if (!XMLUtils::GetInt(pEpgNode, "channelid", iTmp))
+    return false;
+  PVRDemoChannel& channel = m_channels.at(iTmp - 1);
+  entry.iChannelId = channel.iUniqueId;
+
+  /* title */
+  if (!XMLUtils::GetString(pEpgNode, "title", strTmp))
+    return false;
+  entry.strTitle = strTmp;
+
+  /* start */
+  if (!XMLUtils::GetInt(pEpgNode, "start", iTmp))
+    return false;
+  entry.startTime = iTmp;
+
+  /* end */
+  if (!XMLUtils::GetInt(pEpgNode, "end", iTmp))
+    return false;
+  entry.endTime = iTmp;
+
+  /* plot */
+  if (XMLUtils::GetString(pEpgNode, "plot", strTmp))
+    entry.strPlot = strTmp;
+
+  /* plot outline */
+  if (XMLUtils::GetString(pEpgNode, "plotoutline", strTmp))
+    entry.strPlotOutline = strTmp;
+
+  if (!XMLUtils::GetInt(pEpgNode, "series", entry.iSeriesNumber))
+    entry.iSeriesNumber = 0;
+
+  if (!XMLUtils::GetInt(pEpgNode, "episode", entry.iEpisodeNumber))
+    entry.iEpisodeNumber = 0;
+
+  if (XMLUtils::GetString(pEpgNode, "episodetitle", strTmp))
+    entry.strEpisodeName = strTmp;
+
+  /* icon path */
+  if (XMLUtils::GetString(pEpgNode, "icon", strTmp))
+    entry.strIconPath = strTmp;
+
+  /* genre type */
+  XMLUtils::GetInt(pEpgNode, "genretype", entry.iGenreType);
+
+  /* genre subtype */
+  XMLUtils::GetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
+
+  XBMC->Log(LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
+
+  channel.epg.push_back(entry);
+
+  return true;
+}
+
+bool PVRDemoData::ScanXMLRecordingData(const TiXmlNode* pRecordingNode, int iUniqueGroupId, PVRDemoRecording& recording)
+{
+  std::string strTmp;
+
+  /* radio/TV */
+  XMLUtils::GetBoolean(pRecordingNode, "radio", recording.bRadio);
+
+  /* recording title */
+  if (!XMLUtils::GetString(pRecordingNode, "title", strTmp))
+    return false;
+  recording.strTitle = strTmp;
+
+  /* recording url */
+  if (!XMLUtils::GetString(pRecordingNode, "url", strTmp))
+    recording.strStreamURL = m_strDefaultMovie;
+  else
+    recording.strStreamURL = strTmp;
+
+  /* recording path */
+  if (XMLUtils::GetString(pRecordingNode, "directory", strTmp))
+    recording.strDirectory = strTmp;
+
+  strTmp = StringUtils::Format("%d", iUniqueGroupId);
+  recording.strRecordingId = strTmp;
+
+  /* channel name */
+  if (XMLUtils::GetString(pRecordingNode, "channelname", strTmp))
+    recording.strChannelName = strTmp;
+
+  /* plot */
+  if (XMLUtils::GetString(pRecordingNode, "plot", strTmp))
+    recording.strPlot = strTmp;
+
+  /* plot outline */
+  if (XMLUtils::GetString(pRecordingNode, "plotoutline", strTmp))
+    recording.strPlotOutline = strTmp;
+
+  /* Episode Name */
+  if (XMLUtils::GetString(pRecordingNode, "episodetitle", strTmp))
+    recording.strEpisodeName = strTmp;
+
+  /* Series Number */
+  if (!XMLUtils::GetInt(pRecordingNode, "series", recording.iSeriesNumber))
+    recording.iSeriesNumber = 0;
+
+  /* Episode Number */
+  if (!XMLUtils::GetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
+    recording.iEpisodeNumber = 0;
+
+  /* genre type */
+  XMLUtils::GetInt(pRecordingNode, "genretype", recording.iGenreType);
+
+  /* genre subtype */
+  XMLUtils::GetInt(pRecordingNode, "genresubtype", recording.iGenreSubType);
+
+  /* duration */
+  XMLUtils::GetInt(pRecordingNode, "duration", recording.iDuration);
+
+  /* recording time */
+  if (XMLUtils::GetString(pRecordingNode, "time", strTmp))
+  {
+    time_t timeNow = time(nullptr);
+    struct tm* now = localtime(&timeNow);
+
+    auto delim = strTmp.find(':');
+    if (delim != std::string::npos)
+    {
+      now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
+      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, (delim + 1)));
+      now->tm_mday--; // yesterday
+
+      recording.recordingTime = mktime(now);
+    }
+  }
+
+  return true;
+}
+
+bool PVRDemoData::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer)
+{
+  std::string strTmp;
+  int iTmp;
+
+  time_t timeNow = time(nullptr);
+  struct tm* now = localtime(&timeNow);
+
+  /* channel id */
+  if (!XMLUtils::GetInt(pTimerNode, "channelid", iTmp))
+    return false;
+  PVRDemoChannel &channel = m_channels.at(iTmp - 1);
+  timer.iChannelId = channel.iUniqueId;
+
+  /* state */
+  if (XMLUtils::GetInt(pTimerNode, "state", iTmp))
+    timer.state = (PVR_TIMER_STATE) iTmp;
+
+  /* title */
+  if (!XMLUtils::GetString(pTimerNode, "title", strTmp))
+    return false;
+  timer.strTitle = strTmp;
+
+  /* summary */
+  if (!XMLUtils::GetString(pTimerNode, "summary", strTmp))
+    return false;
+  timer.strSummary = strTmp;
+
+  /* start time */
+  if (XMLUtils::GetString(pTimerNode, "starttime", strTmp))
+  {
+    auto delim = strTmp.find(':');
+    if (delim != std::string::npos)
+    {
+      now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
+      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, delim + 1));
+
+      timer.startTime = mktime(now);
+    }
+  }
+
+  /* end time */
+  if (XMLUtils::GetString(pTimerNode, "endtime", strTmp))
+  {
+    auto delim = strTmp.find(':');
+    if (delim != std::string::npos)
+    {
+      now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
+      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, delim + 1));
+
+      timer.endTime = mktime(now);
+    }
+  }
+
+  XBMC->Log(LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'", timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
+  return true;
 }
