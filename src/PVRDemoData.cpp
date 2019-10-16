@@ -163,8 +163,7 @@ PVR_ERROR PVRDemoData::GetChannels(ADDON_HANDLE handle, bool bRadio)
   {
     if (channel.bRadio == bRadio)
     {
-      PVR_CHANNEL xbmcChannel;
-      memset(&xbmcChannel, 0, sizeof(PVR_CHANNEL));
+      PVR_CHANNEL xbmcChannel = {};
 
       xbmcChannel.iUniqueId         = channel.iUniqueId;
       xbmcChannel.bIsRadio          = channel.bRadio;
@@ -216,8 +215,7 @@ PVR_ERROR PVRDemoData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
     PVRDemoChannelGroup &group = m_groups.at(iGroupPtr);
     if (group.bRadio == bRadio)
     {
-      PVR_CHANNEL_GROUP xbmcGroup;
-      memset(&xbmcGroup, 0, sizeof(PVR_CHANNEL_GROUP));
+      PVR_CHANNEL_GROUP xbmcGroup = {};
 
       xbmcGroup.bIsRadio = bRadio;
       xbmcGroup.iPosition = group.iPosition;
@@ -243,8 +241,7 @@ PVR_ERROR PVRDemoData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
         if (iId < 0 || iId > (int)m_channels.size() - 1)
           continue;
         PVRDemoChannel &channel = m_channels.at(iId);
-        PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember;
-        memset(&xbmcGroupMember, 0, sizeof(PVR_CHANNEL_GROUP_MEMBER));
+        PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember = {};
 
         strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
         xbmcGroupMember.iChannelUniqueId  = channel.iUniqueId;
@@ -280,8 +277,7 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
       {
         PVRDemoEpgEntry &myTag = myChannel.epg.at(iEntryPtr);
 
-        EPG_TAG tag;
-        memset(&tag, 0, sizeof(EPG_TAG));
+        EPG_TAG tag = {};
 
         tag.iUniqueBroadcastId = myTag.iBroadcastId + iAddBroadcastId;
         tag.iUniqueChannelId   = iChannelUid;
@@ -324,7 +320,7 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
   {
     PVRDemoRecording &recording = *it;
 
-    PVR_RECORDING xbmcRecording;
+    PVR_RECORDING xbmcRecording = {};
 
     xbmcRecording.iDuration     = recording.iDuration;
     xbmcRecording.iGenreType    = recording.iGenreType;
@@ -377,8 +373,7 @@ PVR_ERROR PVRDemoData::GetTimers(ADDON_HANDLE handle)
   {
     PVRDemoTimer &timer = *it;
 
-    PVR_TIMER xbmcTimer;
-    memset(&xbmcTimer, 0, sizeof(PVR_TIMER));
+    PVR_TIMER xbmcTimer = {};
 
     /* TODO: Implement own timer types to get support for the timer features introduced with PVR API 1.9.7 */
     xbmcTimer.iTimerType = PVR_TIMER_TYPE_NONE;
