@@ -292,7 +292,9 @@ PVR_ERROR PVRDemoData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
         tag.iFlags             = EPG_TAG_FLAG_UNDEFINED;
         tag.iSeriesNumber      = myTag.iSeriesNumber;
         tag.iEpisodeNumber     = myTag.iEpisodeNumber;;
+        tag.iEpisodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
         tag.strEpisodeName     = myTag.strEpisodeName.c_str();
+        tag.strFirstAired = "";
 
         iLastEndTimeTmp = tag.endTime;
 
@@ -321,6 +323,8 @@ PVR_ERROR PVRDemoData::GetRecordings(ADDON_HANDLE handle, bool bDeleted)
     PVRDemoRecording &recording = *it;
 
     PVR_RECORDING xbmcRecording = {};
+    xbmcRecording.iSeriesNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
+    xbmcRecording.iEpisodeNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
 
     xbmcRecording.iDuration     = recording.iDuration;
     xbmcRecording.iGenreType    = recording.iGenreType;
@@ -502,10 +506,10 @@ bool PVRDemoData::ScanXMLEpgData(const TiXmlNode* pEpgNode)
     entry.strPlotOutline = strTmp;
 
   if (!XMLUtils::GetInt(pEpgNode, "series", entry.iSeriesNumber))
-    entry.iSeriesNumber = 0;
+    entry.iSeriesNumber = EPG_TAG_INVALID_SERIES_EPISODE;
 
   if (!XMLUtils::GetInt(pEpgNode, "episode", entry.iEpisodeNumber))
-    entry.iEpisodeNumber = 0;
+    entry.iEpisodeNumber = EPG_TAG_INVALID_SERIES_EPISODE;
 
   if (XMLUtils::GetString(pEpgNode, "episodetitle", strTmp))
     entry.strEpisodeName = strTmp;
