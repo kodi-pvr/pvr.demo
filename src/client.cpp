@@ -355,7 +355,7 @@ PVR_ERROR CallMenuHook(const PVR_MENUHOOK& menuhook, const PVR_MENUHOOK_DATA&)
       return PVR_ERROR_INVALID_PARAMETERS;
   }
   char* msg = XBMC->GetLocalizedString(iMsg);
-  XBMC->QueueNotification(ADDON::QUEUE_INFO, msg);
+  XBMC->QueueNotification(QUEUE_INFO, msg);
   XBMC->FreeString(msg);
 
   return PVR_ERROR_NO_ERROR;
