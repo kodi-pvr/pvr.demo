@@ -9,19 +9,13 @@
 #include "PVRDemo.h"
 
 #include <kodi/General.h>
-#include "util/XMLUtils.h"
-
-#ifdef TARGET_WINDOWS
-#define snprintf _snprintf
-#endif
-
-#include "p8-platform/os.h"
-#include "p8-platform/util/StringUtils.h"
-
+#include <kodi/util/XMLUtils.h>
+#include <p8-platform/os.h>
+#include <p8-platform/util/StringUtils.h>
 
 /***********************************************************
- * PVR Client AddOn specific public library functions
- ***********************************************************/
+  * PVR Client AddOn specific public library functions
+  ***********************************************************/
 
 CPVRDemo::CPVRDemo()
 {
@@ -76,20 +70,23 @@ PVR_ERROR CPVRDemo::GetConnectionString(std::string& connection)
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetBackendHostname(std::string&	hostname)
+PVR_ERROR CPVRDemo::GetBackendHostname(std::string& hostname)
 {
   hostname = "";
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetDriveSpace(uint64_t& total, uint64_t &used)
+PVR_ERROR CPVRDemo::GetDriveSpace(uint64_t& total, uint64_t& used)
 {
   total = 1024 * 1024 * 1024;
-  used  = 0;
+  used = 0;
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results)
+PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
+                                     time_t start,
+                                     time_t end,
+                                     kodi::addon::PVREPGTagsResultSet& results)
 {
   if (m_iEpgStart == -1)
     m_iEpgStart = start;
@@ -107,7 +104,7 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid, time_t start, time_t end, k
       time_t iLastEndTimeTmp = 0;
       for (unsigned int iEntryPtr = 0; iEntryPtr < myChannel.epg.size(); iEntryPtr++)
       {
-        PVRDemoEpgEntry &myTag = myChannel.epg.at(iEntryPtr);
+        PVRDemoEpgEntry& myTag = myChannel.epg.at(iEntryPtr);
 
         kodi::addon::PVREPGTag tag;
         tag.SetUniqueBroadcastId(myTag.iBroadcastId + iAddBroadcastId);
@@ -144,9 +141,12 @@ PVR_ERROR CPVRDemo::IsEPGTagPlayable(const kodi::addon::PVREPGTag&, bool& bIsPla
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& tag, std::vector<kodi::addon::PVRStreamProperty>& properties)
+PVR_ERROR CPVRDemo::GetEPGTagStreamProperties(
+    const kodi::addon::PVREPGTag& tag, std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
-  properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4");
+  properties.emplace_back(
+      PVR_STREAM_PROPERTY_STREAMURL,
+      "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4");
   return PVR_ERROR_NO_ERROR;
 }
 
@@ -180,7 +180,8 @@ PVR_ERROR CPVRDemo::GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& 
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetChannelStreamProperties(const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties)
+PVR_ERROR CPVRDemo::GetChannelStreamProperties(
+    const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
   PVRDemoChannel addonChannel;
   GetChannel(channel, addonChannel);
@@ -214,7 +215,8 @@ PVR_ERROR CPVRDemo::GetChannelGroups(bool bRadio, kodi::addon::PVRChannelGroupsR
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group, kodi::addon::PVRChannelGroupMembersResultSet& results)
+PVR_ERROR CPVRDemo::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group,
+                                           kodi::addon::PVRChannelGroupMembersResultSet& results)
 {
   for (const auto& myGroup : m_groups)
   {
@@ -225,7 +227,7 @@ PVR_ERROR CPVRDemo::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& g
         if (iId < 0 || iId > (int)m_channels.size() - 1)
           continue;
 
-        PVRDemoChannel &channel = m_channels.at(iId);
+        PVRDemoChannel& channel = m_channels.at(iId);
         kodi::addon::PVRChannelGroupMember kodiGroupMember;
         kodiGroupMember.SetGroupName(group.GetGroupName());
         kodiGroupMember.SetChannelUniqueId(channel.iUniqueId);
@@ -240,7 +242,7 @@ PVR_ERROR CPVRDemo::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& g
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus &signalStatus)
+PVR_ERROR CPVRDemo::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus& signalStatus)
 {
   signalStatus.SetAdapterName("pvr demo adapter 1");
   signalStatus.SetAdapterStatus("OK");
@@ -267,7 +269,8 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
     kodiRecording.SetEpisodeNumber(recording.iEpisodeNumber);
     kodiRecording.SetSeriesNumber(recording.iSeriesNumber);
     kodiRecording.SetIsDeleted(deleted);
-    kodiRecording.SetChannelType(recording.bRadio ? PVR_RECORDING_CHANNEL_TYPE_RADIO : PVR_RECORDING_CHANNEL_TYPE_TV);
+    kodiRecording.SetChannelType(recording.bRadio ? PVR_RECORDING_CHANNEL_TYPE_RADIO
+                                                  : PVR_RECORDING_CHANNEL_TYPE_TV);
     kodiRecording.SetChannelName(recording.strChannelName);
     kodiRecording.SetPlotOutline(recording.strPlotOutline);
     kodiRecording.SetPlot(recording.strPlot);
@@ -285,7 +288,9 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::GetRecordingStreamProperties(const kodi::addon::PVRRecording& recording, std::vector<kodi::addon::PVRStreamProperty>& properties)
+PVR_ERROR CPVRDemo::GetRecordingStreamProperties(
+    const kodi::addon::PVRRecording& recording,
+    std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
   properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, GetRecordingURL(recording));
   return PVR_ERROR_NO_ERROR;
@@ -326,22 +331,26 @@ PVR_ERROR CPVRDemo::GetTimers(kodi::addon::PVRTimersResultSet& results)
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::CallEPGMenuHook(const kodi::addon::PVRMenuhook& menuhook, const kodi::addon::PVREPGTag& item)
+PVR_ERROR CPVRDemo::CallEPGMenuHook(const kodi::addon::PVRMenuhook& menuhook,
+                                    const kodi::addon::PVREPGTag& item)
 {
   return CallMenuHook(menuhook);
 }
 
-PVR_ERROR CPVRDemo::CallChannelMenuHook(const kodi::addon::PVRMenuhook& menuhook, const kodi::addon::PVRChannel& item)
+PVR_ERROR CPVRDemo::CallChannelMenuHook(const kodi::addon::PVRMenuhook& menuhook,
+                                        const kodi::addon::PVRChannel& item)
 {
   return CallMenuHook(menuhook);
 }
 
-PVR_ERROR CPVRDemo::CallTimerMenuHook(const kodi::addon::PVRMenuhook& menuhook, const kodi::addon::PVRTimer& item)
+PVR_ERROR CPVRDemo::CallTimerMenuHook(const kodi::addon::PVRMenuhook& menuhook,
+                                      const kodi::addon::PVRTimer& item)
 {
   return CallMenuHook(menuhook);
 }
 
-PVR_ERROR CPVRDemo::CallRecordingMenuHook(const kodi::addon::PVRMenuhook& menuhook, const kodi::addon::PVRRecording& item)
+PVR_ERROR CPVRDemo::CallRecordingMenuHook(const kodi::addon::PVRMenuhook& menuhook,
+                                          const kodi::addon::PVRRecording& item)
 {
   return CallMenuHook(menuhook);
 }
@@ -380,11 +389,12 @@ bool CPVRDemo::LoadDemoData(void)
 
   if (!xmlDoc.LoadFile(strSettingsFile))
   {
-    kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no/invalid data file found at '%s')", strSettingsFile.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no/invalid data file found at '%s')",
+              strSettingsFile.c_str());
     return false;
   }
 
-  TiXmlElement *pRootElement = xmlDoc.RootElement();
+  TiXmlElement* pRootElement = xmlDoc.RootElement();
   if (strcmp(pRootElement->Value(), "demo") != 0)
   {
     kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no <demo> tag found)");
@@ -393,15 +403,15 @@ bool CPVRDemo::LoadDemoData(void)
 
   /* load channels */
   int iUniqueChannelId = 0;
-  TiXmlElement *pElement = pRootElement->FirstChildElement("channels");
+  TiXmlElement* pElement = pRootElement->FirstChildElement("channels");
   if (pElement)
   {
-    TiXmlNode *pChannelNode = NULL;
-    while ((pChannelNode = pElement->IterateChildren(pChannelNode)) != NULL)
+    TiXmlNode* pChannelNode = nullptr;
+    while ((pChannelNode = pElement->IterateChildren(pChannelNode)) != nullptr)
     {
       PVRDemoChannel channel;
       if (ScanXMLChannelData(pChannelNode, ++iUniqueChannelId, channel))
-        m_channels.push_back(channel);
+        m_channels.emplace_back(channel);
     }
   }
 
@@ -410,12 +420,12 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("channelgroups");
   if (pElement)
   {
-    TiXmlNode *pGroupNode = NULL;
-    while ((pGroupNode = pElement->IterateChildren(pGroupNode)) != NULL)
+    TiXmlNode* pGroupNode = nullptr;
+    while ((pGroupNode = pElement->IterateChildren(pGroupNode)) != nullptr)
     {
       PVRDemoChannelGroup group;
       if (ScanXMLChannelGroupData(pGroupNode, ++iUniqueGroupId, group))
-        m_groups.push_back(group);
+        m_groups.emplace_back(group);
     }
   }
 
@@ -423,8 +433,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("epg");
   if (pElement)
   {
-    TiXmlNode *pEpgNode = NULL;
-    while ((pEpgNode = pElement->IterateChildren(pEpgNode)) != NULL)
+    TiXmlNode* pEpgNode = nullptr;
+    while ((pEpgNode = pElement->IterateChildren(pEpgNode)) != nullptr)
     {
       ScanXMLEpgData(pEpgNode);
     }
@@ -435,12 +445,12 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("recordings");
   if (pElement)
   {
-    TiXmlNode *pRecordingNode = NULL;
-    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
+    TiXmlNode* pRecordingNode = nullptr;
+    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != nullptr)
     {
       PVRDemoRecording recording;
       if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
-        m_recordings.push_back(recording);
+        m_recordings.emplace_back(recording);
     }
   }
 
@@ -448,12 +458,12 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("recordingsdeleted");
   if (pElement)
   {
-    TiXmlNode *pRecordingNode = NULL;
-    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != NULL)
+    TiXmlNode* pRecordingNode = nullptr;
+    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != nullptr)
     {
       PVRDemoRecording recording;
       if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
-        m_recordingsDeleted.push_back(recording);
+        m_recordingsDeleted.emplace_back(recording);
     }
   }
 
@@ -461,32 +471,32 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("timers");
   if (pElement)
   {
-    TiXmlNode *pTimerNode = NULL;
-    while ((pTimerNode = pElement->IterateChildren(pTimerNode)) != NULL)
+    TiXmlNode* pTimerNode = nullptr;
+    while ((pTimerNode = pElement->IterateChildren(pTimerNode)) != nullptr)
     {
       PVRDemoTimer timer;
       if (ScanXMLTimerData(pTimerNode, timer))
-        m_timers.push_back(timer);
+        m_timers.emplace_back(timer);
     }
   }
 
   return true;
 }
 
-bool CPVRDemo::GetChannel(const kodi::addon::PVRChannel &channel, PVRDemoChannel &myChannel)
+bool CPVRDemo::GetChannel(const kodi::addon::PVRChannel& channel, PVRDemoChannel& myChannel)
 {
   for (const auto& thisChannel : m_channels)
   {
-    if (thisChannel.iUniqueId == (int) channel.GetUniqueId())
+    if (thisChannel.iUniqueId == (int)channel.GetUniqueId())
     {
-      myChannel.iUniqueId         = thisChannel.iUniqueId;
-      myChannel.bRadio            = thisChannel.bRadio;
-      myChannel.iChannelNumber    = thisChannel.iChannelNumber;
+      myChannel.iUniqueId = thisChannel.iUniqueId;
+      myChannel.bRadio = thisChannel.bRadio;
+      myChannel.iChannelNumber = thisChannel.iChannelNumber;
       myChannel.iSubChannelNumber = thisChannel.iSubChannelNumber;
       myChannel.iEncryptionSystem = thisChannel.iEncryptionSystem;
-      myChannel.strChannelName    = thisChannel.strChannelName;
-      myChannel.strIconPath       = thisChannel.strIconPath;
-      myChannel.strStreamURL      = thisChannel.strStreamURL;
+      myChannel.strChannelName = thisChannel.strChannelName;
+      myChannel.strIconPath = thisChannel.strIconPath;
+      myChannel.strStreamURL = thisChannel.strStreamURL;
 
       return true;
     }
@@ -495,7 +505,7 @@ bool CPVRDemo::GetChannel(const kodi::addon::PVRChannel &channel, PVRDemoChannel
   return false;
 }
 
-std::string CPVRDemo::GetRecordingURL(const kodi::addon::PVRRecording &recording)
+std::string CPVRDemo::GetRecordingURL(const kodi::addon::PVRRecording& recording)
 {
   for (const auto& thisRecording : m_recordings)
   {
@@ -508,7 +518,9 @@ std::string CPVRDemo::GetRecordingURL(const kodi::addon::PVRRecording &recording
   return "";
 }
 
-bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode, int iUniqueChannelId, PVRDemoChannel& channel)
+bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode,
+                                  int iUniqueChannelId,
+                                  PVRDemoChannel& channel)
 {
   std::string strTmp;
   channel.iUniqueId = iUniqueChannelId;
@@ -548,7 +560,9 @@ bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode, int iUniqueChan
   return true;
 }
 
-bool CPVRDemo::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode, int iUniqueGroupId, PVRDemoChannelGroup& group)
+bool CPVRDemo::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode,
+                                       int iUniqueGroupId,
+                                       PVRDemoChannelGroup& group)
 {
   std::string strTmp;
   group.iGroupId = iUniqueGroupId;
@@ -571,7 +585,7 @@ bool CPVRDemo::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode, int iUniqueG
   {
     int iChannelId = atoi(pMemberNode->FirstChild()->Value());
     if (iChannelId > -1)
-      group.members.push_back(iChannelId);
+      group.members.emplace_back(iChannelId);
   }
 
   return true;
@@ -635,14 +649,17 @@ bool CPVRDemo::ScanXMLEpgData(const TiXmlNode* pEpgNode)
   /* genre subtype */
   XMLUtils::GetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
-  kodi::Log(ADDON_LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'", entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
+  kodi::Log(ADDON_LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'",
+            entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
 
-  channel.epg.push_back(entry);
+  channel.epg.emplace_back(entry);
 
   return true;
 }
 
-bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode, int iUniqueGroupId, PVRDemoRecording& recording)
+bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
+                                    int iUniqueGroupId,
+                                    PVRDemoRecording& recording)
 {
   std::string strTmp;
 
@@ -710,7 +727,7 @@ bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode, int iUnique
     if (delim != std::string::npos)
     {
       now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
-      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, (delim + 1)));
+      now->tm_min = std::stoi(StringUtils::Mid(strTmp, (delim + 1)));
       now->tm_mday--; // yesterday
 
       recording.recordingTime = mktime(now);
@@ -731,12 +748,12 @@ bool CPVRDemo::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer
   /* channel id */
   if (!XMLUtils::GetInt(pTimerNode, "channelid", iTmp))
     return false;
-  PVRDemoChannel &channel = m_channels.at(iTmp - 1);
+  PVRDemoChannel& channel = m_channels.at(iTmp - 1);
   timer.iChannelId = channel.iUniqueId;
 
   /* state */
   if (XMLUtils::GetInt(pTimerNode, "state", iTmp))
-    timer.state = (PVR_TIMER_STATE) iTmp;
+    timer.state = (PVR_TIMER_STATE)iTmp;
 
   /* title */
   if (!XMLUtils::GetString(pTimerNode, "title", strTmp))
@@ -755,7 +772,7 @@ bool CPVRDemo::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer
     if (delim != std::string::npos)
     {
       now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
-      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, delim + 1));
+      now->tm_min = std::stoi(StringUtils::Mid(strTmp, delim + 1));
 
       timer.startTime = mktime(now);
     }
@@ -768,13 +785,14 @@ bool CPVRDemo::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer
     if (delim != std::string::npos)
     {
       now->tm_hour = std::stoi(StringUtils::Left(strTmp, delim));
-      now->tm_min  = std::stoi(StringUtils::Mid(strTmp, delim + 1));
+      now->tm_min = std::stoi(StringUtils::Mid(strTmp, delim + 1));
 
       timer.endTime = mktime(now);
     }
   }
 
-  kodi::Log(ADDON_LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'", timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
+  kodi::Log(ADDON_LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'",
+            timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
   return true;
 }
 
