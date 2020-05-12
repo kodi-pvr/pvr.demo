@@ -158,6 +158,10 @@ private:
                             PVRDemoRecording& recording);
   bool ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer);
 
+  bool XMLGetInt(const TiXmlNode* pRootNode, const std::string& strTag, int& iIntValue);
+  bool XMLGetString(const TiXmlNode* pRootNode, const std::string& strTag, std::string& strStringValue);
+  bool XMLGetBoolean(const TiXmlNode* pRootNode, const std::string& strTag, bool& bBoolValue);
+
   std::vector<PVRDemoChannelGroup> m_groups;
   std::vector<PVRDemoChannel> m_channels;
   std::vector<PVRDemoRecording> m_recordings;
