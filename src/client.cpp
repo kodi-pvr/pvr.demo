@@ -35,6 +35,7 @@ bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRDemoData   *m_data           = NULL;
 PVRDemoChannel m_currentChannel;
+bool m_bRecordingPlayback = false;
 
 /* User adjustable settings are saved here.
  * Default values are defined inside client.h
@@ -211,6 +212,8 @@ PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG* tag, PVR_NAMED_VALUE* propert
   if (*iPropertiesCount < 1)
     return PVR_ERROR_INVALID_PARAMETERS;
 
+  m_bRecordingPlayback = true;
+
   strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
   strncpy(properties[0].strValue, "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4", sizeof(properties[0].strValue) - 1);
   *iPropertiesCount = 1;
@@ -243,6 +246,8 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
   if (m_data)
   {
+    m_bRecordingPlayback = false;
+
     PVRDemoChannel addonChannel;
     m_data->GetChannel(*channel, addonChannel);
 
@@ -315,6 +320,8 @@ PVR_ERROR GetRecordingStreamProperties(const PVR_RECORDING* recording, PVR_NAMED
 
   if (m_data)
   {
+    m_bRecordingPlayback = true;
+
     PVRDemoRecording addonRecording;
     std::string streamURL = m_data->GetRecordingURL(*recording);
 
@@ -374,6 +381,11 @@ PVR_ERROR CallMenuHook(const PVR_MENUHOOK& menuhook, const PVR_MENUHOOK_DATA&)
   return PVR_ERROR_NO_ERROR;
 }
 
+bool IsRealTimeStream()
+{ 
+  return !m_bRecordingPlayback; 
+}
+
 /** UNUSED API FUNCTIONS */
 PVR_ERROR OpenDialogChannelScan(void) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -409,7 +421,6 @@ bool CanSeekStream(void) { return false; }
 bool SeekTime(double,bool,double*) { return false; }
 void SetSpeed(int) {};
 bool IsTimeshifting(void) { return false; }
-bool IsRealTimeStream(void) { return true; }
 PVR_ERROR UndeleteRecording(const PVR_RECORDING& recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetEPGTimeFrame(int) { return PVR_ERROR_NOT_IMPLEMENTED; }
