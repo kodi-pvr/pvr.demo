@@ -41,7 +41,7 @@ void ADDON_ReadSettings(void)
   //STUB
 }
 
-ADDON_STATUS ADDON_Create(void* hdl, void* props)
+ADDON_STATUS ADDON_Create(void* hdl, const char* globalApiVersion, void* props)
 {
   if (!hdl || !props)
     return ADDON_STATUS_UNKNOWN;
