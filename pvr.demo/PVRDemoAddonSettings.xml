@@ -8,6 +8,7 @@
       <encryption>0</encryption>
       <icon>data/01.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 2</name>
@@ -16,6 +17,7 @@
       <encryption>0</encryption>
       <icon>data/02.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 3</name>
@@ -24,6 +26,7 @@
       <encryption>0</encryption>
       <icon>data/03.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 4</name>
@@ -32,6 +35,7 @@
       <encryption>0</encryption>
       <icon>data/04.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 5</name>
@@ -40,6 +44,7 @@
       <encryption>0</encryption>
       <icon>data/05.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 6</name>
@@ -48,6 +53,7 @@
       <encryption>0</encryption>
       <icon>data/06.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 7</name>
@@ -56,6 +62,7 @@
       <encryption>0</encryption>
       <icon>data/07.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 8</name>
@@ -64,6 +71,7 @@
       <encryption>0</encryption>
       <icon>data/08.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 9</name>
@@ -72,6 +80,7 @@
       <encryption>0</encryption>
       <icon>data/09.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 10</name>
@@ -80,6 +89,7 @@
       <encryption>0</encryption>
       <icon>data/10.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo TV Channel 11</name>
@@ -88,6 +98,7 @@
       <encryption>0</encryption>
       <icon>data/11.png</icon>
       <stream>http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <archive>1</archive>
     </channel>
 
     <!-- Radio Channels -->
@@ -98,6 +109,7 @@
       <encryption>0</encryption>
       <icon>data/01.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 2</name>
@@ -106,6 +118,7 @@
       <encryption>0</encryption>
       <icon>data/02.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 3</name>
@@ -114,6 +127,7 @@
       <encryption>0</encryption>
       <icon>data/03.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 4</name>
@@ -122,6 +136,7 @@
       <encryption>0</encryption>
       <icon>data/04.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 5</name>
@@ -130,6 +145,7 @@
       <encryption>0</encryption>
       <icon>data/05.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 6</name>
@@ -138,6 +154,7 @@
       <encryption>0</encryption>
       <icon>data/06.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 7</name>
@@ -146,6 +163,7 @@
       <encryption>0</encryption>
       <icon>data/07.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 8</name>
@@ -154,6 +172,7 @@
       <encryption>0</encryption>
       <icon>data/08.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 9</name>
@@ -162,6 +181,7 @@
       <encryption>0</encryption>
       <icon>data/09.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
     <channel>
       <name>Demo Radio Channel 10</name>
@@ -170,6 +190,7 @@
       <encryption>0</encryption>
       <icon>data/10.png</icon>
       <stream></stream>
+      <archive>0</archive>
     </channel>
 
     <!-- TV sub channels -->

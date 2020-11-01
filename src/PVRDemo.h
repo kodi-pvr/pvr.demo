@@ -36,6 +36,7 @@ struct PVRDemoEpgEntry
 struct PVRDemoChannel
 {
   bool bRadio;
+  bool bArchive;
   int iUniqueId;
   int iChannelNumber;
   int iSubChannelNumber;

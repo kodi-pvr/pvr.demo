@@ -134,9 +134,18 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR CPVRDemo::IsEPGTagPlayable(const kodi::addon::PVREPGTag&, bool& bIsPlayable)
+PVR_ERROR CPVRDemo::IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool& bIsPlayable)
 {
-  bIsPlayable = true;
+  bIsPlayable = false;
+
+  for (const auto& channel : m_channels)
+  {
+    if (channel.iUniqueId == tag.GetUniqueChannelId())
+    {
+      bIsPlayable = channel.bArchive;
+    }
+  }
+
   return PVR_ERROR_NO_ERROR;
 }
 
@@ -171,6 +180,7 @@ PVR_ERROR CPVRDemo::GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& 
       kodiChannel.SetEncryptionSystem(channel.iEncryptionSystem);
       kodiChannel.SetIconPath(channel.strIconPath);
       kodiChannel.SetIsHidden(false);
+      kodiChannel.SetHasArchive(channel.bArchive);
 
       results.Add(kodiChannel);
     }
@@ -555,6 +565,8 @@ bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode,
     channel.strStreamURL = m_strDefaultMovie;
   else
     channel.strStreamURL = strTmp;
+
+  XMLGetBoolean(pChannelNode, "archive", channel.bArchive);
 
   return true;
 }
