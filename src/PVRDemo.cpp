@@ -154,7 +154,7 @@ PVR_ERROR CPVRDemo::GetEPGTagStreamProperties(
 {
   properties.emplace_back(
       PVR_STREAM_PROPERTY_STREAMURL,
-      "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_30fps_normal.mp4");
+      "https://file-examples-com.github.io/uploads/2017/04/file_example_MP4_1920_18MG.mp4");
   return PVR_ERROR_NO_ERROR;
 }
 
