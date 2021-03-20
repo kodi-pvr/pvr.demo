@@ -47,6 +47,8 @@ PVR_ERROR CPVRDemo::GetCapabilities(kodi::addon::PVRCapabilities& capabilities)
   capabilities.SetSupportsRecordingsRename(false);
   capabilities.SetSupportsRecordingsLifetimeChange(false);
   capabilities.SetSupportsDescrambleInfo(false);
+  capabilities.SetSupportsMedia(true);
+  capabilities.SetSupportsMediaDelete(true);
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -391,6 +393,65 @@ PVR_ERROR CPVRDemo::CallMenuHook(const kodi::addon::PVRMenuhook& menuhook)
   return PVR_ERROR_NO_ERROR;
 }
 
+PVR_ERROR CPVRDemo::GetMediaAmount(bool deleted, int& amount)
+{
+  amount = deleted ? m_recordingsDeleted.size() : m_recordings.size();
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR CPVRDemo::GetMedia(bool deleted, kodi::addon::PVRMediaResultSet& results)
+{
+  for (const auto& mediaTag : deleted ? m_mediaDeleted : m_media)
+  {
+    kodi::addon::PVRMediaTag kodiMediaTag;
+
+    kodiMediaTag.SetDuration(mediaTag.iDuration);
+    kodiMediaTag.SetGenreType(mediaTag.iGenreType);
+    kodiMediaTag.SetGenreSubType(mediaTag.iGenreSubType);
+    kodiMediaTag.SetMediaTagTime(mediaTag.mediaTime);
+    kodiMediaTag.SetEpisodeNumber(mediaTag.iEpisodeNumber);
+    kodiMediaTag.SetSeriesNumber(mediaTag.iSeriesNumber);
+    kodiMediaTag.SetIsDeleted(deleted);
+    kodiMediaTag.SetMediaClass(mediaTag.bRadio ? PVR_MEDIA_TAG_CLASS_AUDIO
+                                               : PVR_MEDIA_TAG_CLASS_VIDEO);
+    kodiMediaTag.SetProviderName(mediaTag.strProviderName);
+    kodiMediaTag.SetPlotOutline(mediaTag.strPlotOutline);
+    kodiMediaTag.SetPlot(mediaTag.strPlot);
+    kodiMediaTag.SetMediaTagId(mediaTag.strMediaTagId);
+    kodiMediaTag.SetTitle(mediaTag.strTitle);
+    kodiMediaTag.SetEpisodeName(mediaTag.strEpisodeName);
+    kodiMediaTag.SetDirectory(mediaTag.strDirectory);
+
+    // /* TODO: PVR API 5.0.0: Implement this */
+    // kodiMediaTag.SetChannelUid(PVR_CHANNEL_INVALID_UID);
+
+    results.Add(kodiMediaTag);
+  }
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR CPVRDemo::GetMediaTagStreamProperties(
+    const kodi::addon::PVRMediaTag& mediaTag,
+    std::vector<kodi::addon::PVRStreamProperty>& properties)
+{
+  properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, GetMediaTagURL(mediaTag));
+  return PVR_ERROR_NO_ERROR;
+}
+
+std::string CPVRDemo::GetMediaTagURL(const kodi::addon::PVRMediaTag& mediaTag)
+{
+  for (const auto& thisMediaTag : m_media)
+  {
+    if (thisMediaTag.strMediaTagId == mediaTag.GetMediaTagId())
+    {
+      return thisMediaTag.strStreamURL;
+    }
+  }
+
+  return "";
+}
+
 bool CPVRDemo::LoadDemoData(void)
 {
   TiXmlDocument xmlDoc;
@@ -473,6 +534,33 @@ bool CPVRDemo::LoadDemoData(void)
       PVRDemoRecording recording;
       if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
         m_recordingsDeleted.emplace_back(recording);
+    }
+  }
+
+  /* load media */
+  iUniqueGroupId = 0; // reset unique ids
+  pElement = pRootElement->FirstChildElement("media");
+  if (pElement)
+  {
+    TiXmlNode* pMediaTagNode = nullptr;
+    while ((pMediaTagNode = pElement->IterateChildren(pMediaTagNode)) != nullptr)
+    {
+      PVRDemoMediaTag mediaTag;
+      if (ScanXMLMediaTagData(pMediaTagNode, ++iUniqueGroupId, mediaTag))
+        m_media.emplace_back(mediaTag);
+    }
+  }
+
+  /* load deleted media */
+  pElement = pRootElement->FirstChildElement("mediadeleted");
+  if (pElement)
+  {
+    TiXmlNode* pMediaTagNode = nullptr;
+    while ((pMediaTagNode = pElement->IterateChildren(pMediaTagNode)) != nullptr)
+    {
+      PVRDemoMediaTag mediaTag;
+      if (ScanXMLMediaTagData(pMediaTagNode, ++iUniqueGroupId, mediaTag))
+        m_mediaDeleted.emplace_back(mediaTag);
     }
   }
 
@@ -740,6 +828,84 @@ bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
       now->tm_mday--; // yesterday
 
       recording.recordingTime = mktime(now);
+    }
+  }
+
+  return true;
+}
+
+bool CPVRDemo::ScanXMLMediaTagData(const TiXmlNode* pMediaTagNode,
+                                    int iUniqueGroupId,
+                                    PVRDemoMediaTag& mediaTag)
+{
+  std::string strTmp;
+
+  mediaTag.strMediaTagId = std::to_string(iUniqueGroupId);
+
+  /* radio/TV */
+  XMLGetBoolean(pMediaTagNode, "radio", mediaTag.bRadio);
+
+  /* recording title */
+  if (!XMLGetString(pMediaTagNode, "title", strTmp))
+    return false;
+  mediaTag.strTitle = strTmp;
+
+  /* recording url */
+  if (!XMLGetString(pMediaTagNode, "url", strTmp))
+    mediaTag.strStreamURL = m_strDefaultMovie;
+  else
+    mediaTag.strStreamURL = strTmp;
+
+  /* recording path */
+  if (XMLGetString(pMediaTagNode, "directory", strTmp))
+    mediaTag.strDirectory = strTmp;
+
+  /* channel name */
+  if (XMLGetString(pMediaTagNode, "providername", strTmp))
+    mediaTag.strProviderName = strTmp;
+
+  /* plot */
+  if (XMLGetString(pMediaTagNode, "plot", strTmp))
+    mediaTag.strPlot = strTmp;
+
+  /* plot outline */
+  if (XMLGetString(pMediaTagNode, "plotoutline", strTmp))
+    mediaTag.strPlotOutline = strTmp;
+
+  /* Episode Name */
+  if (XMLGetString(pMediaTagNode, "episodetitle", strTmp))
+    mediaTag.strEpisodeName = strTmp;
+
+  /* Series Number */
+  if (!XMLGetInt(pMediaTagNode, "series", mediaTag.iSeriesNumber))
+    mediaTag.iSeriesNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
+
+  /* Episode Number */
+  if (!XMLGetInt(pMediaTagNode, "episode", mediaTag.iEpisodeNumber))
+    mediaTag.iEpisodeNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
+
+  /* genre type */
+  XMLGetInt(pMediaTagNode, "genretype", mediaTag.iGenreType);
+
+  /* genre subtype */
+  XMLGetInt(pMediaTagNode, "genresubtype", mediaTag.iGenreSubType);
+
+  /* duration */
+  XMLGetInt(pMediaTagNode, "duration", mediaTag.iDuration);
+
+  /* mediaTag time */
+  if (XMLGetString(pMediaTagNode, "time", strTmp))
+  {
+    time_t timeNow = time(nullptr);
+    struct tm* now = localtime(&timeNow);
+
+    auto delim = strTmp.find(':');
+    if (delim != std::string::npos)
+    {
+      sscanf(strTmp.c_str(), "%d:%d", &now->tm_hour, &now->tm_min);
+      now->tm_mday--; // yesterday
+
+      mediaTag.mediaTime = mktime(now);
     }
   }
 

@@ -66,6 +66,25 @@ struct PVRDemoRecording
   time_t recordingTime;
 };
 
+struct PVRDemoMediaTag
+{
+  bool bRadio;
+  int iDuration;
+  int iGenreType;
+  int iGenreSubType;
+  int iSeriesNumber;
+  int iEpisodeNumber;
+  std::string strProviderName;
+  std::string strPlotOutline;
+  std::string strPlot;
+  std::string strMediaTagId;
+  std::string strStreamURL;
+  std::string strTitle;
+  std::string strEpisodeName;
+  std::string strDirectory;
+  time_t mediaTime;
+};
+
 struct PVRDemoTimer
 {
   int iChannelId;
@@ -128,6 +147,8 @@ public:
   PVR_ERROR GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& results) override;
   PVR_ERROR GetRecordingsAmount(bool deleted, int& amount) override;
   PVR_ERROR GetRecordings(bool deleted, kodi::addon::PVRRecordingsResultSet& results) override;
+  PVR_ERROR GetMediaAmount(bool deleted, int& amount) override;
+  PVR_ERROR GetMedia(bool deleted, kodi::addon::PVRMediaResultSet& results) override;
   PVR_ERROR GetTimerTypes(std::vector<kodi::addon::PVRTimerType>& types) override;
   PVR_ERROR GetTimersAmount(int& amount) override;
   PVR_ERROR GetTimers(kodi::addon::PVRTimersResultSet& results) override;
@@ -138,11 +159,15 @@ public:
   PVR_ERROR GetRecordingStreamProperties(
       const kodi::addon::PVRRecording& recording,
       std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+  PVR_ERROR GetMediaTagStreamProperties(
+      const kodi::addon::PVRMediaTag& mediaTag,
+      std::vector<kodi::addon::PVRStreamProperty>& properties) override;
 
 protected:
   bool LoadDemoData(void);
 
   std::string GetRecordingURL(const kodi::addon::PVRRecording& recording);
+  std::string GetMediaTagURL(const kodi::addon::PVRMediaTag& mediaTag);
   bool GetChannel(const kodi::addon::PVRChannel& channel, PVRDemoChannel& myChannel);
 
 private:
@@ -157,6 +182,9 @@ private:
   bool ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
                             int iUniqueGroupId,
                             PVRDemoRecording& recording);
+  bool ScanXMLMediaTagData(const TiXmlNode* pMediaTagNode,
+                            int iUniqueGroupId,
+                            PVRDemoMediaTag& mediaTag);
   bool ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer);
 
   bool XMLGetInt(const TiXmlNode* pRootNode, const std::string& strTag, int& iIntValue);
@@ -167,6 +195,8 @@ private:
   std::vector<PVRDemoChannel> m_channels;
   std::vector<PVRDemoRecording> m_recordings;
   std::vector<PVRDemoRecording> m_recordingsDeleted;
+  std::vector<PVRDemoMediaTag> m_media;
+  std::vector<PVRDemoMediaTag> m_mediaDeleted;
   std::vector<PVRDemoTimer> m_timers;
   time_t m_iEpgStart;
   std::string m_strDefaultIcon;
