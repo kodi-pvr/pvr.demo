@@ -7,7 +7,7 @@
       <number>1</number>
       <encryption>0</encryption>
       <icon>data/01.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
     <channel>
@@ -16,7 +16,7 @@
       <number>2</number>
       <encryption>0</encryption>
       <icon>data/02.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
     <channel>
@@ -25,7 +25,7 @@
       <number>3</number>
       <encryption>0</encryption>
       <icon>data/03.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>0</archive>
     </channel>
     <channel>
@@ -34,7 +34,7 @@
       <number>4</number>
       <encryption>0</encryption>
       <icon>data/04.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>0</archive>
     </channel>
     <channel>
@@ -43,7 +43,7 @@
       <number>5</number>
       <encryption>0</encryption>
       <icon>data/05.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>0</archive>
     </channel>
     <channel>
@@ -52,7 +52,7 @@
       <number>6</number>
       <encryption>0</encryption>
       <icon>data/06.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
     <channel>
@@ -61,7 +61,7 @@
       <number>7</number>
       <encryption>0</encryption>
       <icon>data/07.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
     <channel>
@@ -70,7 +70,7 @@
       <number>8</number>
       <encryption>0</encryption>
       <icon>data/08.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
     <channel>
@@ -79,7 +79,7 @@
       <number>9</number>
       <encryption>0</encryption>
       <icon>data/09.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>0</archive>
     </channel>
     <channel>
@@ -88,7 +88,7 @@
       <number>10</number>
       <encryption>0</encryption>
       <icon>data/10.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>0</archive>
     </channel>
     <channel>
@@ -97,7 +97,7 @@
       <number>11</number>
       <encryption>0</encryption>
       <icon>data/11.png</icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
       <archive>1</archive>
     </channel>
 
@@ -201,7 +201,7 @@
       <subnumber>1</subnumber>
       <encryption>0</encryption>
       <icon></icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
     <channel>
       <name>Demo TV Channel Sub.2</name>
@@ -210,7 +210,7 @@
       <subnumber>2</subnumber>
       <encryption>0</encryption>
       <icon></icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
     <channel>
       <name>Demo TV Channel Sub.3</name>
@@ -219,7 +219,7 @@
       <subnumber>3</subnumber>
       <encryption>0</encryption>
       <icon></icon>
-      <stream>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
+      <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
   </channels>
   <channelgroups>
@@ -545,7 +545,7 @@
     <recording>
       <title>Demo TV Recording entry 1</title>
       <episodetitle>Demo TV Recording 1 Episode Name</episodetitle>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 1</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -561,7 +561,7 @@
     <recording>
       <title>Demo TV Recording entry 2</title>
       <episodetitle>Demo TV Recording 2 Episode Name</episodetitle>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 2</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -575,7 +575,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 3</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory1/</directory>
       <channelname>Demo TV Channel 3</channelname>
       <episodetitle>Demo TV Recording 3 Episode Name</episodetitle>
@@ -589,7 +589,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 4</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory2/</directory>
       <channelname>Demo TV Channel 4</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -602,7 +602,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 5</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory1/SubDirectory2/</directory>
       <channelname>Demo TV Channel 5</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -615,7 +615,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 6</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory1/</directory>
       <channelname>Demo TV Channel 6</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -628,7 +628,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 7</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory1/</directory>
       <channelname>Demo TV Channel 7</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -641,7 +641,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 8</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory2/</directory>
       <channelname>Demo TV Channel 8</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -654,7 +654,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 9</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/SubDirectory2/</directory>
       <channelname>Demo TV Channel 9</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
@@ -667,7 +667,7 @@
     </recording>
     <recording>
       <title>Demo TV Recording entry 10</title>
-      <url>https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
       <directory>/Directory2/</directory>
       <channelname>Demo TV Channel 10</channelname>
       <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
