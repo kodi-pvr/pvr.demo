@@ -154,7 +154,7 @@ PVR_ERROR CPVRDemo::GetEPGTagStreamProperties(
 {
   properties.emplace_back(
       PVR_STREAM_PROPERTY_STREAMURL,
-      "https://download.blender.org/demo/movies/BBB/bbb_sunflower_1080p_30fps_normal.mp4");
+      "https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4");
   return PVR_ERROR_NO_ERROR;
 }
 
