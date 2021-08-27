@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=(n==0) ? 0 : (n==1) ? 1 : (n==2) ? 2 : "
 "(n==3) ? 3 :(n==6) ? 4 : 5;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Cleient Recordydd Fideo Personol Arddangos"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Cleient Recordydd Fideo Personol Arddangos"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Bonion yn unig"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""

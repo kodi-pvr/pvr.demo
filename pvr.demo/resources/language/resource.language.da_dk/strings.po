@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.8\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Demo PVR klient"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Demo PVR klient"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Indeholder kun stumper"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr "PVR-klientmenuens hook-element (indstillinger)"

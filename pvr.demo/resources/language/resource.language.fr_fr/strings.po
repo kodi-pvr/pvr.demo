@@ -16,6 +16,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Client enregistreur vidéo (PVR) de démonstration"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Client enregistreur vidéo (PVR) de démonstration"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Ne contient que des clips de démo"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""

@@ -16,6 +16,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Kodin PVR Demo -asiakasohjelma"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Testauskäyttöön tarkoitettu PVR-asiakasohjelma"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Sisältää vain tyngän"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""

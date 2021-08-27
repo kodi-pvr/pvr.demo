@@ -9,6 +9,10 @@
     point="kodi.pvrclient"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
+    <platform>@PLATFORM@</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/kodi-pvr/pvr.demo</source>
+    <forum>https://forum.kodi.tv/forumdisplay.php?fid=173</forum>
     <summary lang="af_ZA">Demo PVR Kliënt</summary>
     <summary lang="am_ET">የ PVR ደንበኛ ናሙና </summary>
     <summary lang="be_BY">Дэманстрацыя кліента PVR</summary>
@@ -190,9 +194,5 @@
     <disclaimer lang="vi_VN">Chỉ chứa phần tử sơ khai</disclaimer>
     <disclaimer lang="zh_CN">只包含存根</disclaimer>
     <disclaimer lang="zh_TW">只包含 Stubs</disclaimer>
-    <platform>@PLATFORM@</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/kodi-pvr/pvr.demo</source>
-    <forum>https://forum.kodi.tv/forumdisplay.php?fid=173</forum>
   </extension>
 </addon>

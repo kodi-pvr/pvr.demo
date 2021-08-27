@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.8\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "데모 PVR 클라이언트"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "데모 PVR 클라이언트"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr " 단순한 stub만 포함"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr "PVR 클라이언트 메뉴 게시 항목(설정)"

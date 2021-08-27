@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
 "%100==4 ? 2 : 3;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Demo odjemalec PVR"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Demo odjemalec PVR"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Vsebuje le fiktivne vsebine"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""
