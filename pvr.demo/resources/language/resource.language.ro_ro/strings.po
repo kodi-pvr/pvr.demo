@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "Demo client PVR"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "Demo client PVR"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "Conține numai cioturi"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""

@@ -16,6 +16,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
+msgctxt "Addon Summary"
+msgid "Demo PVR Client"
+msgstr "PVR 演示客户端"
+
+msgctxt "Addon Description"
+msgid "Demo PVR Client"
+msgstr "PVR 演示客户端"
+
+msgctxt "Addon Disclaimer"
+msgid "Just contains stubs"
+msgstr "只包含存根"
+
 msgctxt "#30000"
 msgid "PVR client menu hook item (settings)"
 msgstr ""
