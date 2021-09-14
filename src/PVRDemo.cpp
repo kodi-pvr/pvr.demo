@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011-2020 Team Kodi (https://kodi.tv)
+ *  Copyright (C) 2011-2021 Team Kodi (https://kodi.tv)
  *  Copyright (C) 2011 Pulse-Eight (http://www.pulse-eight.com/)
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
