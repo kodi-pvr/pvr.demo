@@ -1,3 +1,7 @@
+v7.1.6
+- Translations updates from Weblate
+	- ar_sa, be_by, bs_ba, cy_gb, da_dk, he_il, hr_hr, ko_kr, lt_lt, lv_lv, mt_mt, pl_pl, ro_ro, ru_ru, sl_si, sr_rs, sr_rs@latin, szl, uk_ua
+
 v7.1.5
 - Translations updates from Weblate
 	- da_dk, ko_kr, pl_pl
