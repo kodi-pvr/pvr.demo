@@ -85,7 +85,10 @@ struct PVRDemoChannelGroup
   std::vector<int> members;
 };
 
-class TiXmlNode;
+namespace tinyxml2
+{
+class XMLNode;
+}
 
 class ATTRIBUTE_HIDDEN CPVRDemo : public kodi::addon::CAddonBase,
                                   public kodi::addon::CInstancePVRClient
@@ -147,21 +150,25 @@ protected:
 
 private:
   PVR_ERROR CallMenuHook(const kodi::addon::PVRMenuhook& menuhook);
-  bool ScanXMLChannelData(const TiXmlNode* pChannelNode,
+  bool ScanXMLChannelData(const tinyxml2::XMLNode* pChannelNode,
                           int iUniqueChannelId,
                           PVRDemoChannel& channel);
-  bool ScanXMLChannelGroupData(const TiXmlNode* pGroupNode,
+  bool ScanXMLChannelGroupData(const tinyxml2::XMLNode* pGroupNode,
                                int iUniqueGroupId,
                                PVRDemoChannelGroup& group);
-  bool ScanXMLEpgData(const TiXmlNode* pEpgNode);
-  bool ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
+  bool ScanXMLEpgData(const tinyxml2::XMLNode* pEpgNode);
+  bool ScanXMLRecordingData(const tinyxml2::XMLNode* pRecordingNode,
                             int iUniqueGroupId,
                             PVRDemoRecording& recording);
-  bool ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer);
+  bool ScanXMLTimerData(const tinyxml2::XMLNode* pTimerNode, PVRDemoTimer& timer);
 
-  bool XMLGetInt(const TiXmlNode* pRootNode, const std::string& strTag, int& iIntValue);
-  bool XMLGetString(const TiXmlNode* pRootNode, const std::string& strTag, std::string& strStringValue);
-  bool XMLGetBoolean(const TiXmlNode* pRootNode, const std::string& strTag, bool& bBoolValue);
+  bool XMLGetInt(const tinyxml2::XMLNode* pRootNode, const std::string& strTag, int& iIntValue);
+  bool XMLGetString(const tinyxml2::XMLNode* pRootNode,
+                    const std::string& strTag,
+                    std::string& strStringValue);
+  bool XMLGetBoolean(const tinyxml2::XMLNode* pRootNode,
+                     const std::string& strTag,
+                     bool& bBoolValue);
 
   std::vector<PVRDemoChannelGroup> m_groups;
   std::vector<PVRDemoChannel> m_channels;
