@@ -1,3 +1,7 @@
+v20.1.0
+- Updated to use TinyXML2 version 9.0.0 dated 7. June 2021
+  - Before was the old TinyXML used, where no more maintained (last release 23. March 2015).
+
 v20.0.0
 - Changed test builds to 'Kodi 20 Nexus'
 - Increased version to 20.0.0

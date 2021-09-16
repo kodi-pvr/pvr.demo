@@ -9,8 +9,11 @@
 #include "PVRDemo.h"
 
 #include <algorithm>
+
 #include <kodi/General.h>
-#include <tinyxml.h>
+#include <tinyxml2.h>
+
+using namespace tinyxml2;
 
 /***********************************************************
   * PVR Client AddOn specific public library functions
@@ -393,17 +396,18 @@ PVR_ERROR CPVRDemo::CallMenuHook(const kodi::addon::PVRMenuhook& menuhook)
 
 bool CPVRDemo::LoadDemoData(void)
 {
-  TiXmlDocument xmlDoc;
+  XMLDocument xmlDoc;
   std::string strSettingsFile = kodi::GetAddonPath("PVRDemoAddonSettings.xml");
 
-  if (!xmlDoc.LoadFile(strSettingsFile))
+  XMLError err = xmlDoc.LoadFile(strSettingsFile.c_str());
+  if (err != XML_SUCCESS)
   {
-    kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no/invalid data file found at '%s')",
-              strSettingsFile.c_str());
+    kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no/invalid data file found at '%s', error: %s)",
+              strSettingsFile.c_str(), XMLDocument::ErrorIDToName(err));
     return false;
   }
 
-  TiXmlElement* pRootElement = xmlDoc.RootElement();
+  XMLElement* pRootElement = xmlDoc.RootElement();
   if (strcmp(pRootElement->Value(), "demo") != 0)
   {
     kodi::Log(ADDON_LOG_ERROR, "invalid demo data (no <demo> tag found)");
@@ -412,11 +416,11 @@ bool CPVRDemo::LoadDemoData(void)
 
   /* load channels */
   int iUniqueChannelId = 0;
-  TiXmlElement* pElement = pRootElement->FirstChildElement("channels");
+  XMLElement* pElement = pRootElement->FirstChildElement("channels");
   if (pElement)
   {
-    TiXmlNode* pChannelNode = nullptr;
-    while ((pChannelNode = pElement->IterateChildren(pChannelNode)) != nullptr)
+    for (const XMLElement* pChannelNode = pElement->FirstChildElement(); pChannelNode != nullptr;
+         pChannelNode = pChannelNode->NextSiblingElement())
     {
       PVRDemoChannel channel;
       if (ScanXMLChannelData(pChannelNode, ++iUniqueChannelId, channel))
@@ -429,8 +433,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("channelgroups");
   if (pElement)
   {
-    TiXmlNode* pGroupNode = nullptr;
-    while ((pGroupNode = pElement->IterateChildren(pGroupNode)) != nullptr)
+    for (const XMLElement* pGroupNode = pElement->FirstChildElement(); pGroupNode != nullptr;
+         pGroupNode = pGroupNode->NextSiblingElement())
     {
       PVRDemoChannelGroup group;
       if (ScanXMLChannelGroupData(pGroupNode, ++iUniqueGroupId, group))
@@ -442,8 +446,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("epg");
   if (pElement)
   {
-    TiXmlNode* pEpgNode = nullptr;
-    while ((pEpgNode = pElement->IterateChildren(pEpgNode)) != nullptr)
+    for (const XMLElement* pEpgNode = pElement->FirstChildElement(); pEpgNode != nullptr;
+         pEpgNode = pEpgNode->NextSiblingElement())
     {
       ScanXMLEpgData(pEpgNode);
     }
@@ -454,8 +458,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("recordings");
   if (pElement)
   {
-    TiXmlNode* pRecordingNode = nullptr;
-    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != nullptr)
+    for (const XMLElement* pRecordingNode = pElement->FirstChildElement();
+         pRecordingNode != nullptr; pRecordingNode = pRecordingNode->NextSiblingElement())
     {
       PVRDemoRecording recording;
       if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
@@ -467,8 +471,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("recordingsdeleted");
   if (pElement)
   {
-    TiXmlNode* pRecordingNode = nullptr;
-    while ((pRecordingNode = pElement->IterateChildren(pRecordingNode)) != nullptr)
+    for (const XMLElement* pRecordingNode = pElement->FirstChildElement();
+         pRecordingNode != nullptr; pRecordingNode = pRecordingNode->NextSiblingElement())
     {
       PVRDemoRecording recording;
       if (ScanXMLRecordingData(pRecordingNode, ++iUniqueGroupId, recording))
@@ -480,8 +484,8 @@ bool CPVRDemo::LoadDemoData(void)
   pElement = pRootElement->FirstChildElement("timers");
   if (pElement)
   {
-    TiXmlNode* pTimerNode = nullptr;
-    while ((pTimerNode = pElement->IterateChildren(pTimerNode)) != nullptr)
+    for (const XMLElement* pTimerNode = pElement->FirstChildElement(); pTimerNode != nullptr;
+         pTimerNode = pTimerNode->NextSiblingElement())
     {
       PVRDemoTimer timer;
       if (ScanXMLTimerData(pTimerNode, timer))
@@ -527,7 +531,7 @@ std::string CPVRDemo::GetRecordingURL(const kodi::addon::PVRRecording& recording
   return "";
 }
 
-bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode,
+bool CPVRDemo::ScanXMLChannelData(const XMLNode* pChannelNode,
                                   int iUniqueChannelId,
                                   PVRDemoChannel& channel)
 {
@@ -571,7 +575,7 @@ bool CPVRDemo::ScanXMLChannelData(const TiXmlNode* pChannelNode,
   return true;
 }
 
-bool CPVRDemo::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode,
+bool CPVRDemo::ScanXMLChannelGroupData(const XMLNode* pGroupNode,
                                        int iUniqueGroupId,
                                        PVRDemoChannelGroup& group)
 {
@@ -590,19 +594,22 @@ bool CPVRDemo::ScanXMLChannelGroupData(const TiXmlNode* pGroupNode,
   XMLGetInt(pGroupNode, "position", group.iPosition);
 
   /* members */
-  const TiXmlNode* pMembers = pGroupNode->FirstChild("members");
-  const TiXmlNode* pMemberNode = nullptr;
-  while (pMembers != nullptr && (pMemberNode = pMembers->IterateChildren(pMemberNode)) != nullptr)
+  const XMLElement* pMembers = pGroupNode->FirstChildElement("members");
+  if (pMembers)
   {
-    int iChannelId = atoi(pMemberNode->FirstChild()->Value());
-    if (iChannelId > -1)
-      group.members.emplace_back(iChannelId);
+    for (const XMLElement* pMemberNode = pMembers->FirstChildElement(); pMemberNode != nullptr;
+         pMemberNode = pMemberNode->NextSiblingElement())
+    {
+      int iChannelId = atoi(pMemberNode->FirstChild()->Value());
+      if (iChannelId > -1)
+        group.members.emplace_back(iChannelId);
+    }
   }
 
   return true;
 }
 
-bool CPVRDemo::ScanXMLEpgData(const TiXmlNode* pEpgNode)
+bool CPVRDemo::ScanXMLEpgData(const XMLNode* pEpgNode)
 {
   std::string strTmp;
   int iTmp;
@@ -668,7 +675,7 @@ bool CPVRDemo::ScanXMLEpgData(const TiXmlNode* pEpgNode)
   return true;
 }
 
-bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
+bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
                                     int iUniqueGroupId,
                                     PVRDemoRecording& recording)
 {
@@ -746,7 +753,7 @@ bool CPVRDemo::ScanXMLRecordingData(const TiXmlNode* pRecordingNode,
   return true;
 }
 
-bool CPVRDemo::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer)
+bool CPVRDemo::ScanXMLTimerData(const XMLNode* pTimerNode, PVRDemoTimer& timer)
 {
   std::string strTmp;
   int iTmp;
@@ -801,21 +808,23 @@ bool CPVRDemo::ScanXMLTimerData(const TiXmlNode* pTimerNode, PVRDemoTimer& timer
   return true;
 }
 
-bool CPVRDemo::XMLGetInt(const TiXmlNode* pRootNode, const std::string& strTag, int& iIntValue)
+bool CPVRDemo::XMLGetInt(const XMLNode* pRootNode, const std::string& strTag, int& iIntValue)
 {
-  const TiXmlNode* pNode = pRootNode->FirstChild(strTag);
+  const XMLNode* pNode = pRootNode->FirstChildElement(strTag.c_str());
   if (!pNode || !pNode->FirstChild())
     return false;
   iIntValue = atoi(pNode->FirstChild()->Value());
   return true;
 }
 
-bool CPVRDemo::XMLGetString(const TiXmlNode* pRootNode, const std::string& strTag, std::string& strStringValue)
+bool CPVRDemo::XMLGetString(const XMLNode* pRootNode,
+                            const std::string& strTag,
+                            std::string& strStringValue)
 {
-  const TiXmlElement* pElement = pRootNode->FirstChildElement(strTag);
+  const XMLElement* pElement = pRootNode->FirstChildElement(strTag.c_str());
   if (!pElement)
     return false;
-  const TiXmlNode* pNode = pElement->FirstChild();
+  const XMLNode* pNode = pElement->FirstChild();
   if (pNode)
   {
     strStringValue = pNode->Value();
@@ -825,19 +834,21 @@ bool CPVRDemo::XMLGetString(const TiXmlNode* pRootNode, const std::string& strTa
   return false;
 }
 
-bool CPVRDemo::XMLGetBoolean(const TiXmlNode* pRootNode, const std::string& strTag, bool& bBoolValue)
+bool CPVRDemo::XMLGetBoolean(const XMLNode* pRootNode, const std::string& strTag, bool& bBoolValue)
 {
-  const TiXmlNode* pNode = pRootNode->FirstChild(strTag);
+  const XMLNode* pNode = pRootNode->FirstChildElement(strTag.c_str());
   if (!pNode || !pNode->FirstChild())
     return false;
   std::string strEnabled = pNode->FirstChild()->Value();
   std::transform(strEnabled.begin(), strEnabled.end(), strEnabled.begin(), ::tolower);
-  if (strEnabled == "off" || strEnabled == "no" || strEnabled == "disabled" || strEnabled == "false" || strEnabled == "0" )
+  if (strEnabled == "off" || strEnabled == "no" || strEnabled == "disabled" ||
+      strEnabled == "false" || strEnabled == "0")
     bBoolValue = false;
   else
   {
     bBoolValue = true;
-    if (strEnabled != "on" && strEnabled != "yes" && strEnabled != "enabled" && strEnabled != "true")
+    if (strEnabled != "on" && strEnabled != "yes" && strEnabled != "enabled" &&
+        strEnabled != "true")
       return false; // invalid bool switch - it's probably some other string.
   }
   return true;
