@@ -14,7 +14,7 @@
     <source>https://github.com/kodi-pvr/pvr.demo</source>
     <forum>https://forum.kodi.tv/forumdisplay.php?fid=173</forum>
     <summary lang="af_ZA">Demo PVR Kliënt</summary>
-    <summary lang="am_ET">የ PVR ደንበኛ ናሙና </summary>
+    <summary lang="am_ET">የ PVR ደንበኛ ናሙና</summary>
     <summary lang="be_BY">Дэманстрацыя кліента PVR</summary>
     <summary lang="bg_BG">Демонстрационен клиент за ПВР</summary>
     <summary lang="ca_ES">Demostració del client PVR</summary>
@@ -75,7 +75,7 @@
     <summary lang="zh_CN">PVR 演示客户端</summary>
     <summary lang="zh_TW">演示PVR客戶端</summary>
     <description lang="af_ZA">Demo PVR Kliënt</description>
-    <description lang="am_ET">የ PVR ደንበኛ ናሙና </description>
+    <description lang="am_ET">የ PVR ደንበኛ ናሙና</description>
     <description lang="be_BY">Дэманстрацыя кліента PVR</description>
     <description lang="bg_BG">Демонстрационен клиент за ПВР</description>
     <description lang="ca_ES">Demostració del client PVR</description>
@@ -136,7 +136,7 @@
     <description lang="zh_CN">PVR 演示客户端</description>
     <description lang="zh_TW">演示PVR客戶端</description>
     <disclaimer lang="af_ZA">Bevat net stubs</disclaimer>
-    <disclaimer lang="am_ET">ቁራጭ ይዟል </disclaimer>
+    <disclaimer lang="am_ET">ቁራጭ ይዟል</disclaimer>
     <disclaimer lang="be_BY">Змяшчае толькі заглушкі</disclaimer>
     <disclaimer lang="bg_BG">Съдържа само stub файлове</disclaimer>
     <disclaimer lang="ca_ES">Només conté fragments</disclaimer>
