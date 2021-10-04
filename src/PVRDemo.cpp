@@ -45,6 +45,7 @@ PVR_ERROR CPVRDemo::GetCapabilities(kodi::addon::PVRCapabilities& capabilities)
   capabilities.SetSupportsRadio(true);
   capabilities.SetSupportsChannelGroups(true);
   capabilities.SetSupportsRecordings(true);
+  capabilities.SetSupportsRecordingsDelete(true);
   capabilities.SetSupportsRecordingsUndelete(true);
   capabilities.SetSupportsTimers(true);
   capabilities.SetSupportsRecordingsRename(false);
