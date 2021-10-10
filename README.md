@@ -4,7 +4,9 @@
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5120/badge.svg)](https://scan.coverity.com/projects/5120)
 
 # Demo PVR
-Demo PVR client addon for [Kodi](https://kodi.tv)
+Demo PVR client addon for [Kodi](https://kodi.tv). The add-on is aimed at both PVR add-on devs and at XBMC skin developers.
+
+For more information on the relationship of the data and the UI see [here](pvr.demo/README.md)
 
 ## Build instructions
 

@@ -45,6 +45,7 @@ struct PVRDemoChannel
   std::string strIconPath;
   std::string strStreamURL;
   std::vector<PVRDemoEpgEntry> epg;
+  int iProviderId;
 };
 
 struct PVRDemoRecording
@@ -64,6 +65,8 @@ struct PVRDemoRecording
   std::string strEpisodeName;
   std::string strDirectory;
   time_t recordingTime;
+  int iChannelId;
+  int iProviderId;
 };
 
 struct PVRDemoTimer
@@ -83,6 +86,16 @@ struct PVRDemoChannelGroup
   std::string strGroupName;
   int iPosition;
   std::vector<int> members;
+};
+
+struct PVRDemoProvider
+{
+  int iProviderId;
+  std::string strProviderName;
+  PVR_PROVIDER_TYPE providerType;
+  std::string strIconPath;
+  std::vector<std::string> countries;
+  std::vector<std::string> languages;
 };
 
 namespace tinyxml2
@@ -123,6 +136,8 @@ public:
   PVR_ERROR GetEPGTagStreamProperties(
       const kodi::addon::PVREPGTag& tag,
       std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+  PVR_ERROR GetProvidersAmount(int& amount) override;
+  PVR_ERROR GetProviders(kodi::addon::PVRProvidersResultSet& results) override;
   PVR_ERROR GetChannelGroupsAmount(int& amount) override;
   PVR_ERROR GetChannelGroups(bool bRadio, kodi::addon::PVRChannelGroupsResultSet& results) override;
   PVR_ERROR GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group,
@@ -150,6 +165,9 @@ protected:
 
 private:
   PVR_ERROR CallMenuHook(const kodi::addon::PVRMenuhook& menuhook);
+  bool ScanXMLProviderData(const tinyxml2::XMLNode* pProviderNode,
+                          int iUniqueProviderId,
+                          PVRDemoProvider& provider);
   bool ScanXMLChannelData(const tinyxml2::XMLNode* pChannelNode,
                           int iUniqueChannelId,
                           PVRDemoChannel& channel);
@@ -170,6 +188,7 @@ private:
                      const std::string& strTag,
                      bool& bBoolValue);
 
+  std::vector<PVRDemoProvider> m_providers;
   std::vector<PVRDemoChannelGroup> m_groups;
   std::vector<PVRDemoChannel> m_channels;
   std::vector<PVRDemoRecording> m_recordings;

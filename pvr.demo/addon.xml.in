@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.demo"
-  version="20.2.0"
+  version="20.3.0"
   name="PVR Demo Client"
   provider-name="Pulse-Eight Ltd., Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
@@ -13,6 +13,9 @@
     <license>GPL-2.0-or-later</license>
     <source>https://github.com/kodi-pvr/pvr.demo</source>
     <forum>https://forum.kodi.tv/forumdisplay.php?fid=173</forum>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
     <summary lang="af_ZA">Demo PVR Kliënt</summary>
     <summary lang="am_ET">የ PVR ደንበኛ ናሙና</summary>
     <summary lang="be_BY">Дэманстрацыя кліента PVR</summary>

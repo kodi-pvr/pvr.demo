@@ -51,6 +51,7 @@ PVR_ERROR CPVRDemo::GetCapabilities(kodi::addon::PVRCapabilities& capabilities)
   capabilities.SetSupportsRecordingsRename(false);
   capabilities.SetSupportsRecordingsLifetimeChange(false);
   capabilities.SetSupportsDescrambleInfo(false);
+  capabilities.SetSupportsProviders(true);
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -162,6 +163,32 @@ PVR_ERROR CPVRDemo::GetEPGTagStreamProperties(
   return PVR_ERROR_NO_ERROR;
 }
 
+PVR_ERROR CPVRDemo::GetProvidersAmount(int& amount)
+{
+  amount = m_providers.size();
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR CPVRDemo::GetProviders(kodi::addon::PVRProvidersResultSet& results)
+{
+  for (const auto& provider : m_providers)
+  {
+    kodi::addon::PVRProvider kodiProvider;
+
+    kodiProvider.SetUniqueId(provider.iProviderId);
+    kodiProvider.SetName(provider.strProviderName);
+    kodiProvider.SetType(provider.providerType);
+    kodiProvider.SetIconPath(provider.strIconPath);
+    kodiProvider.SetCountries(provider.countries);
+    kodiProvider.SetLanguages(provider.languages);
+
+    results.Add(kodiProvider);
+  }
+
+  return PVR_ERROR_NO_ERROR;
+}
+
 PVR_ERROR CPVRDemo::GetChannelsAmount(int& amount)
 {
   amount = m_channels.size();
@@ -185,6 +212,9 @@ PVR_ERROR CPVRDemo::GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& 
       kodiChannel.SetIconPath(channel.strIconPath);
       kodiChannel.SetIsHidden(false);
       kodiChannel.SetHasArchive(channel.bArchive);
+
+      /* PVR API 8.0.0 */
+      kodiChannel.SetClientProviderUid(channel.iProviderId);
 
       results.Add(kodiChannel);
     }
@@ -293,7 +323,10 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
     kodiRecording.SetDirectory(recording.strDirectory);
 
     /* TODO: PVR API 5.0.0: Implement this */
-    kodiRecording.SetChannelUid(PVR_CHANNEL_INVALID_UID);
+    kodiRecording.SetChannelUid(recording.iChannelId);
+
+    /* PVR API 8.0.0 */
+    kodiRecording.SetClientProviderUid(recording.iProviderId);
 
     results.Add(kodiRecording);
   }
@@ -415,9 +448,23 @@ bool CPVRDemo::LoadDemoData(void)
     return false;
   }
 
+  /* load providers */
+  int iUniqueProviderId = 0;
+  XMLElement* pElement = pRootElement->FirstChildElement("providers");
+  if (pElement)
+  {
+    for (const XMLElement* pProviderNode = pElement->FirstChildElement(); pProviderNode != nullptr;
+         pProviderNode = pProviderNode->NextSiblingElement())
+    {
+      PVRDemoProvider provider;
+      if (ScanXMLProviderData(pProviderNode, ++iUniqueProviderId, provider))
+        m_providers.emplace_back(provider);
+    }
+  }
+
   /* load channels */
   int iUniqueChannelId = 0;
-  XMLElement* pElement = pRootElement->FirstChildElement("channels");
+  pElement = pRootElement->FirstChildElement("channels");
   if (pElement)
   {
     for (const XMLElement* pChannelNode = pElement->FirstChildElement(); pChannelNode != nullptr;
@@ -532,6 +579,54 @@ std::string CPVRDemo::GetRecordingURL(const kodi::addon::PVRRecording& recording
   return "";
 }
 
+bool CPVRDemo::ScanXMLProviderData(const XMLNode* pProviderNode,
+                                   int iUniqueProviderId,
+                                   PVRDemoProvider& provider)
+{
+  std::string strTmp;
+  provider.iProviderId = iUniqueProviderId;
+
+  /* provider name */
+  if (!XMLGetString(pProviderNode, "name", strTmp))
+    return false;
+  provider.strProviderName = strTmp;
+
+  /* provider type */
+  if (!XMLGetString(pProviderNode, "type", strTmp))
+    return false;
+  kodi::tools::StringUtils::ToLower(strTmp);
+  if (strTmp == "addon")
+    provider.providerType = PVR_PROVIDER_TYPE_ADDON;
+  else if (strTmp == "satellite")
+    provider.providerType = PVR_PROVIDER_TYPE_SATELLITE;
+  else if (strTmp == "cable")
+    provider.providerType = PVR_PROVIDER_TYPE_CABLE;
+  else if (strTmp == "aerial")
+    provider.providerType = PVR_PROVIDER_TYPE_AERIAL;
+  else if (strTmp == "iptv")
+    provider.providerType = PVR_PROVIDER_TYPE_IPTV;
+  else
+    provider.providerType = PVR_PROVIDER_TYPE_UNKNOWN;
+
+  /* provider icon path */
+  if (!XMLGetString(pProviderNode, "iconPath", strTmp))
+    provider.strIconPath = m_strDefaultIcon;
+  else
+    provider.strIconPath = ClientPath() + strTmp;
+
+  /* provider countries */
+  if (!XMLGetString(pProviderNode, "countries", strTmp))
+    return false;
+  provider.countries = kodi::tools::StringUtils::Split(strTmp, PROVIDER_STRING_TOKEN_SEPARATOR);
+
+  /* provider languages */
+  if (!XMLGetString(pProviderNode, "languages", strTmp))
+    return false;
+  provider.languages = kodi::tools::StringUtils::Split(strTmp, PROVIDER_STRING_TOKEN_SEPARATOR);
+
+  return true;
+}
+
 bool CPVRDemo::ScanXMLChannelData(const XMLNode* pChannelNode,
                                   int iUniqueChannelId,
                                   PVRDemoChannel& channel)
@@ -572,6 +667,10 @@ bool CPVRDemo::ScanXMLChannelData(const XMLNode* pChannelNode,
     channel.strStreamURL = strTmp;
 
   XMLGetBoolean(pChannelNode, "archive", channel.bArchive);
+
+  /* provider id */
+  channel.iProviderId = PVR_PROVIDER_INVALID_UID;
+  XMLGetInt(pChannelNode, "provider", channel.iProviderId);
 
   return true;
 }
@@ -750,6 +849,14 @@ bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
       recording.recordingTime = mktime(now);
     }
   }
+
+  /* channel id */
+  recording.iChannelId = PVR_CHANNEL_INVALID_UID;
+  XMLGetInt(pRecordingNode, "channel", recording.iChannelId);
+
+  /* provider id */
+  recording.iProviderId = PVR_PROVIDER_INVALID_UID;
+  XMLGetInt(pRecordingNode, "provider", recording.iProviderId);
 
   return true;
 }
