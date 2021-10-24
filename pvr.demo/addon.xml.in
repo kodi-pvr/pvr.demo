@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.demo"
-  version="20.3.0"
+  version="20.3.1"
   name="PVR Demo Client"
   provider-name="Pulse-Eight Ltd., Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
@@ -27,7 +27,7 @@
     <summary lang="de_DE">Demo PVR Client</summary>
     <summary lang="el_GR">Δοκιμαστικός Πελάτης PVR</summary>
     <summary lang="en_AU">Demo PVR Client</summary>
-    <summary lang="en_GB">Demo PVR Client</summary>
+    <summary lang="en_GB">This add-on is aimed at both PVR add-on devs to show a worked example of the PVR API and at XBMC skin developers to test skin changes against PVR.</summary>
     <summary lang="en_NZ">Demo PVR Client</summary>
     <summary lang="en_US">Demo PVR Client</summary>
     <summary lang="es_AR">Cliente PVR demo</summary>
