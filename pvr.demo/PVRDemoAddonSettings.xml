@@ -241,7 +241,7 @@
       <number>1</number>
       <subnumber>1</subnumber>
       <encryption>0</encryption>
-      <icon>data/11.png</icon>
+      <icon>data/01-01.png</icon>
       <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
     <channel>
@@ -250,7 +250,7 @@
       <number>1</number>
       <subnumber>2</subnumber>
       <encryption>0</encryption>
-      <icon>data/11.png</icon>
+      <icon>data/01-02.png</icon>
       <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
     <channel>
@@ -259,7 +259,7 @@
       <number>1</number>
       <subnumber>3</subnumber>
       <encryption>0</encryption>
-      <icon>data/11.png</icon>
+      <icon>data/01-03.png</icon>
       <stream>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</stream>
     </channel>
   </channels>
