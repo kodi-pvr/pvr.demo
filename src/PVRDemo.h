@@ -103,8 +103,8 @@ namespace tinyxml2
 class XMLNode;
 }
 
-class ATTRIBUTE_HIDDEN CPVRDemo : public kodi::addon::CAddonBase,
-                                  public kodi::addon::CInstancePVRClient
+class ATTR_DLL_LOCAL CPVRDemo : public kodi::addon::CAddonBase,
+                                public kodi::addon::CInstancePVRClient
 {
 public:
   CPVRDemo();
