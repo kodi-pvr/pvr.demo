@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.demo"
-  version="20.3.1"
+  version="20.4.0"
   name="PVR Demo Client"
   provider-name="Pulse-Eight Ltd., Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>
@@ -23,16 +23,16 @@
     <summary lang="ca_ES">Demostració del client PVR</summary>
     <summary lang="cs_CZ">Ukázka klienta nahrávače videa</summary>
     <summary lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</summary>
-    <summary lang="da_DK">Demo PVR klient</summary>
+    <summary lang="da_DK">Demo PVR-klient</summary>
     <summary lang="de_DE">Demo PVR Client</summary>
     <summary lang="el_GR">Δοκιμαστικός Πελάτης PVR</summary>
     <summary lang="en_AU">Demo PVR Client</summary>
-    <summary lang="en_GB">This add-on is aimed at both PVR add-on devs to show a worked example of the PVR API and at XBMC skin developers to test skin changes against PVR.</summary>
+    <summary lang="en_GB">Demo PVR Client</summary>
     <summary lang="en_NZ">Demo PVR Client</summary>
     <summary lang="en_US">Demo PVR Client</summary>
     <summary lang="es_AR">Cliente PVR demo</summary>
     <summary lang="es_ES">Demo Cliente PVR</summary>
-    <summary lang="es_MX">Cliente Demo PVR</summary>
+    <summary lang="es_MX">Cliente PVR de demostración</summary>
     <summary lang="et_EE">Demo PVR'i klient</summary>
     <summary lang="eu_ES">PVR bezeroaren demoa</summary>
     <summary lang="fi_FI">Kodin PVR Demo -asiakasohjelma</summary>
@@ -84,7 +84,7 @@
     <description lang="ca_ES">Demostració del client PVR</description>
     <description lang="cs_CZ">Ukázkový klient PVR</description>
     <description lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</description>
-    <description lang="da_DK">Demo PVR klient</description>
+    <description lang="da_DK">Demo PVR-klient</description>
     <description lang="de_DE">Demo PVR Client</description>
     <description lang="el_GR">Δοκιμαστικός Πελάτης PVR</description>
     <description lang="en_AU">Demo PVR Client</description>
@@ -93,7 +93,7 @@
     <description lang="en_US">Demo PVR Client</description>
     <description lang="es_AR">Cliente PVR demo</description>
     <description lang="es_ES">Demo Cliente PVR</description>
-    <description lang="es_MX">Cliente Demo PVR</description>
+    <description lang="es_MX">Cliente PVR de demostración</description>
     <description lang="et_EE">Demo PVR'i klient</description>
     <description lang="eu_ES">PVR bezeroaren demoa</description>
     <description lang="fi_FI">Testauskäyttöön tarkoitettu PVR-asiakasohjelma</description>
@@ -154,7 +154,7 @@
     <disclaimer lang="en_US">Just contains stubs</disclaimer>
     <disclaimer lang="es_AR">contiene sólo marcadores</disclaimer>
     <disclaimer lang="es_ES">Sólo contiene fragmentos</disclaimer>
-    <disclaimer lang="es_MX">Solo contiene talones</disclaimer>
+    <disclaimer lang="es_MX">Solo contiene ejemplos</disclaimer>
     <disclaimer lang="et_EE">Sisaldab ainult juppe</disclaimer>
     <disclaimer lang="eu_ES">Puskak ditu soilik</disclaimer>
     <disclaimer lang="fi_FI">Sisältää vain tyngän</disclaimer>

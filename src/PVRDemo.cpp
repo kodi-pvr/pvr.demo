@@ -423,7 +423,7 @@ PVR_ERROR CPVRDemo::CallMenuHook(const kodi::addon::PVRMenuhook& menuhook)
     default:
       return PVR_ERROR_INVALID_PARAMETERS;
   }
-  kodi::QueueNotification(QUEUE_INFO, "", kodi::GetLocalizedString(iMsg));
+  kodi::QueueNotification(QUEUE_INFO, "", kodi::addon::GetLocalizedString(iMsg));
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -431,7 +431,7 @@ PVR_ERROR CPVRDemo::CallMenuHook(const kodi::addon::PVRMenuhook& menuhook)
 bool CPVRDemo::LoadDemoData(void)
 {
   XMLDocument xmlDoc;
-  std::string strSettingsFile = kodi::GetAddonPath("PVRDemoAddonSettings.xml");
+  std::string strSettingsFile = kodi::addon::GetAddonPath("PVRDemoAddonSettings.xml");
 
   XMLError err = xmlDoc.LoadFile(strSettingsFile.c_str());
   if (err != XML_SUCCESS)
