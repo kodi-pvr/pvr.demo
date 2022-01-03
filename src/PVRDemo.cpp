@@ -231,12 +231,15 @@ PVR_ERROR CPVRDemo::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& g
   {
     if (myGroup.strGroupName == group.GetGroupName())
     {
-      for (const auto& iId : myGroup.members)
+      for (int iId : myGroup.members)
       {
-        if (iId < 0 || iId > (int)m_channels.size() - 1)
+        if (iId < 1 || iId > static_cast<int>(m_channels.size()))
+        {
+          kodi::Log(ADDON_LOG_ERROR, "ignoring invalid channel id '%d')", iId);
           continue;
+        }
 
-        PVRDemoChannel& channel = m_channels.at(iId);
+        PVRDemoChannel& channel = m_channels.at(iId - 1);
         kodi::addon::PVRChannelGroupMember kodiGroupMember;
         kodiGroupMember.SetGroupName(group.GetGroupName());
         kodiGroupMember.SetChannelUniqueId(channel.iUniqueId);
