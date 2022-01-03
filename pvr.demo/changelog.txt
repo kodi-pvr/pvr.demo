@@ -1,3 +1,9 @@
+v19.0.2
+- Fixed GetChannelGroupMembers
+
+v19.0.1
+- Translation updates
+
 v19.0.0
 - Changed test builds to 'Kodi 19 Matrix'
 - Increased version to 19.0.0
