@@ -103,11 +103,10 @@ namespace tinyxml2
 class XMLNode;
 }
 
-class ATTR_DLL_LOCAL CPVRDemo : public kodi::addon::CAddonBase,
-                                public kodi::addon::CInstancePVRClient
+class ATTR_DLL_LOCAL CPVRDemo : public kodi::addon::CInstancePVRClient
 {
 public:
-  CPVRDemo();
+  CPVRDemo(const kodi::addon::IInstanceInfo& instance);
   ~CPVRDemo() override;
 
   PVR_ERROR GetBackendName(std::string& name) override;
@@ -197,4 +196,5 @@ private:
   time_t m_iEpgStart;
   std::string m_strDefaultIcon;
   std::string m_strDefaultMovie;
+  uint32_t m_number;
 };

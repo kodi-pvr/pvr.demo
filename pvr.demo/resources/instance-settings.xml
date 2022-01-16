@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<settings version="1">
+  <section id="pvr.dvbviewer">
+    <!-- Connection -->
+    <category id="connection" label="30100">
+      <group id="1">
+        <setting id="host" type="string" label="30101">
+          <level>0</level>
+          <default>127.0.0.1</default>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+    </category>
+  </section>
+</settings>

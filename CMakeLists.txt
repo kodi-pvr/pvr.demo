@@ -11,9 +11,11 @@ include_directories(${KODI_INCLUDE_DIR}/.. # Hack way with "/..", need bigger Ko
 
 set(DEPLIBS ${TINYXML2_LIBRARIES})
 
-set(PVRDEMO_SOURCES src/PVRDemo.cpp)
+set(PVRDEMO_SOURCES src/addon.cpp
+                    src/PVRDemo.cpp)
 
-set(PVRDEMO_HEADERS src/PVRDemo.h)
+set(PVRDEMO_HEADERS src/addon.h
+                    src/PVRDemo.h)
 
 build_addon(pvr.demo PVRDEMO DEPLIBS)
 

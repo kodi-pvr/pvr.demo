@@ -19,17 +19,22 @@ using namespace tinyxml2;
   * PVR Client AddOn specific public library functions
   ***********************************************************/
 
-CPVRDemo::CPVRDemo()
+CPVRDemo::CPVRDemo(const kodi::addon::IInstanceInfo& instance)
+  : CInstancePVRClient(instance)
 {
   m_iEpgStart = -1;
   m_strDefaultIcon = "http://www.royalty-free.tv/news/wp-content/uploads/2011/06/cc-logo1.jpg";
   m_strDefaultMovie = "";
+  m_number = instance.GetNumber();
 
   LoadDemoData();
 
-  AddMenuHook(kodi::addon::PVRMenuhook(1, 30000, PVR_MENUHOOK_SETTING));
-  AddMenuHook(kodi::addon::PVRMenuhook(2, 30001, PVR_MENUHOOK_ALL));
-  AddMenuHook(kodi::addon::PVRMenuhook(3, 30002, PVR_MENUHOOK_CHANNEL));
+  std::string setting = GetInstanceSettingString("host");
+  fprintf(stderr, "setting %s\n", setting.c_str());
+
+//   AddMenuHook(kodi::addon::PVRMenuhook(1, 30000, PVR_MENUHOOK_SETTING));
+//   AddMenuHook(kodi::addon::PVRMenuhook(2, 30001, PVR_MENUHOOK_ALL));
+//   AddMenuHook(kodi::addon::PVRMenuhook(3, 30002, PVR_MENUHOOK_CHANNEL));
 }
 
 CPVRDemo::~CPVRDemo()
@@ -58,7 +63,7 @@ PVR_ERROR CPVRDemo::GetCapabilities(kodi::addon::PVRCapabilities& capabilities)
 
 PVR_ERROR CPVRDemo::GetBackendName(std::string& name)
 {
-  name = "pulse-eight demo pvr add-on";
+  name = "pulse-eight demo pvr add-on " + std::to_string(m_number);
   return PVR_ERROR_NO_ERROR;
 }
 
@@ -70,13 +75,13 @@ PVR_ERROR CPVRDemo::GetBackendVersion(std::string& version)
 
 PVR_ERROR CPVRDemo::GetConnectionString(std::string& connection)
 {
-  connection = "connected";
+  connection = "connected " + std::to_string(m_number);
   return PVR_ERROR_NO_ERROR;
 }
 
 PVR_ERROR CPVRDemo::GetBackendHostname(std::string& hostname)
 {
-  hostname = "";
+  hostname = std::to_string(m_number);
   return PVR_ERROR_NO_ERROR;
 }
 
@@ -113,7 +118,7 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
         kodi::addon::PVREPGTag tag;
         tag.SetUniqueBroadcastId(myTag.iBroadcastId + iAddBroadcastId);
         tag.SetUniqueChannelId(channelUid);
-        tag.SetTitle(myTag.strTitle);
+        tag.SetTitle(myTag.strTitle + " - " + std::to_string(m_number));
         tag.SetStartTime(myTag.startTime + iLastEndTime);
         tag.SetEndTime(myTag.endTime + iLastEndTime);
         tag.SetPlotOutline(myTag.strPlotOutline);
@@ -177,7 +182,7 @@ PVR_ERROR CPVRDemo::GetProviders(kodi::addon::PVRProvidersResultSet& results)
     kodi::addon::PVRProvider kodiProvider;
 
     kodiProvider.SetUniqueId(provider.iProviderId);
-    kodiProvider.SetName(provider.strProviderName);
+    kodiProvider.SetName(provider.strProviderName + " - " + std::to_string(m_number));
     kodiProvider.SetType(provider.providerType);
     kodiProvider.SetIconPath(provider.strIconPath);
     kodiProvider.SetCountries(provider.countries);
@@ -207,7 +212,7 @@ PVR_ERROR CPVRDemo::GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& 
       kodiChannel.SetIsRadio(channel.bRadio);
       kodiChannel.SetChannelNumber(channel.iChannelNumber);
       kodiChannel.SetSubChannelNumber(channel.iSubChannelNumber);
-      kodiChannel.SetChannelName(channel.strChannelName);
+      kodiChannel.SetChannelName(channel.strChannelName + " - " + std::to_string(m_number));
       kodiChannel.SetEncryptionSystem(channel.iEncryptionSystem);
       kodiChannel.SetIconPath(channel.strIconPath);
       kodiChannel.SetIsHidden(false);
@@ -250,7 +255,7 @@ PVR_ERROR CPVRDemo::GetChannelGroups(bool bRadio, kodi::addon::PVRChannelGroupsR
 
       kodiGroup.SetIsRadio(bRadio);
       kodiGroup.SetPosition(group.iPosition);
-      kodiGroup.SetGroupName(group.strGroupName);
+      kodiGroup.SetGroupName(group.strGroupName + " - " + std::to_string(m_number));
       results.Add(kodiGroup);
     }
   }
@@ -964,5 +969,3 @@ bool CPVRDemo::XMLGetBoolean(const XMLNode* pRootNode, const std::string& strTag
   }
   return true;
 }
-
-ADDONCREATOR(CPVRDemo)
