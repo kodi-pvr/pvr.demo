@@ -125,6 +125,9 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
         tag.SetSeriesNumber(myTag.iSeriesNumber);
         tag.SetEpisodeNumber(myTag.iEpisodeNumber);
         tag.SetEpisodeName(myTag.strEpisodeName);
+        tag.SetParentalRating(myTag.iParentalRating);
+        tag.SetParentalRatingCode(myTag.strParentalRatingCode);
+        tag.SetParentalRatingIcon(myTag.strParentalRatingIcon);
 
         iLastEndTimeTmp = tag.GetEndTime();
 
@@ -331,6 +334,10 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
     /* PVR API 8.0.0 */
     kodiRecording.SetClientProviderUid(recording.iProviderId);
 
+    kodiRecording.SetParentalRating(recording.iParentalRating);
+    kodiRecording.SetParentalRatingCode(recording.strParentalRatingCode);
+    kodiRecording.SetParentalRatingIcon(recording.strParentalRatingIcon);
+
     results.Add(kodiRecording);
   }
 
@@ -373,6 +380,9 @@ PVR_ERROR CPVRDemo::GetTimers(kodi::addon::PVRTimersResultSet& results)
     kodiTimer.SetState(timer.state);
     kodiTimer.SetTitle(timer.strTitle);
     kodiTimer.SetSummary(timer.strSummary);
+    kodiTimer.SetParentalRating(timer.iParentalRating);
+    kodiTimer.SetParentalRatingCode(timer.strParentalRatingCode);
+    kodiTimer.SetParentalRatingIcon(timer.strParentalRatingIcon);
 
     results.Add(kodiTimer);
   }
@@ -770,6 +780,17 @@ bool CPVRDemo::ScanXMLEpgData(const XMLNode* pEpgNode)
   /* genre subtype */
   XMLGetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
+  /* parental rating age */
+  XMLGetInt(pEpgNode, "parentalrating", entry.iParentalRating);
+
+  /* parental rating code */
+  if (XMLGetString(pEpgNode, "parentalratingcode", strTmp))
+    entry.strParentalRatingCode = strTmp;
+
+  /* parental rating icon */
+  if (XMLGetString(pEpgNode, "parentalratingicon", strTmp))
+    entry.strParentalRatingIcon = ClientPath() + strTmp;
+
   kodi::Log(ADDON_LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'",
             entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
 
@@ -861,6 +882,20 @@ bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
   recording.iProviderId = PVR_PROVIDER_INVALID_UID;
   XMLGetInt(pRecordingNode, "provider", recording.iProviderId);
 
+  /* parental rating age */
+  XMLGetInt(pRecordingNode, "parentalrating", recording.iParentalRating);
+
+  /* parental rating code */
+  if (XMLGetString(pRecordingNode, "parentalratingcode", strTmp))
+    recording.strParentalRatingCode = strTmp;
+
+  /* parental rating icon */
+  if (XMLGetString(pRecordingNode, "parentalratingicon", strTmp))
+    recording.strParentalRatingIcon = ClientPath() + strTmp;
+
+  kodi::Log(ADDON_LOG_DEBUG, "loaded recording '%s' channel '%d' duration '%d'",
+            recording.strTitle.c_str(), recording.iChannelId, recording.iDuration);
+
   return true;
 }
 
@@ -913,6 +948,17 @@ bool CPVRDemo::ScanXMLTimerData(const XMLNode* pTimerNode, PVRDemoTimer& timer)
       timer.endTime = mktime(now);
     }
   }
+
+  /* parental rating age */
+  XMLGetInt(pTimerNode, "parentalrating", timer.iParentalRating);
+
+  /* parental rating code */
+  if (XMLGetString(pTimerNode, "parentalratingcode", strTmp))
+    timer.strParentalRatingCode = strTmp;
+
+  /* parental rating icon */
+  if (XMLGetString(pTimerNode, "parentalratingicon", strTmp))
+    timer.strParentalRatingIcon = ClientPath() + strTmp;
 
   kodi::Log(ADDON_LOG_DEBUG, "loaded timer '%s' channel '%d' start '%d' end '%d'",
             timer.strTitle.c_str(), timer.iChannelId, timer.startTime, timer.endTime);
