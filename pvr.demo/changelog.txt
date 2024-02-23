@@ -1,3 +1,10 @@
+v21.2.0
+- Add support for parentalRatingIcon to EPG events.
+- Add support for parentalRatingCode and parentalRatingIcon to timers and recordings.
+
+v21.1.0
+- Add support for parentalRating and parentalRatingCode to EPG events.
+
 v20.5.0
 - Update PVR API 8.0.2
 
