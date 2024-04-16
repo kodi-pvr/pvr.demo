@@ -1,3 +1,7 @@
+v20.5.1
+- Translations updates from Weblate
+	- de_de, et_ee, it_it
+
 v20.5.0
 - Update PVR API 8.0.2
 
