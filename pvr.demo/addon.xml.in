@@ -24,7 +24,7 @@
     <summary lang="cs_CZ">Ukázka klienta nahrávače videa</summary>
     <summary lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</summary>
     <summary lang="da_DK">Demo PVR-klient</summary>
-    <summary lang="de_DE">Demo PVR Client</summary>
+    <summary lang="de_DE">Demo PVR-Client</summary>
     <summary lang="el_GR">Δοκιμαστικός Πελάτης PVR</summary>
     <summary lang="en_AU">Demo PVR Client</summary>
     <summary lang="en_GB">Demo PVR Client</summary>
@@ -33,9 +33,9 @@
     <summary lang="es_AR">Cliente PVR demo</summary>
     <summary lang="es_ES">Demo Cliente PVR</summary>
     <summary lang="es_MX">Cliente PVR de demostración</summary>
-    <summary lang="et_EE">Demo PVR'i klient</summary>
+    <summary lang="et_EE">Demo PVR&apos;i klient</summary>
     <summary lang="eu_ES">PVR bezeroaren demoa</summary>
-    <summary lang="fi_FI">Kodin PVR Demo -asiakasohjelma</summary>
+    <summary lang="fi_FI">PVR-demopääte</summary>
     <summary lang="fr_CA">Client de numériscope de démo</summary>
     <summary lang="fr_FR">Client enregistreur vidéo (PVR) de démonstration</summary>
     <summary lang="gl_ES">Cliente PVR Demo</summary>
@@ -85,7 +85,7 @@
     <description lang="cs_CZ">Ukázkový klient PVR</description>
     <description lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</description>
     <description lang="da_DK">Demo PVR-klient</description>
-    <description lang="de_DE">Demo PVR Client</description>
+    <description lang="de_DE">Demo PVR-Client</description>
     <description lang="el_GR">Δοκιμαστικός Πελάτης PVR</description>
     <description lang="en_AU">Demo PVR Client</description>
     <description lang="en_GB">Demo PVR Client</description>
@@ -94,9 +94,9 @@
     <description lang="es_AR">Cliente PVR demo</description>
     <description lang="es_ES">Demo Cliente PVR</description>
     <description lang="es_MX">Cliente PVR de demostración</description>
-    <description lang="et_EE">Demo PVR'i klient</description>
+    <description lang="et_EE">Demo PVR&apos;i klient</description>
     <description lang="eu_ES">PVR bezeroaren demoa</description>
-    <description lang="fi_FI">Testauskäyttöön tarkoitettu PVR-asiakasohjelma</description>
+    <description lang="fi_FI">Esimerkki PVR-pääte testaukseen.</description>
     <description lang="fr_CA">Client numériscope de démo</description>
     <description lang="fr_FR">Client enregistreur vidéo (PVR) de démonstration</description>
     <description lang="gl_ES">Cliente PVR Demo</description>
@@ -166,7 +166,7 @@
     <disclaimer lang="hu_HU">Csak tesztfunkciókat tartalmaz</disclaimer>
     <disclaimer lang="id_ID">Hanya mengandung stub</disclaimer>
     <disclaimer lang="is_IS">Inniheldur aðeins búta</disclaimer>
-    <disclaimer lang="it_IT">Contiene solo tronconi</disclaimer>
+    <disclaimer lang="it_IT">Contiene solo frammenti</disclaimer>
     <disclaimer lang="ja_JP">単なるスタブです</disclaimer>
     <disclaimer lang="ko_KR">단순한 stub만 포함</disclaimer>
     <disclaimer lang="lt_LT">Tiesiog tuščia struktūra</disclaimer>
