@@ -359,6 +359,7 @@
       <icon></icon>
       <genretype>32</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
     </entry>
     <entry>
       <broadcastid>300</broadcastid>
@@ -372,6 +373,12 @@
       <icon></icon>
       <genretype>48</genretype>
       <genresubtype>0</genresubtype>
+      <parentalratingcode>CC-DD</parentalratingcode>
+      <parentalratingicon>data/cc-dd.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
+      <cast>Actor One, Actor Two, Actor Three</cast>
+      <director>Director Name</director>
+      <writer>Writer Name</writer>
     </entry>
     <entry>
       <broadcastid>400</broadcastid>
@@ -386,6 +393,10 @@
       <icon></icon>
       <genretype>64</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>9</parentalrating>
+      <parentalratingcode>A</parentalratingcode>
+      <parentalratingicon>data/a.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>500</broadcastid>
@@ -398,6 +409,10 @@
       <icon></icon>
       <genretype>80</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>600</broadcastid>
@@ -422,6 +437,10 @@
       <icon></icon>
       <genretype>112</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>15</parentalrating>
+      <parentalratingcode>EEE</parentalratingcode>
+      <parentalratingicon>data/eee.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>800</broadcastid>
@@ -434,6 +453,10 @@
       <icon></icon>
       <genretype>128</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>9</parentalrating>
+      <parentalratingcode>A</parentalratingcode>
+      <parentalratingicon>data/a.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>900</broadcastid>
@@ -446,6 +469,9 @@
       <icon></icon>
       <genretype>144</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingsource>ABC</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>1100</broadcastid>
@@ -458,6 +484,9 @@
       <icon></icon>
       <genretype>176</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>15</parentalrating>
+      <parentalratingcode>EEE</parentalratingcode>
+      <parentalratingicon>data/eee.png</parentalratingicon>
     </entry>
 
     <entry>
@@ -471,6 +500,10 @@
       <icon></icon>
       <genretype>30</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>13</parentalrating>
+      <parentalratingcode>CC-DD</parentalratingcode>
+      <parentalratingicon>data/cc-dd.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>1600</broadcastid>
@@ -495,6 +528,9 @@
       <icon></icon>
       <genretype>20</genretype>
       <genresubtype>0</genresubtype>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>2400</broadcastid>
@@ -507,6 +543,7 @@
       <icon></icon>
       <genretype>30</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>9</parentalrating>
     </entry>
     <entry>
       <broadcastid>1900</broadcastid>
@@ -519,6 +556,10 @@
       <icon></icon>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>2000</broadcastid>
@@ -543,6 +584,10 @@
       <icon></icon>
       <genretype>30</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ÜŤƑ-8-ṰẼŠṮ</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>2200</broadcastid>
@@ -555,6 +600,10 @@
       <icon></icon>
       <genretype>10</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>9</parentalrating>
+      <parentalratingcode>A</parentalratingcode>
+      <parentalratingicon>data/a.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>2300</broadcastid>
@@ -567,6 +616,10 @@
       <icon></icon>
       <genretype>20</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>13</parentalrating>
+      <parentalratingcode>CC-DD</parentalratingcode>
+      <parentalratingicon>data/cc-dd.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
     <entry>
       <broadcastid>2400</broadcastid>
@@ -579,6 +632,10 @@
       <icon></icon>
       <genretype>30</genretype>
       <genresubtype>0</genresubtype>
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ABCD</parentalratingsource>
     </entry>
   </epg>
   <recordings>
@@ -600,6 +657,31 @@
       <episode>1</episode>
       <channel>1</channel>
       <provider>1</provider> <!-- Demo Provider 1 -->
+      <parentalrating>9</parentalrating>
+      <parentalratingcode>A</parentalratingcode>
+      <parentalratingicon>data/a.png</parentalratingicon>
+    </recording>
+    <recording>
+      <title>Demo TV Recording entry 11</title>
+      <episodetitle>Demo TV Recording 11 Episode Name</episodetitle>
+      <url>https://mirrors.kodi.tv/demo-files/BBB/bbb_sunflower_1080p_30fps_normal.mp4</url>
+      <directory>/</directory>
+      <channelname>Demo TV Channel 1</channelname>
+      <plotoutline>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</plotoutline>
+      <plot>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
+      <genretype>10</genretype>
+      <genresubtype>0</genresubtype>
+      <time>12:00</time>
+      <duration>7200</duration>
+      <radio>0</radio>
+      <series>2</series>
+      <episode>1</episode>
+      <channel>1</channel>
+      <provider>1</provider> <!-- Demo Provider 1 -->
+      <parentalrating>11</parentalrating>
+      <parentalratingcode>BB</parentalratingcode>
+      <parentalratingicon>data/bb.png</parentalratingicon>
+      <parentalratingsource>ABC</parentalratingsource>
     </recording>
     <recording>
       <title>Demo TV Recording entry 2</title>
@@ -1193,6 +1275,19 @@
         <endtime>16:45</endtime>
         <state>3</state>
         <summary>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</summary>
+    </timer>
+    <timer>
+        <title>Demo Timer entry #10</title>
+        <channelid>1</channelid>
+        <starttime>13:15</starttime>
+        <endtime>14:45</endtime>
+        <state>1</state>
+        <summary>SUMMARY Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</summary>
+        <plot>PLOT Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam cursus consectetur ipsum, eu tincidunt dui aliquam ac. Sed scelerisque, augue eu lacinia ultrices, libero ante ullamcorper augue, vel malesuada justo risus ac nulla. Quisque ac libero libero. Sed tincidunt, orci eu condimentum laoreet, felis odio mattis est, et lacinia metus enim in leo. Fusce faucibus tristique risus in varius. Etiam sagittis venenatis ligula nec rutrum. Etiam gravida dictum hendrerit. Sed sodales felis in sapien rutrum non malesuada nisi lobortis. Mauris iaculis ante odio. Nunc gravida erat convallis purus dignissim et ultricies orci dapibus. Aliquam erat volutpat. Vestibulum mi felis, malesuada ac tincidunt sit amet, pulvinar nec dolor. Pellentesque vehicula est vulputate mi adipiscing euismod. Donec ac mauris nulla. Nullam suscipit felis eu quam sodales ac bibendum nisi interdum. Curabitur non lectus a ante venenatis semper eget id justo. Ut facilisis, ligula pretium dictum congue, lacus dolor commodo nibh, sit amet sodales sed.</plot>
+        <parentalrating>13</parentalrating>
+        <parentalratingcode>CC-DD</parentalratingcode>
+        <parentalratingicon>data/cc-dd.png</parentalratingicon>
+        <parentalratingsource>ABC</parentalratingsource>
     </timer>
   </timers>
 </demo>
