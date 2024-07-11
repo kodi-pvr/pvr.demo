@@ -125,6 +125,8 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
         tag.SetSeriesNumber(myTag.iSeriesNumber);
         tag.SetEpisodeNumber(myTag.iEpisodeNumber);
         tag.SetEpisodeName(myTag.strEpisodeName);
+        tag.SetEpisodePartNumber(myTag.iEpisodePartNumber);
+        tag.SetYear(myTag.iYear);
 
         iLastEndTimeTmp = tag.GetEndTime();
 
@@ -324,6 +326,7 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
     kodiRecording.SetTitle(recording.strTitle);
     kodiRecording.SetEpisodeName(recording.strEpisodeName);
     kodiRecording.SetDirectory(recording.strDirectory);
+    kodiRecording.SetYear(recording.iYear);
 
     /* TODO: PVR API 5.0.0: Implement this */
     kodiRecording.SetChannelUid(recording.iChannelId);
@@ -770,6 +773,14 @@ bool CPVRDemo::ScanXMLEpgData(const XMLNode* pEpgNode)
   /* genre subtype */
   XMLGetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
+  /* episodepart */
+  if (!XMLGetInt(pEpgNode, "episodepart", entry.iEpisodePartNumber))
+    entry.iEpisodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+
+  /* year */
+  if (!XMLGetInt(pEpgNode, "year", entry.iYear))
+    entry.iYear = 0;
+
   kodi::Log(ADDON_LOG_DEBUG, "loaded EPG entry '%s' channel '%d' start '%d' end '%d'",
             entry.strTitle.c_str(), entry.iChannelId, entry.startTime, entry.endTime);
 
@@ -861,6 +872,9 @@ bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
   recording.iProviderId = PVR_PROVIDER_INVALID_UID;
   XMLGetInt(pRecordingNode, "provider", recording.iProviderId);
 
+  /* recording year */
+  if (!XMLGetInt(pRecordingNode, "year", recording.iYear))
+    recording.iYear = 0;
   return true;
 }
 
