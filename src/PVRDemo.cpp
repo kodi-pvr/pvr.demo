@@ -224,7 +224,9 @@ PVR_ERROR CPVRDemo::GetChannels(bool bRadio, kodi::addon::PVRChannelsResultSet& 
 }
 
 PVR_ERROR CPVRDemo::GetChannelStreamProperties(
-    const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties)
+    const kodi::addon::PVRChannel& channel,
+    PVR_SOURCE source,
+    std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
   PVRDemoChannel addonChannel;
   GetChannel(channel, addonChannel);
