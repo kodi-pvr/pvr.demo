@@ -57,6 +57,7 @@ struct PVRDemoRecording
   int iGenreSubType;
   int iSeriesNumber;
   int iEpisodeNumber;
+  int iEpisodePartNumber;
   std::string strChannelName;
   std::string strPlotOutline;
   std::string strPlot;

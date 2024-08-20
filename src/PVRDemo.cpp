@@ -841,6 +841,10 @@ bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
   if (!XMLGetInt(pRecordingNode, "episode", recording.iEpisodeNumber))
     recording.iEpisodeNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
 
+  /* Episode Part */
+  if (!XMLGetInt(pRecordingNode, "episodepart", recording.iEpisodePartNumber))
+    recording.iEpisodePartNumber = PVR_RECORDING_INVALID_SERIES_EPISODE;
+
   /* genre type */
   XMLGetInt(pRecordingNode, "genretype", recording.iGenreType);
 
