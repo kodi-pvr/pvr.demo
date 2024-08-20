@@ -29,8 +29,9 @@ struct PVRDemoEpgEntry
   //  bool bNotify;
   int iSeriesNumber;
   int iEpisodeNumber;
-  //  int iEpisodePartNumber;
+  int iEpisodePartNumber;
   std::string strEpisodeName;
+  int iYear;
 };
 
 struct PVRDemoChannel
@@ -56,6 +57,7 @@ struct PVRDemoRecording
   int iGenreSubType;
   int iSeriesNumber;
   int iEpisodeNumber;
+  int iEpisodePartNumber;
   std::string strChannelName;
   std::string strPlotOutline;
   std::string strPlot;
@@ -67,6 +69,7 @@ struct PVRDemoRecording
   time_t recordingTime;
   int iChannelId;
   int iProviderId;
+  int iYear;
 };
 
 struct PVRDemoTimer
