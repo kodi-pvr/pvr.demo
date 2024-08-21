@@ -127,6 +127,10 @@ PVR_ERROR CPVRDemo::GetEPGForChannel(int channelUid,
         tag.SetEpisodeName(myTag.strEpisodeName);
         tag.SetEpisodePartNumber(myTag.iEpisodePartNumber);
         tag.SetYear(myTag.iYear);
+        tag.SetParentalRating(myTag.iParentalRating);
+        tag.SetParentalRatingCode(myTag.strParentalRatingCode);
+        tag.SetParentalRatingIcon(myTag.strParentalRatingIcon);
+        tag.SetParentalRatingSource(myTag.strParentalRatingSource);
 
         iLastEndTimeTmp = tag.GetEndTime();
 
@@ -336,7 +340,11 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
 
     /* PVR API 8.0.0 */
     kodiRecording.SetClientProviderUid(recording.iProviderId);
-
+    kodiRecording.SetParentalRating(recording.iParentalRating);
+    kodiRecording.SetParentalRatingCode(recording.strParentalRatingCode);
+    kodiRecording.SetParentalRatingIcon(recording.strParentalRatingIcon);
+    kodiRecording.SetParentalRatingSource(recording.strParentalRatingSource);
+    
     results.Add(kodiRecording);
   }
 
@@ -776,6 +784,21 @@ bool CPVRDemo::ScanXMLEpgData(const XMLNode* pEpgNode)
   /* genre subtype */
   XMLGetInt(pEpgNode, "genresubtype", entry.iGenreSubType);
 
+  /* parental rating age */
+  XMLGetInt(pEpgNode, "parentalrating", entry.iParentalRating);
+
+  /* parental rating code */
+  if (XMLGetString(pEpgNode, "parentalratingcode", strTmp))
+    entry.strParentalRatingCode = strTmp;
+
+  /* parental rating icon */
+  if (XMLGetString(pEpgNode, "parentalratingicon", strTmp))
+    entry.strParentalRatingIcon = ClientPath() + strTmp;
+
+  /* parental rating source */
+  if (XMLGetString(pEpgNode, "parentalratingsource", strTmp))
+    entry.strParentalRatingSource = strTmp;
+  
   /* episodepart */
   if (!XMLGetInt(pEpgNode, "episodepart", entry.iEpisodePartNumber))
     entry.iEpisodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
@@ -878,6 +901,21 @@ bool CPVRDemo::ScanXMLRecordingData(const XMLNode* pRecordingNode,
   /* provider id */
   recording.iProviderId = PVR_PROVIDER_INVALID_UID;
   XMLGetInt(pRecordingNode, "provider", recording.iProviderId);
+
+  /* parental rating age */
+  XMLGetInt(pRecordingNode, "parentalrating", recording.iParentalRating);
+
+  /* parental rating code */
+  if (XMLGetString(pRecordingNode, "parentalratingcode", strTmp))
+    recording.strParentalRatingCode = strTmp;
+
+  /* parental rating icon */
+  if (XMLGetString(pRecordingNode, "parentalratingicon", strTmp))
+    recording.strParentalRatingIcon = ClientPath() + strTmp;
+
+  /* parental rating source */
+  if (XMLGetString(pRecordingNode, "parentalratingsource", strTmp))
+    recording.strParentalRatingSource = strTmp;
 
   /* recording year */
   if (!XMLGetInt(pRecordingNode, "year", recording.iYear))

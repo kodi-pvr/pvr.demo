@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.demo"
-  version="22.2.1"
+  version="22.3.0"
   name="Demo PVR Client"
   provider-name="Pulse-Eight Ltd., Team Kodi">
   <requires>@ADDON_DEPENDS@</requires>

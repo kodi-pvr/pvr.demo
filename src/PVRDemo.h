@@ -24,13 +24,16 @@ struct PVRDemoEpgEntry
   int iGenreType;
   int iGenreSubType;
   //  time_t firstAired;
-  //  int iParentalRating;
+  int iParentalRating = 0;
   //  int iStarRating;
   //  bool bNotify;
   int iSeriesNumber;
   int iEpisodeNumber;
   int iEpisodePartNumber;
   std::string strEpisodeName;
+  std::string strParentalRatingCode;
+  std::string strParentalRatingIcon;
+  std::string strParentalRatingSource;
   int iYear;
 };
 
@@ -69,6 +72,10 @@ struct PVRDemoRecording
   time_t recordingTime;
   int iChannelId;
   int iProviderId;
+  int iParentalRating = 0;
+  std::string strParentalRatingCode;
+  std::string strParentalRatingIcon;
+  std::string strParentalRatingSource;
   int iYear;
 };
 
