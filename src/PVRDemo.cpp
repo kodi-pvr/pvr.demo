@@ -321,6 +321,7 @@ PVR_ERROR CPVRDemo::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResult
     kodiRecording.SetGenreSubType(recording.iGenreSubType);
     kodiRecording.SetRecordingTime(recording.recordingTime);
     kodiRecording.SetEpisodeNumber(recording.iEpisodeNumber);
+    kodiRecording.SetEpisodePartNumber(recording.iEpisodePartNumber);
     kodiRecording.SetSeriesNumber(recording.iSeriesNumber);
     kodiRecording.SetIsDeleted(deleted);
     kodiRecording.SetChannelType(recording.bRadio ? PVR_RECORDING_CHANNEL_TYPE_RADIO
