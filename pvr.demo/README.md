@@ -3,6 +3,7 @@ Dummy data and files to be used with the PVR Demo Add-on.
 
 ## Icons
 There are 11 icons used for the channels. The same icons are used for TV and Radio.
+4 icons of various aspect ratios are available for ParentalRatingIcons.
 
 ## PVR Channel Data types
 
