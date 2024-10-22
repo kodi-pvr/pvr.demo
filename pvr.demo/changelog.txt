@@ -1,3 +1,6 @@
+v22.4.0
+- PVR Add-on API v9.2.0
+
 v22.3.0
 - Add support for parentalRating+Code+Icon+Source to EPG and recordings.
 
