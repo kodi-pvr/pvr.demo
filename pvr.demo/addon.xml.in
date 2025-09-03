@@ -20,6 +20,7 @@
     <summary lang="am_ET">የ PVR ደንበኛ ናሙና</summary>
     <summary lang="be_BY">Дэманстрацыя кліента PVR</summary>
     <summary lang="bg_BG">Демонстрационен клиент за ПВР</summary>
+    <summary lang="bs_BA">Demo PVR klijent</summary>
     <summary lang="ca_ES">Demostració del client PVR</summary>
     <summary lang="cs_CZ">Ukázka klienta nahrávače videa</summary>
     <summary lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</summary>
@@ -81,6 +82,7 @@
     <description lang="am_ET">የ PVR ደንበኛ ናሙና</description>
     <description lang="be_BY">Дэманстрацыя кліента PVR</description>
     <description lang="bg_BG">Демонстрационен клиент за ПВР</description>
+    <description lang="bs_BA">Demo PVR klijent</description>
     <description lang="ca_ES">Demostració del client PVR</description>
     <description lang="cs_CZ">Ukázkový klient PVR</description>
     <description lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</description>
@@ -142,6 +144,7 @@
     <disclaimer lang="am_ET">ቁራጭ ይዟል</disclaimer>
     <disclaimer lang="be_BY">Змяшчае толькі заглушкі</disclaimer>
     <disclaimer lang="bg_BG">Съдържа само stub файлове</disclaimer>
+    <disclaimer lang="bs_BA">Sadrži samo završne tekstove</disclaimer>
     <disclaimer lang="ca_ES">Només conté fragments</disclaimer>
     <disclaimer lang="cs_CZ">Obsahuje pouze prázdné kódy</disclaimer>
     <disclaimer lang="cy_GB">Bonion yn unig</disclaimer>
@@ -188,7 +191,7 @@
     <disclaimer lang="sq_AL">Vetëm përmban stubs</disclaimer>
     <disclaimer lang="sr_RS">Садржи само назнаке садржаја</disclaimer>
     <disclaimer lang="sr_RS@latin">Sadrži samo naznake sadržaja</disclaimer>
-    <disclaimer lang="sv_SE">Innehåller bara undertexter</disclaimer>
+    <disclaimer lang="sv_SE">Innehåller bara stubs</disclaimer>
     <disclaimer lang="szl">Ino dymōnstracyjŏ</disclaimer>
     <disclaimer lang="te_IN">కేవలం స్టబ్స్ కలిగి ఉంటుంది</disclaimer>
     <disclaimer lang="tg_TJ">Танҳо дорои сарпӯшак мебошад</disclaimer>
