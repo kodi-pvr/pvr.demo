@@ -22,7 +22,7 @@
     <summary lang="bg_BG">Демонстрационен клиент за ПВР</summary>
     <summary lang="bs_BA">Demo PVR klijent</summary>
     <summary lang="ca_ES">Demostració del client PVR</summary>
-    <summary lang="cs_CZ">Ukázka klienta nahrávače videa</summary>
+    <summary lang="cs_CZ">Ukázkový klient PVR</summary>
     <summary lang="cy_GB">Cleient Recordydd Fideo Personol Arddangos</summary>
     <summary lang="da_DK">Demo PVR-klient</summary>
     <summary lang="de_DE">Demo PVR-Client</summary>
@@ -146,7 +146,7 @@
     <disclaimer lang="bg_BG">Съдържа само stub файлове</disclaimer>
     <disclaimer lang="bs_BA">Sadrži samo završne tekstove</disclaimer>
     <disclaimer lang="ca_ES">Només conté fragments</disclaimer>
-    <disclaimer lang="cs_CZ">Obsahuje pouze prázdné kódy</disclaimer>
+    <disclaimer lang="cs_CZ">Obsahuje pouze zástupné implementace</disclaimer>
     <disclaimer lang="cy_GB">Bonion yn unig</disclaimer>
     <disclaimer lang="da_DK">Indeholder kun stumper</disclaimer>
     <disclaimer lang="de_DE">Enthält nur Fragmente</disclaimer>
